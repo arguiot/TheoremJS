@@ -1,0 +1,35 @@
+{
+  "name": "theorem.js",
+  "version": "0.0.1",
+  "description": "A Math object extension for computation in JavaScript",
+  "main": "dist/theorem.min.js",
+  "scripts": {
+    "test": "npm run gulp && npm run eye",
+    "gulp": "gulp",
+    "eye": "eye"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arguiot/TheoremJS.git"
+  },
+  "keywords": [
+    "lang",
+    "translate",
+    "language",
+    "framework",
+    "display.js"
+  ],
+  "author": "Arthur Guiot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arguiot/TheoremJS/issues"
+  },
+  "homepage": "https://github.com/arguiot/TheoremJS#readme",
+  "devDependencies": {
+    "eye.js": "^0.2.0",
+    "gulp": "^3.9.1",
+    "gulp-babili": "^0.1.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-rigger": "^0.5.8"
+  }
+}
