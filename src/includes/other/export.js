@@ -1,14 +1,14 @@
 // Browserify / Node.js
 if (typeof define === "function" && define.amd) {
-  define(() => new Glottologist());
+  define(() => new TheoremJS());
   // CommonJS and Node.js module support.
 } else if (typeof exports !== "undefined") {
   // Support Node.js specific `module.exports` (which can be a function)
   if (typeof module !== "undefined" && module.exports) {
-    exports = module.exports = new Glottologist();
+    exports = module.exports = new TheoremJS();
   }
   // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
-  exports.Glottologist = new Glottologist();
+  exports.TheoremJS = new TheoremJS();
 } else if (typeof global !== "undefined") {
-  global.Glottologist = new Glottologist();
+  global.TheoremJS = new TheoremJS();
 }

@@ -12,22 +12,6 @@ gulp.task("copy", () => {
         .pipe(gulp.dest("dist"));
 });
 
-gulp.task("minify", () => {
-    gulp
-        .src("src/*.js")
-        .pipe(rigger())
-        .pipe(babili({
-            mangle: {
-                keepClassName: true
-            }
-        }))
-        .pipe(rename({
-            basename: "theorem",
-			suffix: ".min"
-        }))
-        .pipe(gulp.dest("dist"));
-})
-
 gulp.task("test", () => {
     gulp
         .src("src/*.js")
@@ -37,4 +21,4 @@ gulp.task("test", () => {
         }))
         .pipe(gulp.dest("__test__"));
 });
-gulp.task("default", ["copy", "minify", "test"])
+gulp.task("default", ["copy", "test"])
