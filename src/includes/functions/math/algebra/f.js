@@ -1,5 +1,6 @@
 f(v, func) {
 	return {
+		type: "function"
 		v: v,
 		f: func,
 		core: x => {
