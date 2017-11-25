@@ -203,7 +203,7 @@ class TheoremJS {
   }
   f(v, func) {
   	return {
-  		type: "function"
+  		type: "function",
   		v: v,
   		f: func,
   		core: x => {
@@ -314,16 +314,19 @@ class TheoremJS {
   		buffer += `${args[i]} * x^${i} ${i == args.length -1 ? '': '+ '}`
   	}
   	return {
-  		type: "polynomial"
+  		type: "polynomial",
   		v: "x",
   		f: buffer,
-  		values: [...arguments]
+  		values: [...arguments],
   		core: x => {
   			let regex = new RegExp("x")
   			let newStr = buffer.replace(regex, x)
   			return eval(newStr)
   		}
   	}
+  }
+  run(f, x) {
+  	return f.core(x)
   }
   y_intercept(f) {
   	return f.core(0)

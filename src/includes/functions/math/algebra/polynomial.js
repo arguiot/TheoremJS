@@ -5,10 +5,10 @@ polynomial() {
 		buffer += `${args[i]} * x^${i} ${i == args.length -1 ? '': '+ '}`
 	}
 	return {
-		type: "polynomial"
+		type: "polynomial",
 		v: "x",
 		f: buffer,
-		values: [...arguments]
+		values: [...arguments],
 		core: x => {
 			let regex = new RegExp("x")
 			let newStr = buffer.replace(regex, x)
