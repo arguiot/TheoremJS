@@ -5,3 +5,4 @@
 //= math/other
 //= math/stats
 //= math/trig
+//= math/algebra

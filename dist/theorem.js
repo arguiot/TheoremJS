@@ -83,8 +83,44 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
+  max() {
+  	const sorted = this.sort(...arguments);
+  	return sorted[sorted.length - 1]
+  }
+  min() {
+  	const sorted = this.sort(...arguments);
+  	return sorted[0]
+  }
   product() {
   	return [...arguments].reduce((a, b) => new BigNumber(a).times(b)).toString()
+  }
+  sort() {
+  	// https://gist.github.com/jasondscott/7073857
+      Array.prototype.quickSort = function() {
+  
+          var r = this;
+          if (this.length <= 1) {
+              return this;
+          }
+          var less = [],
+              greater = [];
+  
+          var pivot = r.splice(new BigNumber(r.length).div(2).floor(), 1);
+  
+          for (var i = r.length - 1; i >= 0; i--) {
+              if (new BigNumber(r[i]).lessThanOrEqualTo(new BigNumber(pivot))) {
+                  less.push(r[i]);
+              } else {
+                  greater.push(r[i]);
+              }
+          }
+  
+          var c = [];
+  
+          return c.concat(less.quickSort(), pivot, greater.quickSort());
+      };
+  
+  	return [...arguments].quickSort()
   }
   sum() {
   	return [...arguments].reduce((a, b) => new BigNumber(a).plus(b)).toString()
@@ -164,6 +200,38 @@ class TheoremJS {
       	result.push(Math.tan(n[i]))
       }
   	return result.length == 1 ? result[0] : result
+  }
+  f(v, func) {
+  	return {
+  		v: v,
+  		f: func,
+  		core: x => {
+  			let regex = new RegExp(v)
+  			let newStr = func.replace(regex, x)
+  			return eval(newStr)
+  		}
+  	}
+  }
+  graph(f, from=-100, to=100, step=0.1) {
+  	let array = {}
+  	for (var i = new BigNumber(from); i.lessThanOrEqualTo(new BigNumber(to)); i = i.plus(new BigNumber(step))) {
+  		array[i.toString()] = f.core(i).toPrecision(15)
+  	}
+  	return array
+  }
+  numeralSolve(f, end, from = -100, to = 100, step = 0.1) {
+  	let p = this.graph(f, from, to, step)
+  	let g = Object.values(p)
+  	let y = []
+  	for (let i in g) {
+  		y.push(new BigNumber(g[i]).sub(end).abs().toNumber())
+  	}
+  	Object.prototype.getKey = function(value) {
+  		var object = this;
+  		return Object.keys(object).find(key => object[key] === value);
+  	};
+  	const min = this.min(...y)
+  	return [p.getKey(min.toPrecision(15)), min]
   }
 }
 // Browserify / Node.js
