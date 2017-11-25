@@ -8,6 +8,7 @@ class TheoremJS {
   constructor() {
   	// code
   }
+  
   flatten(array) {
   	return array.reduce((a, b) => a.concat(b), []);
   }
@@ -34,27 +35,64 @@ class TheoremJS {
   	}
   	return tmp;
   }
-  average() {
-  	const summed = this.sum(...arguments);
-  	const average = new BigNumber(summed).div(arguments.length);
-  	return average.toString()
-  }
-  cos(n) {
-      if (typeof n != 'object') {
-          n = [n]
-      }
-  	let result = []
-      for (var i = 0; i < n.length; i++) {
-      	result.push(Math.cos(n[i]))
-      }
-  	return result.length == 1 ? result[0] : result
-  }
+  
   factorial(n) {
   	let buffer = 1;
   	for (var i = 0; i < n; i++) {
   		buffer = new BigNumber(buffer).times(new BigNumber(i) + 1)
   	}
   	return buffer
+  }
+  pow(n, base) {
+  	if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(new BigNumber(i).pow(base))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  root(n, base) {
+  	if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(new BigNumber(i).pow(new BigNumber(1).div(base)))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  sqrt(n) {
+  	if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(new BigNumber(i).sqrt())
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  apply(n, f) {
+      if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(f(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  product() {
+  	return [...arguments].reduce((a, b) => new BigNumber(a).times(b)).toString()
+  }
+  sum() {
+  	return [...arguments].reduce((a, b) => new BigNumber(a).plus(b)).toString()
+  }
+  average() {
+  	const summed = this.sum(...arguments);
+  	const average = new BigNumber(summed).div(arguments.length);
+  	return average.toString()
   }
   median() {
   	let array = [...arguments]
@@ -67,8 +105,45 @@ class TheoremJS {
   		return new BigNumber(new BigNumber(array[half-1]).add(array[half])).div(2).toString()
   	}
   }
-  product() {
-  	return [...arguments].reduce((a, b) => new BigNumber(a).times(b)).toString()
+  acos(n) {
+      if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.acos(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  asin(n) {
+      if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.asin(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  atan(n) {
+      if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.atan(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  cos(n) {
+      if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.cos(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
   }
   sin(n) {
       if (typeof n != 'object') {
@@ -80,9 +155,6 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
-  sum() {
-  	return [...arguments].reduce((a, b) => new BigNumber(a).plus(b)).toString()
-  }
   tan(n) {
       if (typeof n != 'object') {
           n = [n]
@@ -93,7 +165,6 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
-  
 }
 // Browserify / Node.js
 if (typeof define === "function" && define.amd) {
