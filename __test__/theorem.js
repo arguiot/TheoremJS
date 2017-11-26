@@ -8,7 +8,20 @@ class TheoremJS {
   constructor() {
   	// code
   }
-  
+  // Browserify / Node.js
+  if (typeof define === "function" && define.amd) {
+    define(() => new TheoremJS());
+    // CommonJS and Node.js module support.
+  } else if (typeof exports !== "undefined") {
+    // Support Node.js specific `module.exports` (which can be a function)
+    if (typeof module !== "undefined" && module.exports) {
+      exports = module.exports = new TheoremJS();
+    }
+    // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
+    exports.TheoremJS = new TheoremJS();
+  } else if (typeof global !== "undefined") {
+    global.TheoremJS = new TheoremJS();
+  }
   flatten(array) {
   	return array.reduce((a, b) => a.concat(b), []);
   }
@@ -38,7 +51,7 @@ class TheoremJS {
   
   factorial(n) {
       if (new BigNumber(n).equals(0)) {
-          return 1;
+          return new BigNumber(1);
       }
       return new BigNumber(n).times(this.factorial(new BigNumber(n).minus(1)))
   }
@@ -58,7 +71,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(i).pow(new BigNumber(1).div(base)))
+      	result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(1).div(base))))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -68,7 +81,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(i).sqrt())
+      	result.push(new BigNumber(n[i]).sqrt())
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -179,6 +192,10 @@ class TheoremJS {
       	result.push(Math.cos(n[i]))
       }
   	return result.length == 1 ? result[0] : result
+  }
+  cosh(x) {
+  	const e = this.e()
+  	return e.pow(x).minus(e.pow(-x)).div(2)
   }
   sin(n) {
       if (typeof n != 'object') {
@@ -335,13 +352,16 @@ class TheoremJS {
       let one = new BigNumber(1);
       let rval;
   
-      for (let i = 0; i <= n; i++) {
+      for (let i = 0; i <= n * 10; i++) {
           let fval = this.factorial(i);
           let invert = one.div(fval)
           zero = zero.plus(invert)
       }
       rval = zero.toFixed(Number(n))
-      return rval;
+      return new BigNumber(rval).toFixed(n - 1);
+  }
+  goldenRatio(n = 15) {
+  	return new BigNumber(new BigNumber(1).plus(this.sqrt(5)).div(2).toFixed(n - 1));
   }
   pi(digits = 15) {
   	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
@@ -372,7 +392,7 @@ class TheoremJS {
           .minus(arctan(new DecimalPlus(1).div(239)));
   
       // the final pi has the requested number of decimals
-      return new BigNumber(new Decimal(4).times(pi4th).toFixed(digits + 1))
+      return new BigNumber(new Decimal(4).times(pi4th).toFixed(digits + 1)).toFixed(digits - 1)
   }
 }
 // Browserify / Node.js
