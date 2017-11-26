@@ -8,19 +8,11 @@ class TheoremJS {
   constructor() {
   	// code
   }
-  // Browserify / Node.js
-  if (typeof define === "function" && define.amd) {
-    define(() => new TheoremJS());
-    // CommonJS and Node.js module support.
-  } else if (typeof exports !== "undefined") {
-    // Support Node.js specific `module.exports` (which can be a function)
-    if (typeof module !== "undefined" && module.exports) {
-      exports = module.exports = new TheoremJS();
-    }
-    // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
-    exports.TheoremJS = new TheoremJS();
-  } else if (typeof global !== "undefined") {
-    global.TheoremJS = new TheoremJS();
+  convertToBase(x, n) {
+  	return new BigNumber(x).toString(n)
+  }
+  deg2rad(x) {
+  	return new BigNumber(x).times(this.pi()).div(180)
   }
   flatten(array) {
   	return array.reduce((a, b) => a.concat(b), []);
@@ -61,7 +53,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(i).pow(base))
+      	result.push(new BigNumber(n[i]).pow(base))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -71,7 +63,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(1).div(base))))
+      	result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(1).div(base).toNumber())))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -104,7 +96,7 @@ class TheoremJS {
   	return sorted[0]
   }
   product() {
-  	return [...arguments].reduce((a, b) => new BigNumber(a).times(b)).toString()
+  	return [...arguments].reduce((a, b) => new BigNumber(a).times(b))
   }
   sort() {
   	// https://gist.github.com/jasondscott/7073857
@@ -135,7 +127,7 @@ class TheoremJS {
   	return [...arguments].quickSort()
   }
   sum() {
-  	return [...arguments].reduce((a, b) => new BigNumber(a).plus(b)).toString()
+  	return [...arguments].reduce((a, b) => new BigNumber(a).plus(b))
   }
   average() {
   	const summed = this.sum(...arguments);
@@ -193,9 +185,15 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
-  cosh(x) {
-  	const e = this.e()
-  	return e.pow(x).minus(e.pow(-x)).div(2)
+  cosh(n) {
+  	if (typeof n != 'object') {
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.cosh(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
   }
   sin(n) {
       if (typeof n != 'object') {
@@ -358,10 +356,10 @@ class TheoremJS {
           zero = zero.plus(invert)
       }
       rval = zero.toFixed(Number(n))
-      return new BigNumber(rval).toFixed(n - 1);
+      return new BigNumber(rval);
   }
   goldenRatio(n = 15) {
-  	return new BigNumber(new BigNumber(1).plus(this.sqrt(5)).div(2).toFixed(n - 1));
+  	return new BigNumber(1).plus(this.sqrt(5)).div(2)
   }
   pi(digits = 15) {
   	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
@@ -392,7 +390,7 @@ class TheoremJS {
           .minus(arctan(new DecimalPlus(1).div(239)));
   
       // the final pi has the requested number of decimals
-      return new BigNumber(new Decimal(4).times(pi4th).toFixed(digits + 1)).toFixed(digits - 1)
+      return new BigNumber(new Decimal(4).times(pi4th).toFixed(digits + 1))
   }
 }
 // Browserify / Node.js

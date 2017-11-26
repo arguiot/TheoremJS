@@ -1,4 +1,10 @@
-cosh(x) {
-	const e = this.e()
-	return e.pow(x).minus(e.pow(-x)).div(2)
+cosh(n) {
+	if (typeof n != 'object') {
+        n = [n]
+    }
+	let result = []
+    for (var i = 0; i < n.length; i++) {
+    	result.push(Math.cosh(n[i]))
+    }
+	return result.length == 1 ? result[0] : result
 }

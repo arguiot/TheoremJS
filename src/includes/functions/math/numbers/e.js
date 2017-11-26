@@ -9,5 +9,5 @@ e(n = 15) {
         zero = zero.plus(invert)
     }
     rval = zero.toFixed(Number(n))
-    return new BigNumber(rval).toFixed(n - 1);
+    return new BigNumber(rval);
 }
