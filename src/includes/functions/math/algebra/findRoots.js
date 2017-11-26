@@ -10,10 +10,10 @@ findRoots(f) {
                 exp.push(`(${new BigNumber(f.values[1]).isNegative() ? '' : '-'}${new BigNumber(f.values[1]).abs()} - Math.sqrt(${new BigNumber(f.values[1]).pow(2).minus(new BigNumber(4).times(f.values[0]).times(f.values[2]))})) / ${new BigNumber(f.values[0]).times(2)}`)
                 break;
             case 3:
-				let a = new BigNumber(f.values[0]).toNumber()
-				let b = new BigNumber(f.values[1]).toNumber()
-				let c = new BigNumber(f.values[2]).toNumber()
-				let d = new BigNumber(f.values[3]).toNumber()
+                let a = new BigNumber(f.values[0]).toNumber()
+                let b = new BigNumber(f.values[1]).toNumber()
+                let c = new BigNumber(f.values[2]).toNumber()
+                let d = new BigNumber(f.values[3]).toNumber()
                 if (Math.abs(a) < 1e-8) { // Quadratic case, ax^2+bx+c=0
                     a = b;
                     b = c;
@@ -61,13 +61,13 @@ findRoots(f) {
                 // Convert back from depressed cubic
                 for (var i = 0; i < roots.length; i++)
                     roots[i] -= b / (3 * a);
-				exp = roots;
+                exp = roots;
                 break;
-			default:
-				exp = [numeralSolve(f, 0)[0]]
+            default:
+                exp = [numeralSolve(f, 0)[0]]
         }
     } else {
-		exp = [numeralSolve(f, 0)[0]]
-	}
-	return exp
+        exp = [numeralSolve(f, 0)[0]]
+    }
+    return exp
 }

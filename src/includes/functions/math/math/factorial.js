@@ -1,7 +1,6 @@
 factorial(n) {
-	let buffer = 1;
-	for (var i = 0; i < n; i++) {
-		buffer = new BigNumber(buffer).times(new BigNumber(i) + 1)
-	}
-	return buffer
+    if (new BigNumber(n).equals(0)) {
+        return 1;
+    }
+    return new BigNumber(n).times(this.factorial(new BigNumber(n).minus(1)))
 }

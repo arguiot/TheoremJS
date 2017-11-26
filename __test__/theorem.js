@@ -37,11 +37,10 @@ class TheoremJS {
   }
   
   factorial(n) {
-  	let buffer = 1;
-  	for (var i = 0; i < n; i++) {
-  		buffer = new BigNumber(buffer).times(new BigNumber(i) + 1)
-  	}
-  	return buffer
+      if (new BigNumber(n).equals(0)) {
+          return 1;
+      }
+      return new BigNumber(n).times(this.factorial(new BigNumber(n).minus(1)))
   }
   pow(n, base) {
   	if (typeof n != 'object') {
@@ -225,10 +224,10 @@ class TheoremJS {
                   exp.push(`(${new BigNumber(f.values[1]).isNegative() ? '' : '-'}${new BigNumber(f.values[1]).abs()} - Math.sqrt(${new BigNumber(f.values[1]).pow(2).minus(new BigNumber(4).times(f.values[0]).times(f.values[2]))})) / ${new BigNumber(f.values[0]).times(2)}`)
                   break;
               case 3:
-  				let a = new BigNumber(f.values[0]).toNumber()
-  				let b = new BigNumber(f.values[1]).toNumber()
-  				let c = new BigNumber(f.values[2]).toNumber()
-  				let d = new BigNumber(f.values[3]).toNumber()
+                  let a = new BigNumber(f.values[0]).toNumber()
+                  let b = new BigNumber(f.values[1]).toNumber()
+                  let c = new BigNumber(f.values[2]).toNumber()
+                  let d = new BigNumber(f.values[3]).toNumber()
                   if (Math.abs(a) < 1e-8) { // Quadratic case, ax^2+bx+c=0
                       a = b;
                       b = c;
@@ -276,15 +275,15 @@ class TheoremJS {
                   // Convert back from depressed cubic
                   for (var i = 0; i < roots.length; i++)
                       roots[i] -= b / (3 * a);
-  				exp = roots;
+                  exp = roots;
                   break;
-  			default:
-  				exp = [numeralSolve(f, 0)[0]]
+              default:
+                  exp = [numeralSolve(f, 0)[0]]
           }
       } else {
-  		exp = [numeralSolve(f, 0)[0]]
-  	}
-  	return exp
+          exp = [numeralSolve(f, 0)[0]]
+      }
+      return exp
   }
   graph(f, from=-100, to=100, step=0.1) {
   	let array = {}
@@ -330,6 +329,50 @@ class TheoremJS {
   }
   y_intercept(f) {
   	return f.core(0)
+  }
+  e(n = 15) {
+      let zero = new BigNumber(0);
+      let one = new BigNumber(1);
+      let rval;
+  
+      for (let i = 0; i <= n; i++) {
+          let fval = this.factorial(i);
+          let invert = one.div(fval)
+          zero = zero.plus(invert)
+      }
+      rval = zero.toFixed(Number(n))
+      return rval;
+  }
+  pi(digits = 15) {
+  	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
+      function arctan(x) {
+          var y = x;
+          var yPrev = NaN;
+          var x2 = x.times(x);
+          var num = x;
+          var sign = -1;
+  
+          for (var k = 3; !y.equals(yPrev); k += 2) {
+              num = num.times(x2);
+  
+              yPrev = y;
+              y = (sign > 0) ? y.plus(num.div(k)) : y.minus(num.div(k));
+              sign = -sign;
+          }
+  
+          return y;
+      }
+  
+      // Machin: Pi / 4 = 4 * arctan(1 / 5) - arctan(1 / 239)
+      // http://milan.milanovic.org/math/english/pi/machin.html
+  
+      // we calculate pi with a few decimal places extra to prevent round off issues
+      var DecimalPlus = BigNumber.another({ DECIMAL_PLACES: digits + 4 })
+      var pi4th = new DecimalPlus(4).times(arctan(new DecimalPlus(1).div(5)))
+          .minus(arctan(new DecimalPlus(1).div(239)));
+  
+      // the final pi has the requested number of decimals
+      return new BigNumber(new Decimal(4).times(pi4th).toFixed(digits + 1))
   }
 }
 // Browserify / Node.js

@@ -6,3 +6,4 @@
 //= math/stats
 //= math/trig
 //= math/algebra
+//= math/numbers
