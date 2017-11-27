@@ -1,10 +1,11 @@
 sin(n) {
-    if (typeof n != 'object') {
+    if (typeof n != 'object' || n.isBigNumber) {
+        n = n.isBigNumber == true ? n.toNumber() : n
         n = [n]
     }
-	let result = []
+    let result = []
     for (var i = 0; i < n.length; i++) {
-    	result.push(Math.sin(n[i]))
+        result.push(Math.sin(n[i]))
     }
-	return result.length == 1 ? result[0] : result
+    return result.length == 1 ? result[0] : result
 }

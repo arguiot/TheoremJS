@@ -132,21 +132,22 @@ class TheoremJS {
   average() {
   	const summed = this.sum(...arguments);
   	const average = new BigNumber(summed).div(arguments.length);
-  	return average.toString()
+  	return average
   }
   median() {
   	let array = [...arguments]
   	array.sort( (a, b) => new BigNumber(a).sub(b) );
-  	const half = Math.floor(new BigNumber(array.length).div(2));
+  	const half = Math.floor(new BigNumber(array.length).div(2).toNumber());
   	if(array.length % 2) {
-  		return array[half].toString()
+  		return array[half]
   	}
   	else {
-  		return new BigNumber(new BigNumber(array[half-1]).add(array[half])).div(2).toString()
+  		return new BigNumber(array[half-1]).add(array[half]).div(2).toNumber()
   	}
   }
   acos(n) {
-      if (typeof n != 'object') {
+      if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
@@ -155,8 +156,20 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
+  acosh(n) {
+  	if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.acosh(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
   asin(n) {
-      if (typeof n != 'object') {
+      if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
@@ -165,8 +178,20 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
+  asinh(n) {
+  	if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.asinh(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
   atan(n) {
-      if (typeof n != 'object') {
+      if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
@@ -175,8 +200,33 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
+  atan2(x, y) {
+  	if (typeof n != 'object' || n.isBigNumber) {
+  		x = x.isBigNumber == true ? x.toNumber() : x
+          x = [x]
+  		y = y.isBigNumber == true ? y.toNumber() : y
+          y = [y]
+      }
+  	let result = []
+      for (var i = 0; i < x.length; i++) {
+      	result.push(Math.atan2(x[i], y[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  atanh(n) {
+  	if (typeof n != 'object') {
+  		n = n.isBigNumber == true ? n.toNumber() : n
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.atanh(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
   cos(n) {
-      if (typeof n != 'object') {
+      if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
@@ -186,7 +236,8 @@ class TheoremJS {
   	return result.length == 1 ? result[0] : result
   }
   cosh(n) {
-  	if (typeof n != 'object') {
+  	if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
@@ -196,22 +247,46 @@ class TheoremJS {
   	return result.length == 1 ? result[0] : result
   }
   sin(n) {
-      if (typeof n != 'object') {
+      if (typeof n != 'object' || n.isBigNumber) {
+          n = n.isBigNumber == true ? n.toNumber() : n
+          n = [n]
+      }
+      let result = []
+      for (var i = 0; i < n.length; i++) {
+          result.push(Math.sin(n[i]))
+      }
+      return result.length == 1 ? result[0] : result
+  }
+  sinh(n) {
+  	if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.sin(n[i]))
+      	result.push(Math.sinh(n[i]))
       }
   	return result.length == 1 ? result[0] : result
   }
   tan(n) {
-      if (typeof n != 'object') {
+      if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
       	result.push(Math.tan(n[i]))
+      }
+  	return result.length == 1 ? result[0] : result
+  }
+  tanh(n) {
+  	if (typeof n != 'object' || n.isBigNumber) {
+  		n = n.isBigNumber == true ? n.toNumber() : n
+          n = [n]
+      }
+  	let result = []
+      for (var i = 0; i < n.length; i++) {
+      	result.push(Math.tanh(n[i]))
       }
   	return result.length == 1 ? result[0] : result
   }

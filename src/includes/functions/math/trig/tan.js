@@ -1,5 +1,6 @@
 tan(n) {
-    if (typeof n != 'object') {
+    if (typeof n != 'object' || n.isBigNumber) {
+		n = n.isBigNumber == true ? n.toNumber() : n
         n = [n]
     }
 	let result = []

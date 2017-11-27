@@ -27,7 +27,7 @@
   "homepage": "https://github.com/arguiot/TheoremJS#readme",
   "devDependencies": {
     "bignumber.js": "^4.1.0",
-    "eye.js": "^0.2.0",
+    "eye.js": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-babili": "^0.1.4",
     "gulp-rename": "^1.2.2",

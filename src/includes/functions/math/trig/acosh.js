@@ -1,11 +1,11 @@
-atan(n) {
-    if (typeof n != 'object' || n.isBigNumber) {
+acosh(n) {
+	if (typeof n != 'object' || n.isBigNumber) {
 		n = n.isBigNumber == true ? n.toNumber() : n
         n = [n]
     }
 	let result = []
     for (var i = 0; i < n.length; i++) {
-    	result.push(Math.atan(n[i]))
+    	result.push(Math.acosh(n[i]))
     }
 	return result.length == 1 ? result[0] : result
 }
