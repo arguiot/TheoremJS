@@ -8,38 +8,6 @@ class TheoremJS {
   constructor() {
   	// code
   }
-  convertToBase(x, n) {
-  	return new BigNumber(x).toString(n)
-  }
-  deg2rad(x) {
-  	return new BigNumber(x).times(this.pi()).div(180)
-  }
-  flatten(array) {
-  	return array.reduce((a, b) => a.concat(b), []);
-  }
-  linspace(start, end, n) {
-  	const diff = end - start;
-  	const step = diff / n;
-  	return this.arange(start, end, step);
-  }
-  arange(start, end, step, offset) {
-  	const len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
-  	const direction = start < end ? 1 : -1;
-  	const startingPoint = start - (direction * (offset || 0));
-  	const stepSize = direction * (step || 1);
-  
-  	return Array(len).fill(0).map((_, index) => startingPoint + (stepSize * index));
-  }
-  range(n) {
-  	return this.arange(0, n, 1);
-  }
-  reshape(array, part) {
-  	const tmp = [];
-  	for (let i = 0; i < array.length; i += part) {
-  		tmp.push(array.slice(i, i + part));
-  	}
-  	return tmp;
-  }
   
   factorial(n) {
       if (new BigNumber(n).equals(0)) {
@@ -466,6 +434,54 @@ class TheoremJS {
   
       // the final pi has the requested number of decimals
       return new BigNumber(new Decimal(4).times(pi4th).toFixed(digits + 1))
+  }
+  convertToBase(x, n) {
+  	return new BigNumber(x).toString(n)
+  }
+  deg2rad(x) {
+      return new BigNumber(x).times(this.pi()).div(180)
+  }
+  drawCircularPoints(n, r=1, start=[-r, 0]) {
+  	const angle = this.pi().times(2).div(n)
+  	let buffer = {}
+  	buffer[start[0]] = start[1]
+  	let angleState = this.atan2(...start.reverse()) + angle.toNumber()
+  	for (var i = 0; i < n - 1; i++) {
+  		const x = new BigNumber(r).times(`${this.cos(angleState)}`).toString()
+  		const y = new BigNumber(r).times(`${this.sin(angleState)}`).toNumber()
+  		buffer[x] = y
+  		angleState += angle.toNumber()
+  	}
+  	return buffer
+  }
+  rad2deg(x) {
+  	return new BigNumber(x).times(180).div(this.pi())
+  }
+  flatten(array) {
+  	return array.reduce((a, b) => a.concat(b), []);
+  }
+  linspace(start, end, n) {
+  	const diff = end - start;
+  	const step = diff / n;
+  	return this.arange(start, end, step);
+  }
+  arange(start, end, step, offset) {
+  	const len = (Math.abs(end - start) + ((offset || 0) * 2)) / (step || 1) + 1;
+  	const direction = start < end ? 1 : -1;
+  	const startingPoint = start - (direction * (offset || 0));
+  	const stepSize = direction * (step || 1);
+  
+  	return Array(len).fill(0).map((_, index) => startingPoint + (stepSize * index));
+  }
+  range(n) {
+  	return this.arange(0, n, 1);
+  }
+  reshape(array, part) {
+  	const tmp = [];
+  	for (let i = 0; i < array.length; i += part) {
+  		tmp.push(array.slice(i, i + part));
+  	}
+  	return tmp;
   }
 }
 // Browserify / Node.js

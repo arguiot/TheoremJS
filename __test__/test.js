@@ -143,4 +143,19 @@ eye.describe("Math", () => {
 			$ => $(t.atan2(90, 15)).Equal(Math.atan2(90, 15))
 		)
 	})
+	eye.describe("Other", () => {
+		eye.test("Convert to base", "node",
+			$ => $(t.convertToBase(2, 2)).Equal('10'),
+			$ => $(t.convertToBase(400, 64)).Equal('6g')
+		)
+		eye.test("Deg & Rad convertions", "node",
+			$ => $(t.deg2rad(180)).Equal(t.pi()),
+			$ => $(t.rad2deg(t.pi()).toNumber()).Equal(180)
+		)
+		eye.test("Draw Circular Points", "node",
+			$ => $(parseFloat(Object.keys(t.drawCircularPoints(3))[0])).Equal(-1),
+			$ => $(parseFloat(Object.keys(t.drawCircularPoints(3))[1])).isCloseTo(0.5),
+			$ => $(parseFloat(Object.keys(t.drawCircularPoints(3))[2])).isCloseTo(0.5),
+		)
+	})
 })

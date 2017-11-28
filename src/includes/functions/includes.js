@@ -1,5 +1,3 @@
-//= other
-//= array
 //= math
 //= math/math
 //= math/other
@@ -7,3 +5,5 @@
 //= math/trig
 //= math/algebra
 //= math/numbers
+//= other
+//= array
