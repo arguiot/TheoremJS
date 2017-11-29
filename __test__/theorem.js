@@ -15,6 +15,23 @@ class TheoremJS {
       }
       return new BigNumber(n).times(this.factorial(new BigNumber(n).minus(1)))
   }
+  ln(x, n = 15) {
+      let buffer = new BigNumber(0);
+      for (let i = 0; i < n * 10; i++) {
+  		const n = new BigNumber(1)
+  					.div(new BigNumber(i).times(2).plus(1))
+  					.times(
+  						new BigNumber(x).minus(1)
+  						.div(new BigNumber(x).plus(1))
+  						.pow(new BigNumber(i).times(2).plus(1))
+  					)
+          buffer = buffer.plus(n)
+      }
+      return new BigNumber(buffer.times(2).toFixed(n - 1))
+  }
+  log(x, base, n = 15) {
+  	return new BigNumber(this.ln(x, n).div(this.ln(base, n)).toPrecision(n - 1))
+  }
   pow(n, base) {
   	if (typeof n != 'object') {
           n = [n]
