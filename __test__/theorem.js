@@ -17,7 +17,7 @@ class TheoremJS {
   }
   ln(x, n = 15) {
       let buffer = new BigNumber(0);
-      for (let i = 0; i < n + (3 / 2 * x); i++) {
+      for (let i = 0; i < Math.n + (3 / 2 * x); i++) {
   		const n = new BigNumber(1)
   					.div(new BigNumber(i).times(2).plus(1))
   					.times(
