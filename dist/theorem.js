@@ -52,6 +52,9 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
+  sigmoid(x, n = 15) {
+  	return new BigNumber(new BigNumber(1).div(this.e(n).pow(x).add(1)).toPrecision(n))
+  }
   sqrt(n) {
   	if (typeof n != 'object') {
           n = [n]
@@ -276,6 +279,12 @@ class TheoremJS {
   	return result.length == 1 ? result[0] : result
   }
   f(v, func) {
+  	if (typeof v == 'function') {
+  		return {
+  			type: "function",
+  			core: v
+  		}
+  	}
   	return {
   		type: "function",
   		v: v,
@@ -303,25 +312,6 @@ class TheoremJS {
                   let b = new BigNumber(f.values[1]).toNumber()
                   let c = new BigNumber(f.values[2]).toNumber()
                   let d = new BigNumber(f.values[3]).toNumber()
-                  if (Math.abs(a) < 1e-8) { // Quadratic case, ax^2+bx+c=0
-                      a = b;
-                      b = c;
-                      c = d;
-                      if (Math.abs(a) < 1e-8) { // Linear case, ax+b=0
-                          a = b;
-                          b = c;
-                          if (Math.abs(a) < 1e-8) // Degenerate case
-                              return [];
-                          return [-b / a];
-                      }
-  
-                      var D = b * b - 4 * a * c;
-                      if (Math.abs(D) < 1e-8)
-                          return [-b / (2 * a)];
-                      else if (D > 0)
-                          return [(-b + Math.sqrt(D)) / (2 * a), (-b - Math.sqrt(D)) / (2 * a)];
-                      return [];
-                  }
   
                   // Convert to depressed cubic t^3+pt+q = 0 (subst x = t - b/3a)
                   var p = (3 * a * c - b * b) / (3 * a * a);
@@ -385,7 +375,7 @@ class TheoremJS {
   	const args = [...arguments].reverse()
   	let buffer = "";
   	for (let i in args) {
-  		buffer += `${args[i]} * x^${i} ${i == args.length -1 ? '': '+ '}`
+  		buffer += `${args[i]} * x**${i} ${i == args.length -1 ? '': '+ '}`
   	}
   	return {
   		type: "polynomial",
@@ -405,6 +395,17 @@ class TheoremJS {
   y_intercept(f) {
   	return f.core(0)
   }
+  c(name, n = 15) {
+  	const numbers = {
+  		"pi": '3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909',
+  		"e": '2.718281828459045235360287471352662497757247093699959574966967627724076630353547594571382178525166427427466391932003059921817413596629043572900334295260595630738132328627943490763233829880753195251019011573834187930702154089149934884167509244761460668',
+  		"sqrt(2)": '1.414213562373095048801688724209698078569671875376948073176679737990732478462107038850387534327641572735013846230912297024924836055850737212644121497099935831413222665927505592755799950501152782060571470109559971605970274534596862014728517418640889199',
+  		"goldenRatio": '1.618033988749894848204586834365638117720309179805762862135448622705260462818902449707207204189391137484754088075386891752126633862223536931793180060766726354433389086595939582905638322661319928290267880675208766892501711696207032221043216269548626296',
+  		"EulerGamma": '0.5772156649015328606065120900824024310421593359399235988057672348848677267776646709369470632917467495146314472498070824809605040144865428362241739976449235362535003337429373377376739427925952582470949160087352039481656708532331517766115286211995015080',
+  		"UltimateAnswer": '42'
+  	}
+  	return new BigNumber(new BigNumber(numbers[name]).toPrecision(n))
+  }
   e(n = 15) {
       let zero = new BigNumber(0);
       let one = new BigNumber(1);
@@ -415,11 +416,11 @@ class TheoremJS {
           let invert = one.div(fval)
           zero = zero.plus(invert)
       }
-      rval = zero.toFixed(Number(n))
+      rval = zero.toPrecision(n)
       return new BigNumber(rval);
   }
   goldenRatio(n = 15) {
-  	return new BigNumber(1).plus(this.sqrt(5)).div(2)
+  	return new BigNumber(new BigNumber(1).plus(this.sqrt(5)).div(2).toPrecision(n))
   }
   pi(digits = 15) {
   	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
@@ -450,7 +451,7 @@ class TheoremJS {
           .minus(arctan(new DecimalPlus(1).div(239)));
   
       // the final pi has the requested number of decimals
-      return new BigNumber(new Decimal(4).times(pi4th).toFixed(digits + 1))
+      return new BigNumber(new Decimal(4).times(pi4th).toPrecision(digits))
   }
   convertToBase(x, n) {
   	return new BigNumber(x).toString(n)

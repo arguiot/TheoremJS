@@ -8,6 +8,6 @@ e(n = 15) {
         let invert = one.div(fval)
         zero = zero.plus(invert)
     }
-    rval = zero.toFixed(Number(n))
+    rval = zero.toPrecision(n)
     return new BigNumber(rval);
 }

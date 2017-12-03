@@ -1,4 +1,10 @@
 f(v, func) {
+	if (typeof v == 'function') {
+		return {
+			type: "function",
+			core: v
+		}
+	}
 	return {
 		type: "function",
 		v: v,

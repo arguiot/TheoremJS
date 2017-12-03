@@ -14,25 +14,6 @@ findRoots(f) {
                 let b = new BigNumber(f.values[1]).toNumber()
                 let c = new BigNumber(f.values[2]).toNumber()
                 let d = new BigNumber(f.values[3]).toNumber()
-                if (Math.abs(a) < 1e-8) { // Quadratic case, ax^2+bx+c=0
-                    a = b;
-                    b = c;
-                    c = d;
-                    if (Math.abs(a) < 1e-8) { // Linear case, ax+b=0
-                        a = b;
-                        b = c;
-                        if (Math.abs(a) < 1e-8) // Degenerate case
-                            return [];
-                        return [-b / a];
-                    }
-
-                    var D = b * b - 4 * a * c;
-                    if (Math.abs(D) < 1e-8)
-                        return [-b / (2 * a)];
-                    else if (D > 0)
-                        return [(-b + Math.sqrt(D)) / (2 * a), (-b - Math.sqrt(D)) / (2 * a)];
-                    return [];
-                }
 
                 // Convert to depressed cubic t^3+pt+q = 0 (subst x = t - b/3a)
                 var p = (3 * a * c - b * b) / (3 * a * a);

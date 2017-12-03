@@ -21,7 +21,11 @@ eye.describe("Math", () => {
 			$ => $(t.run(t.f("x", "2*x+1"), 2)).Equal(5)
 		)
 		eye.test("Find Roots & Polynomial", "node",
-			$ => $(t.findRoots(t.polynomial(1, -1, -1))).Equal([ '(1 + Math.sqrt(5)) / 2', '(1 - Math.sqrt(5)) / 2' ])
+			$ => $(t.findRoots(t.polynomial(1, -1, -1))).Equal([ '(1 + Math.sqrt(5)) / 2', '(1 - Math.sqrt(5)) / 2' ]),
+			$ => {
+				const roots = t.findRoots(t.polynomial(-3, 0, 2, 0))
+				return $(roots[1]).isCloseTo(Math.sqrt(2 / 3))
+			}
 		)
 		eye.test("Numeral Solve & Graph", "node",
 			$ => $(t.numeralSolve(t.f("x", "2*x+1"), 0)).Equal([ '-0.5', 0 ]) // Returns -0.5 with 0 error rate
@@ -43,16 +47,24 @@ eye.describe("Math", () => {
 		eye.test("Sqrt", "node",
 			$ => $(t.sqrt(4).toNumber()).Equal(2)
 		)
+		eye.test("Sigmoid", "node",
+			$ => $(t.y_intercept(t.f(x => t.sigmoid(x).toNumber()))).Equal(0.5)
+		)
 	})
 	eye.describe("Numbers", () => {
 		eye.test("Pi", "node",
-			$ => $(t.pi().toNumber()).Equal(3.141592653589793)
+			$ => $(t.pi().toNumber()).Equal(3.14159265358979)
 		)
 		eye.test("e", "node",
-			$ => $(t.e().toNumber()).Equal(2.718281828459045)
+			$ => $(t.e().toNumber()).Equal(2.71828182845905)
 		)
 		eye.test("Golden Ratio", "node",
-			$ => $(t.goldenRatio().toNumber()).Equal(1.618033988749895)
+			$ => $(t.goldenRatio().toNumber()).Equal(1.61803398874989)
+		)
+		eye.test("Constants", "node",
+			$ => $(t.c("pi")).Equal(t.pi()),
+			$ => $(t.c("e")).Equal(t.e()),
+			$ => $(t.c("goldenRatio")).Equal(t.goldenRatio())
 		)
 	})
 	eye.describe("Other", () => {
