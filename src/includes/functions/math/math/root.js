@@ -1,5 +1,5 @@
 root(n, base) {
-	if (typeof n != 'object') {
+	if (typeof n != 'object' || n.isBigNumber) {
         n = [n]
     }
 	let result = []

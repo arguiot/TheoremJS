@@ -4,6 +4,7 @@
 */
 
 const BigNumber = require('bignumber.js');
+BigNumber.config(20)
 class TheoremJS {
   constructor() {
   	// code
@@ -14,6 +15,38 @@ class TheoremJS {
           return new BigNumber(1);
       }
       return new BigNumber(n).times(this.factorial(new BigNumber(n).minus(1)))
+  }
+  gamma (z) {
+  	const g = 7;
+  	const p = [
+  	    0.99999999999980993,
+  	    676.5203681218851,
+  	    -1259.1392167224028,
+  	    771.32342877765313,
+  	    -176.61502916214059,
+  	    12.507343278686905,
+  	    -0.13857109526572012,
+  	    9.9843695780195716e-6,
+  	    1.5056327351493116e-7
+  	];
+      if (z < 0.5) {
+          return new BigNumber(Number(Math.PI / (Math.sin(Math.PI * z) * this.gamma(1 - z).toNumber())).toFixed(10));
+      }
+      else if(z > 100) return Math.exp(this.lngamma(z));
+      else {
+          z -= 1;
+          let x = p[0];
+          for (var i = 1; i < g + 2; i++) {
+              x += p[i] / (z + i);
+          }
+          const t = z + g + 0.5;
+  
+          return new BigNumber(Number(Math.sqrt(2 * Math.PI)
+              * Math.pow(t, z + 0.5)
+              * Math.exp(-t)
+              * x
+          ).toFixed(10))
+      }
   }
   ln(x, n = 15) {
       let buffer = new BigNumber(0);
@@ -29,21 +62,46 @@ class TheoremJS {
       }
       return new BigNumber(buffer.times(2).toFixed(n - 1))
   }
+  lngamma(z) {
+  	const g_ln = 607/128;
+  	const p_ln = [
+  	    0.99999999999999709182,
+  	    57.156235665862923517,
+  	    -59.597960355475491248,
+  	    14.136097974741747174,
+  	    -0.49191381609762019978,
+  	    0.33994649984811888699e-4,
+  	    0.46523628927048575665e-4,
+  	    -0.98374475304879564677e-4,
+  	    0.15808870322491248884e-3,
+  	    -0.21026444172410488319e-3,
+  	    0.21743961811521264320e-3,
+  	    -0.16431810653676389022e-3,
+  	    0.84418223983852743293e-4,
+  	    -0.26190838401581408670e-4,
+  	    0.36899182659531622704e-5
+  	];
+      if(z < 0) return Number('0/0');
+      let x = p_ln[0];
+      for(var i = p_ln.length - 1; i > 0; --i) x += p_ln[i] / (z + i);
+      const t = z + g_ln + 0.5;
+      return new BigNumber(Number(.5*Math.log(2*Math.PI)+(z+.5)*Math.log(t)-t+Math.log(x)-Math.log(z)).toFixed(10));
+  }
   log(x, base, n = 15) {
   	return new BigNumber(this.ln(x, n).div(this.ln(base, n)).toPrecision(n - 1))
   }
   pow(n, base) {
-  	if (typeof n != 'object') {
+      if (typeof n != 'object' || n.isBigNumber) {
           n = [n]
       }
-  	let result = []
+      let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(n[i]).pow(base))
+          result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(base).toNumber()).toFixed(10)))
       }
-  	return result.length == 1 ? result[0] : result
+      return result.length == 1 ? result[0] : result
   }
   root(n, base) {
-  	if (typeof n != 'object') {
+  	if (typeof n != 'object' || n.isBigNumber) {
           n = [n]
       }
   	let result = []
@@ -56,14 +114,21 @@ class TheoremJS {
   	return new BigNumber(new BigNumber(1).div(this.e(n).pow(x).add(1)).toPrecision(n))
   }
   sqrt(n) {
-  	if (typeof n != 'object') {
+  	if (typeof n != 'object' || n.isBigNumber) {
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(n[i]).sqrt())
+      	result.push(new BigNumber(new BigNumber(n[i]).sqrt()))
       }
   	return result.length == 1 ? result[0] : result
+  }
+  zeta(x, n = 15) {
+  	let buffer = 0
+  	for (var i = 1; i < n * 10; i++) {
+  		buffer = new BigNumber(buffer).plus(new BigNumber(x).pow(-i))
+  	}
+  	return new BigNumber(buffer.toPrecision(n))
   }
   apply(n, f) {
       if (typeof n != 'object') {

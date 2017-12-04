@@ -4,6 +4,7 @@
 */
 
 const BigNumber = require('bignumber.js');
+BigNumber.config(20)
 class TheoremJS {
   //= includes/functions
 }

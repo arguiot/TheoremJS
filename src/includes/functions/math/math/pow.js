@@ -1,10 +1,10 @@
 pow(n, base) {
-	if (typeof n != 'object') {
+    if (typeof n != 'object' || n.isBigNumber) {
         n = [n]
     }
-	let result = []
+    let result = []
     for (var i = 0; i < n.length; i++) {
-    	result.push(new BigNumber(n[i]).pow(base))
+        result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(base).toNumber()).toFixed(10)))
     }
-	return result.length == 1 ? result[0] : result
+    return result.length == 1 ? result[0] : result
 }
