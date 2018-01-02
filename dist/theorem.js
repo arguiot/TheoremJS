@@ -198,6 +198,30 @@ class TheoremJS {
   		return new BigNumber(array[half-1]).add(array[half]).div(2).toNumber()
   	}
   }
+  regression(data, deg) {
+  	if (deg == 1) {
+  		return this.linreg(data)
+  	}
+  }
+  linreg(array) {
+  	const X = Object.keys(array)
+  	for(var i=0; i<X.length;i++) X[i] = parseFloat(X[i]);
+  	const Y = Object.values(array)
+  	const N = X.length // could also be Y.length
+  	let XY = [];
+  	let XX = [];
+  	for (var i = 0; i < X.length - 1; i++) {
+  		XX.push(X[i] * X[i])
+  		XY.push(X[i] * Y[i])
+  	}
+  	const sumX = this.sum(...X)
+  	const sumY = this.sum(...Y)
+  	const sumXY = this.sum(...XY)
+  	const sumXX = this.sum(...XX)
+  	const slope = (N * sumXY - sumX * sumY) / (N * sumXX - sumX ** 2)
+  	const intercept = (sumY - slope * sumX) / N
+  	return this.polynomial(slope, intercept)
+  }
   acos(n) {
       if (typeof n != 'object' || n.isBigNumber) {
   		n = n.isBigNumber == true ? n.toNumber() : n
@@ -467,6 +491,55 @@ class TheoremJS {
   y_intercept(f) {
   	return f.core(0)
   }
+  * collatz(n) {
+  	while (n != 1) {
+  		if(n % 2 == 0) {
+  			n = n / 2
+  		} else {
+  			n = 3 * n + 1
+  		}
+  		yield n;
+  	}
+  }
+  * fibonacci() {
+      let fn1 = 0;
+      let fn2 = 1;
+      while (true) {
+          const current = fn1;
+          fn1 = fn2;
+          fn2 = fn1 + current;
+          const reset = yield current;
+          if (reset) {
+              fn1 = 0;
+              fn2 = 1;
+          }
+      }
+  }
+  * sieve() {
+  	// Eratosthenes algorithm to find all primes under n
+      var array = [], upperLimit = Math.sqrt(n), output = [2];
+  
+      // Make an array from 2 to (n - 1)
+      for (var i = 0; i < n; i++)
+          array.push(1);
+  
+      // Remove multiples of primes starting from 2, 3, 5,...
+      for (var i = 3; i <= upperLimit; i += 2) {
+          if (array[i]) {
+              for (var j = i * i; j < n; j += i*2)
+                  array[j] = 0;
+          }
+      }
+  
+      // All array[i] set to 1 (true) are primes
+      for (var i = 3; i < n; i += 2) {
+          if(array[i]) {
+              output.push(i);
+          }
+      }
+  
+      return output;
+  }
   c(name, n = 15) {
   	const numbers = {
   		"pi": '3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909',
@@ -493,6 +566,16 @@ class TheoremJS {
   }
   goldenRatio(n = 15) {
   	return new BigNumber(new BigNumber(1).plus(this.sqrt(5)).div(2).toPrecision(n))
+  }
+  isPrime(n) {
+  	n = Number(n)
+      if (n < 2) return false
+  	if (n == 2) return true
+  	if (n % 2 == 0) return false
+  	for (var i = 3; i < this.sqrt(n).toNumber(); i += 2) {
+  		if (n % i == 0) return false
+  	}
+  	return true
   }
   pi(digits = 15) {
   	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })

@@ -66,6 +66,13 @@ eye.describe("Math", () => {
 			$ => $(t.c("e")).Equal(t.e()),
 			$ => $(t.c("goldenRatio")).Equal(t.goldenRatio())
 		)
+		eye.describe("Primes", () => {
+			eye.test("isPrime", "node",
+				$ => $(t.isPrime(31013)).Equal(true),
+				$ => $(t.isPrime(1)).Equal(false),
+				$ => $(t.isPrime(2)).Equal(true)
+			)
+		})
 	})
 	eye.describe("Other", () => {
 		eye.test("Apply", "node",

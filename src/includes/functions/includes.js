@@ -4,6 +4,7 @@
 //= math/stats
 //= math/trig
 //= math/algebra
+//= math/generators
 //= math/numbers
 //= other
 //= array
