@@ -199,28 +199,88 @@ class TheoremJS {
   	}
   }
   regression(data, deg) {
-  	if (deg == 1) {
-  		return this.linreg(data)
+      if (deg == 1) {
+          return this.linreg(data)
+      } else {
+  		return this.polyreg(data, deg)
   	}
   }
   linreg(array) {
-  	const X = Object.keys(array)
-  	for(var i=0; i<X.length;i++) X[i] = parseFloat(X[i]);
-  	const Y = Object.values(array)
-  	const N = X.length // could also be Y.length
-  	let XY = [];
-  	let XX = [];
-  	for (var i = 0; i < X.length - 1; i++) {
-  		XX.push(X[i] * X[i])
-  		XY.push(X[i] * Y[i])
-  	}
-  	const sumX = this.sum(...X)
-  	const sumY = this.sum(...Y)
-  	const sumXY = this.sum(...XY)
-  	const sumXX = this.sum(...XX)
-  	const slope = (N * sumXY - sumX * sumY) / (N * sumXX - sumX ** 2)
-  	const intercept = (sumY - slope * sumX) / N
-  	return this.polynomial(slope, intercept)
+      const X = Object.keys(array)
+      for (var i = 0; i < X.length; i++) X[i] = parseFloat(X[i]);
+      const Y = Object.values(array)
+      const N = X.length // could also be Y.length
+      let XY = [];
+      let XX = [];
+      for (var i = 0; i < X.length - 1; i++) {
+          XX.push(X[i] * X[i])
+          XY.push(X[i] * Y[i])
+      }
+      const sumX = this.sum(...X)
+      const sumY = this.sum(...Y)
+      const sumXY = this.sum(...XY)
+      const sumXX = this.sum(...XX)
+      const slope = (N * sumXY - sumX * sumY) / (N * sumXX - sumX ** 2)
+      const intercept = (sumY - slope * sumX) / N
+      return this.polynomial(slope, intercept)
+  }
+  polyreg(data, deg) {
+      const x = Object.keys(data)
+      for (let i in x) {
+          x[i] = parseFloat(x[i])
+      }
+      const y = Object.values(data)
+      for (let i in y) {
+          y[i] = parseFloat(y[i])
+      }
+      const lhs = [];
+      const rhs = [];
+      let a = 0;
+      let b = 0;
+      let c;
+      let k;
+  
+      var i;
+      let j;
+      let l;
+      const len = x.length;
+  
+      let results;
+      let equation;
+      let string;
+  
+      if (typeof deg === 'undefined') {
+          k = 3;
+      } else {
+          k = deg + 1;
+      }
+  
+      for (i = 0; i < k; i++) {
+          for (l = 0; l < len; l++) {
+              if (y[l] !== null) {
+                  a += x[l] ** i * y[l];
+              }
+          }
+  
+          lhs.push(a);
+          a = 0;
+  
+          c = [];
+          for (j = 0; j < k; j++) {
+              for (l = 0; l < len; l++) {
+                  if (y[l] !== null) {
+                      b += x[l] ** (i + j);
+                  }
+              }
+              c.push(b);
+              b = 0;
+          }
+          rhs.push(c);
+      }
+      rhs.push(lhs);
+      equation = this.gaussElimination(rhs, k);
+  
+      return this.polynomial(...equation.reverse())
   }
   acos(n) {
       if (typeof n != 'object' || n.isBigNumber) {
@@ -439,6 +499,43 @@ class TheoremJS {
       }
       return exp
   }
+  gaussElimination(input, order) {
+      const matrix = input;
+      const n = input.length - 1;
+      const coefficients = [order];
+  
+      for (let i = 0; i < n; i++) {
+          let maxrow = i;
+          for (let j = i + 1; j < n; j++) {
+              if (Math.abs(matrix[i][j]) > Math.abs(matrix[i][maxrow])) {
+                  maxrow = j;
+              }
+          }
+  
+          for (let k = i; k < n + 1; k++) {
+              const tmp = matrix[k][i];
+              matrix[k][i] = matrix[k][maxrow];
+              matrix[k][maxrow] = tmp;
+          }
+  
+          for (let j = i + 1; j < n; j++) {
+              for (let k = n; k >= i; k--) {
+                  matrix[k][j] -= (matrix[k][i] * matrix[i][j]) / matrix[i][i];
+              }
+          }
+      }
+  
+      for (let j = n - 1; j >= 0; j--) {
+          let total = 0;
+          for (let k = j + 1; k < n; k++) {
+              total += matrix[k][j] * coefficients[k];
+          }
+  
+          coefficients[j] = (matrix[n][j] - total) / matrix[j][j];
+      }
+  
+      return coefficients;
+  }
   graph(f, from=-100, to=100, step=0.1) {
   	let array = {}
   	for (var i = new BigNumber(from); i.lessThanOrEqualTo(new BigNumber(to)); i = i.plus(new BigNumber(step))) {
@@ -607,6 +704,10 @@ class TheoremJS {
   
       // the final pi has the requested number of decimals
       return new BigNumber(new Decimal(4).times(pi4th).toPrecision(digits))
+  }
+  round(n, precision = 2) {
+  	n = Number(n)
+  	return Math.round(n * 10 ** precision) / 10 ** precision
   }
   convertToBase(x, n) {
   	return new BigNumber(x).toString(n)
