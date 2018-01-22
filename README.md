@@ -1,7 +1,7 @@
 <div align="center">
 
 # TheoremJS
-A Math object extension for computation in JavaScript
+A Math framework for computation in JavaScript
 </div>
 
 
