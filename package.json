@@ -1,8 +1,8 @@
 {
   "name": "theorem.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Math object extension for computation in JavaScript",
-  "main": "dist/theorem.min.js",
+  "main": "dist/theorem.js",
   "scripts": {
     "test": "npm run gulp && npm run eye",
     "gulp": "gulp",
