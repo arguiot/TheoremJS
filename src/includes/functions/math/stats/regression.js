@@ -2,26 +2,29 @@ regression(data, deg) {
     if (deg == 1) {
         return this.linreg(data)
     } else {
-		return this.polyreg(data, deg)
-	}
+        return this.polyreg(data, deg)
+    }
 }
 linreg(array) {
-    const X = Object.keys(array)
-    for (var i = 0; i < X.length; i++) X[i] = parseFloat(X[i]);
-    const Y = Object.values(array)
-    const N = X.length // could also be Y.length
-    let XY = [];
-    let XX = [];
-    for (var i = 0; i < X.length - 1; i++) {
-        XX.push(X[i] * X[i])
-        XY.push(X[i] * Y[i])
+    const x = Object.keys(array)
+    const y = Object.values(array)
+    const n = y.length;
+    let sum_x = 0;
+    let sum_y = 0;
+    let sum_xy = 0;
+    let sum_xx = 0;
+    let sum_yy = 0;
+
+    for (let i = 0; i < y.length; i++) {
+        sum_x += parseFloat(x[i]);
+        sum_y += parseFloat(y[i]);
+        sum_xy += parseFloat(x[i] * y[i]);
+        sum_xx += parseFloat(x[i] * x[i]);
+        sum_yy += parseFloat(y[i] * y[i]);
     }
-    const sumX = this.sum(...X)
-    const sumY = this.sum(...Y)
-    const sumXY = this.sum(...XY)
-    const sumXX = this.sum(...XX)
-    const slope = (N * sumXY - sumX * sumY) / (N * sumXX - sumX ** 2)
-    const intercept = (sumY - slope * sumX) / N
+
+    const slope = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+    const intercept = (sum_y - slope * sum_x) / n;
     return this.polynomial(slope, intercept)
 }
 polyreg(data, deg) {
