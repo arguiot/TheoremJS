@@ -8,7 +8,9 @@ camera.lookAt(new THREE.Vector3(0, 0, 0));
 const renderer = new THREE.WebGLRenderer({
     antialias: true
 });
-renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.setSize(window.innerWidth * 2, window.innerHeight * 2)
+renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
+camera.updateProjectionMatrix()
 document.body.appendChild(renderer.domElement);
 
 // Sphere
@@ -45,6 +47,15 @@ line2.position.x = 2
 line2.position.y = 1
 line2.rotation.z = 1.2
 
+// Points
+const pointShape = new THREE.SphereGeometry(0.03, 4, 4);
+const pMaterial = new THREE.MeshBasicMaterial( {color: 0x0000} )
+const point = new THREE.Mesh( pointShape, pMaterial )
+scene.add(point)
+point.position.x = 2;
+point.position.y = 1;
+
+
 camera.position.z = 10;
 
 sphere.constRand = 0.4
@@ -63,6 +74,8 @@ const render = () => {
     triangle.position.x = moveBy + 2
     line1.position.y = moveBy + 1
     line2.position.y = moveBy / .9 + 1
+	point.position.y = moveBy * 1.3 + 1
+	point.position.x = (-moveBy / 2.1) + 2
     renderer.render(scene, camera);
 };
 
