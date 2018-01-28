@@ -1,10 +1,18 @@
 <div align="center">
-
-# TheoremJS
+<h1>TheoremJS</h1>
 A Math framework for computation in JavaScript
 </div>
 
-
+## Getting Started
+Type the following command in a terminal
+```bash
+[sudo] npm i theorem.js
+```
+Then open your favorite code editor:
+```js
+const t = require("theorem.js");
+/* Start coding here */
+```
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/arguiot/TheoremJS/tags).
