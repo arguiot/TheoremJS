@@ -72,10 +72,10 @@ const render = () => {
     }
     sphere.position.x = -moveBy - 2
     triangle.position.x = moveBy + 2
-    line1.position.y = moveBy + 1
-    line2.position.y = moveBy / .9 + 1
-	point.position.y = moveBy * 1.3 + 1
-	point.position.x = (-moveBy / 2.1) + 2
+    line1.position.y = moveBy / .9 + 1
+    line2.position.y = moveBy + 1
+	point.position.y = moveBy / 1.22 + 1
+	point.position.x = (-moveBy / -2.25) + 2
     renderer.render(scene, camera);
 };
 
@@ -86,3 +86,6 @@ $.scroll(() => {
         moveBy = 2.5 * ($.scrollTop() / window.innerWidth)
     }
 })
+
+var year = new Date().getFullYear()
+$.var()

@@ -21,6 +21,35 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
 
+	<nav role="navigation">
+		<div id="menuToggle">
+			<!--
+	    A fake / hidden checkbox is used as click reciever,
+	    so you can use the :checked selector on it.
+	    -->
+			<input type="checkbox" />
+
+			<!--
+	    Some spans to act as a hamburger.
+
+	    They are acting like a real hamburger,
+	    not that McDonalds stuff.
+	    -->
+			<span></span>
+			<span></span>
+			<span></span>
+
+			<!--
+	    Too bad the menu has to be inside of the button
+	    but hey, it's pure CSS magic.
+	    -->
+			<ul id="menu">
+				<a href="https://github.com/arguiot/TheoremJS"><li>GitHub</li></a>
+				<a href="https://github.com/arguiot/TheoremJS/wiki"><li>Docs</li></a>
+				<a href="mailto:arguiot@gmail.com"><li>Contact</li></a>
+			</ul>
+		</div>
+	</nav>
 	<div class="header">
 		<h1>TheoremJS</h1>
 		<p>A Math framework for computation in JavaScript</p>
@@ -35,7 +64,8 @@
 		<section>
 			<h2>Written in JavaScript ❤️</h2>
 			<p>
-				JavaScript is an easy to use scripting language that is perfect for mathematical computation: it's fast and it has a lot of built-in functions. TheoremJS was built on top <a href="http://mikemcl.github.io/bignumber.js/">BigNumber</a> to ensure that all the math is done with precision.
+				JavaScript is an easy to use scripting language that is perfect for mathematical computation: it's fast and it has a lot of built-in functions. TheoremJS was built on top <a href="http://mikemcl.github.io/bignumber.js/">BigNumber</a> to ensure that
+				all the math is done with precision.
 			</p>
 		</section>
 		<section>
@@ -47,12 +77,12 @@
 		</section>
 	</article>
 	<footer>
-		<div class="copyright">© Copyright Arthur Guiot 2018</div>
-		<ul class="links">
-			<li><a href="https://github.com/arguiot/TheoremJS">GitHub</a></li>
-			<li><a href="https://github.com/arguiot/TheoremJS/wiki">Docs</a></li>
-			<li><a href="mailto:arguiot@gmail.com">Contact</a></li>
-		</ul>
+		<div class="container">
+			© Copyright Arthur Guiot <span var="year"></span>
+			<small>
+				MIT License
+			</small>
+		</div>
 	</footer>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/DisplayJS/2.3.0/display.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>

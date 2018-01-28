@@ -95,7 +95,127 @@ textarea {
 body {
     margin: 0;
     overflow-x: hidden;
-	font-family: 'Roboto Mono', monospace
+    font-family: 'Roboto Mono', monospace
+}
+
+#menuToggle {
+    display: block;
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuToggle input {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+    cursor: pointer;
+    opacity: 0;
+    /* hide this */
+    z-index: 2;
+    /* and place it over the hamburger */
+    -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+
+#menuToggle span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+    background: #292929;
+    border-radius: 3px;
+    z-index: 1;
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+    transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+
+#menuToggle input:checked~span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #fff;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+
+#menuToggle input:checked~span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+
+#menuToggle input:checked~span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+
+#menu {
+    position: fixed;
+    width: 300px;
+	height: 100vh;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+    background: #292929;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li {
+    padding: 10px 0;
+    font-size: 22px;
+	color: white;
+}
+#menu a {
+	color: white;
+	text-decoration: none;
+}
+#menu a:hover {
+	text-decoration: underline;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+
+#menuToggle input:checked~ul {
+    transform: none;
 }
 
 canvas {
@@ -114,43 +234,46 @@ canvas {
     align-items: center;
     flex-direction: column;
 }
+
 article {
-	width: 100vw;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding-top: 50px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
 }
+
 section {
-	width: 60vw;
-	max-width: 800px;
+    width: 60vw;
+    max-width: 800px;
 }
+
 .gist-meta {
-	display: none;
+    display: none;
 }
+
 footer {
-	margin-top: 50px;
-	width: 100vw;
-	height: 400px;
-	background: #333;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	color: white;
+    margin-top: 50px;
+    width: 100vw;
+    height: 400px;
+    background-color: #292929;
+    padding: 32px 0;
+    color: #fff;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2), 0 0 5px 4px rgba(0, 0, 0, 0.14), 0 0 10px 1px rgba(0, 0, 0, 0.12);
+    display: flex;
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+	text-align: center;
 }
-.copyright {
-	width: 150px;
+
+small {
+    font-size: 100%;
+    display: block;
+    opacity: .6
 }
-.links>li>a {
-	color: white;
-	text-decoration: none;
-}
-.links>li>a:hover {
-	color: white;
-	text-decoration: underline;
-}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
