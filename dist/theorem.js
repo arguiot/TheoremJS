@@ -460,7 +460,7 @@ class TheoremJS {
   		f: func,
   		core: x => {
   			let regex = new RegExp(v)
-  			let newStr = func.replace(regex, x)
+  			let newStr = func.replace(regex, `(${x})`)
   			return eval(newStr)
   		}
   	}

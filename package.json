@@ -1,7 +1,7 @@
 {
   "name": "theorem.js",
   "version": "0.0.2",
-  "description": "A Math object extension for computation in JavaScript",
+  "description": "A Math library for computation in JavaScript",
   "main": "dist/theorem.js",
   "scripts": {
     "test": "npm run gulp && npm run eye",
@@ -13,11 +13,11 @@
     "url": "git+https://github.com/arguiot/TheoremJS.git"
   },
   "keywords": [
-    "lang",
-    "translate",
-    "language",
-    "framework",
-    "display.js"
+    "theoremjs",
+    "math",
+    "computation",
+    "algebra",
+    "library"
   ],
   "author": "Arthur Guiot",
   "license": "MIT",
