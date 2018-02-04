@@ -694,6 +694,9 @@ class TheoremJS {
   	}
   	return true
   }
+  n(n) {
+  	return new BigNumber(n)
+  }
   pi(digits = 15) {
   	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
       function arctan(x) {
