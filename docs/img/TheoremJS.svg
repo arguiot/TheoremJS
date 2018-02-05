@@ -1,0 +1,266 @@
+<svg width="1001" height="1000" viewBox="0 0 1001 1000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>TheoremJS</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-10596 345)">
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M 10596 -345L 11597 -345L 11597 655L 10596 655L 10596 -345Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="TheoremJS" clip-path="url(#clip-0)">
+<mask id="mask0_alpha" mask-type="alpha">
+<g id="Ellipse 2">
+<use xlink:href="#path0_fill" transform="translate(10596 -345)" fill="#C4C4C4"/>
+</g>
+</mask>
+<g id="Ellipse 2" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_stroke" transform="translate(10597 -345)"/>
+</g>
+<g id="graph" mask="url(#mask0_alpha)">
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="translate(10597 155)"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 11097 655)"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 11197 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 10997 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 10897 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 10697 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 555)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 455)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 355)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 255)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 55)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 -45)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 -145)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 2.67189e-24 -2.67189e-24 1 10597 -245)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 10797 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 10597 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 11297 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 11397 655)" fill="#828282"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(6.12323e-17 -1 1 6.12323e-17 11497 655)" fill="#828282"/>
+</g>
+</g>
+<g id="Plus" mask="url(#mask0_alpha)">
+<g id="Rectangle">
+<use xlink:href="#path3_fill" transform="translate(11059 -45)" fill="#333333"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path3_fill" transform="matrix(6.12323e-17 -1 1 6.12323e-17 10897 192)" fill="#333333"/>
+</g>
+</g>
+<g id="Div" mask="url(#mask0_alpha)">
+<g id="Divide">
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10792.2 170.625)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10792.2 130)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 10772 159.625)" fill="#828282"/>
+</g>
+</g>
+<g id="Divide">
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10892.2 370.625)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10892.2 330)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 10872 359.625)" fill="#828282"/>
+</g>
+</g>
+<g id="Divide">
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10992.2 570.625)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10992.2 530)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 10972 559.625)" fill="#828282"/>
+</g>
+</g>
+<g id="Divide">
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(11492.2 -29.375)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(11492.2 -70)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 11472 -40.375)" fill="#828282"/>
+</g>
+</g>
+<g id="Divide">
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10792.2 -129.375)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10792.2 -170)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 10772 -140.375)" fill="#828282"/>
+</g>
+</g>
+<g id="Divide">
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10987.2 -229.375)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(10987.2 -270)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 10967 -240.375)" fill="#828282"/>
+</g>
+</g>
+<g id="Divide">
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(11492.2 270.625)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path4_fill" transform="translate(11492.2 230)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 11472 259.625)" fill="#828282"/>
+</g>
+</g>
+</g>
+<g id="Add" mask="url(#mask0_alpha)">
+<g id="Plus">
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="translate(11092.2 -170)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 11072 -140.375)" fill="#828282"/>
+</g>
+</g>
+<g id="Plus">
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="translate(11292.2 -70)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 11272 -40.375)" fill="#828282"/>
+</g>
+</g>
+<g id="Plus">
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="translate(11392.2 430)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 11372 459.625)" fill="#828282"/>
+</g>
+</g>
+<g id="Plus">
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="translate(11192.2 530)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 11172 559.625)" fill="#828282"/>
+</g>
+</g>
+<g id="Plus">
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="translate(10692.2 30)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path5_fill" transform="matrix(4.89859e-16 -1 1 7.65404e-18 10672 59.625)" fill="#828282"/>
+</g>
+</g>
+</g>
+<g id="Times" mask="url(#mask0_alpha)">
+<g id="Multiply">
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 0.707107 -0.707106 0.707107 10914 -69.9257)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 -0.707107 0.707106 0.707107 10872.1 -62.117)" fill="#828282"/>
+</g>
+</g>
+<g id="Multiply">
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 0.707107 -0.707106 0.707107 11214 -269.926)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 -0.707107 0.707106 0.707107 11172.1 -262.117)" fill="#828282"/>
+</g>
+</g>
+<g id="Multiply">
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 0.707107 -0.707106 0.707107 11414 130.074)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 -0.707107 0.707106 0.707107 11372.1 137.883)" fill="#828282"/>
+</g>
+</g>
+<g id="Multiply">
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 0.707107 -0.707106 0.707107 11314 330.074)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 -0.707107 0.707106 0.707107 11272.1 337.883)" fill="#828282"/>
+</g>
+</g>
+<g id="Multiply">
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 0.707107 -0.707106 0.707107 11014 430.074)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 -0.707107 0.707106 0.707107 10972.1 437.883)" fill="#828282"/>
+</g>
+</g>
+<g id="Multiply">
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 0.707107 -0.707106 0.707107 10714 330.074)" fill="#828282"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path6_fill" transform="matrix(0.707106 -0.707107 0.707106 0.707107 10672.1 337.883)" fill="#828282"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 1001 500C 1001 776.142 776.919 1000 500.5 1000C 224.081 1000 0 776.142 0 500C 0 223.858 224.081 0 500.5 0C 776.919 0 1001 223.858 1001 500Z"/>
+<path id="path1_stroke" d="M 995 500C 995 773.381 773.381 995 500 995L 500 1005C 778.904 1005 1005 778.904 1005 500L 995 500ZM 500 995C 226.619 995 5 773.381 5 500L -5 500C -5 778.904 221.096 1005 500 1005L 500 995ZM 5 500C 5 226.619 226.619 5 500 5L 500 -5C 221.096 -5 -5 221.096 -5 500L 5 500ZM 500 5C 773.381 5 995 226.619 995 500L 1005 500C 1005 221.096 778.904 -5 500 -5L 500 5Z"/>
+<path id="path2_stroke" d="M 0 0L 1000 0L 1000 -1L 0 -1L 0 0Z"/>
+<path id="path3_fill" d="M 0 37.5C 0 16.7893 16.7893 0 37.5 0L 37.5 0C 58.2107 0 75 16.7893 75 37.5L 75 362.5C 75 383.211 58.2107 400 37.5 400L 37.5 400C 16.7893 400 0 383.211 0 362.5L 0 37.5Z"/>
+<path id="path4_fill" d="M 0 4.6875C 0 2.09867 2.09867 0 4.6875 0L 4.6875 0C 7.27633 0 9.375 2.09867 9.375 4.6875L 9.375 4.6875C 9.375 7.27633 7.27633 9.375 4.6875 9.375L 4.6875 9.375C 2.09867 9.375 0 7.27633 0 4.6875L 0 4.6875Z"/>
+<path id="path5_fill" d="M 0 4.6875C 0 2.09867 2.09867 0 4.6875 0L 4.6875 0C 7.27633 0 9.375 2.09867 9.375 4.6875L 9.375 45.3125C 9.375 47.9013 7.27633 50 4.6875 50L 4.6875 50C 2.09867 50 0 47.9013 0 45.3125L 0 4.6875Z"/>
+<path id="path6_fill" d="M 0 5.57412C 0 2.49562 2.49562 0 5.57412 0L 5.57412 0C 8.65262 0 11.1482 2.49562 11.1482 5.57412L 11.1482 53.8832C 11.1482 56.9617 8.65262 59.4573 5.57412 59.4573L 5.57412 59.4573C 2.49562 59.4573 0 56.9617 0 53.8832L 0 5.57412Z"/>
+</defs>
+</svg>
