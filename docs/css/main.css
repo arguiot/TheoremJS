@@ -248,7 +248,14 @@ section {
     width: 60vw;
     max-width: 800px;
 }
-
+h3 {
+	text-align: center;
+}
+.sep {
+	border-top: 1px solid #eee;
+	padding-top: 20px;
+	padding-bottom: 20px
+}
 .gist-meta {
     display: none;
 }
