@@ -43,6 +43,11 @@ eye.describe("Math", () => {
         eye.test("Y-Intercept", "node",
             $ => $(t.y_intercept(t.f("x", "2*x+1"))).Equal(1)
         )
+		eye.describe("Calculus", () => {
+			eye.test("Integral", "node",
+				$ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([NaN,NaN,0.3333333333333333,-0.5,-1,0])
+			)
+		})
     })
     eye.describe("Math Basic Functions", () => {
         eye.test("Factorial", "node",
