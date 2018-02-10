@@ -35,7 +35,8 @@ eye.describe("Math", () => {
             $ => {
                 const roots = t.findRoots(t.polynomial(-3, 0, 2, 0))
                 return $(roots[1]).isCloseTo(Math.sqrt(2 / 3))
-            }
+            },
+			$ => $(t.polynomial(1, -1, -1).core(0)).Equal(-1)
         )
         eye.test("Numeral Solve & Graph", "node",
             $ => $(t.numeralSolve(t.f("x", "2*x+1"), 0)).Equal(['-0.5', 0]) // Returns -0.5 with 0 error rate
@@ -45,7 +46,7 @@ eye.describe("Math", () => {
         )
 		eye.describe("Calculus", () => {
 			eye.test("Integral", "node",
-				$ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([NaN,NaN,0.3333333333333333,-0.5,-1,0])
+				$ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([NaN,NaN,0.3333333333333333,-0.5,-1,0]),
 			)
 		})
     })
