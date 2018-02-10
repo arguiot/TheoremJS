@@ -1,6 +1,6 @@
 {
   "name": "theorem.js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A Math library for computation in JavaScript",
   "main": "dist/theorem.js",
   "scripts": {
