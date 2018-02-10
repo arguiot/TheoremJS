@@ -2,7 +2,7 @@
 	"type": "github",
 	"title": "TheoremJS",
 	"url": "https://github.com/arguiot/TheoremJS/wiki",
-	"logo": "//:0",
+	"logo": "https://theorem.js.org/img/TheoremJS.svg",
 	"copyright": "Arthur Guiot",
 	"analytics": "UA-109503398-4"
 	}]

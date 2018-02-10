@@ -184,7 +184,7 @@ body {
 #menu {
     position: fixed;
     width: 300px;
-	height: 100vh;
+    height: 100vh;
     margin: -100px 0 0 -50px;
     padding: 50px;
     padding-top: 125px;
@@ -200,14 +200,16 @@ body {
 #menu li {
     padding: 10px 0;
     font-size: 22px;
-	color: white;
+    color: white;
 }
+
 #menu a {
-	color: white;
-	text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
+
 #menu a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 /*
@@ -248,16 +250,26 @@ section {
     width: 60vw;
     max-width: 800px;
 }
+
 h3 {
-	text-align: center;
+    text-align: center;
 }
+
 .sep {
-	border-top: 1px solid #eee;
-	padding-top: 20px;
-	padding-bottom: 20px
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    padding-bottom: 20px
 }
+
 .gist-meta {
     display: none;
+}
+
+hr {
+    border: 0 none;
+    color: #cccccc;
+    height: 4px;
+    padding: 0;
 }
 
 footer {
@@ -272,7 +284,7 @@ footer {
     justify-content: center;
     -ms-align-items: center;
     align-items: center;
-	text-align: center;
+    text-align: center;
 }
 
 small {
