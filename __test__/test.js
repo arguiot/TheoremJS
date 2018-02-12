@@ -36,7 +36,7 @@ eye.describe("Math", () => {
                 const roots = t.findRoots(t.polynomial(-3, 0, 2, 0))
                 return $(roots[1]).isCloseTo(Math.sqrt(2 / 3))
             },
-			$ => $(t.polynomial(1, -1, -1).core(0)).Equal(-1)
+            $ => $(t.polynomial(1, -1, -1).core(0)).Equal(-1)
         )
         eye.test("Numeral Solve & Graph", "node",
             $ => $(t.numeralSolve(t.f("x", "2*x+1"), 0)).Equal(['-0.5', 0]) // Returns -0.5 with 0 error rate
@@ -44,16 +44,16 @@ eye.describe("Math", () => {
         eye.test("Y-Intercept", "node",
             $ => $(t.y_intercept(t.f("x", "2*x+1"))).Equal(1)
         )
-		eye.describe("Calculus", () => {
-			eye.test("Derivative", "node",
-				$ => $(t.derivate(t.polynomial(1, -1, -1)).values).Equal([2, -1]),
-				$ => $(t.derivate(t.polynomial(5, 2, -1, 3)).values).Equal([15, 4, -1])
-			)
-			eye.test("Integral", "node",
-				$ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([0.3333333333333333,-0.5,-1,0]),
-				$ => $(t.integrate(t.polynomial(1, -1, -1)).f).Equal("0 * x**0 + -1 * x**1 + -0.5 * x**2 + 0.3333333333333333 * x**3 ")
-			)
-		})
+        eye.describe("Calculus", () => {
+            eye.test("Derivative", "node",
+                $ => $(t.derivate(t.polynomial(1, -1, -1)).values).Equal([2, -1]),
+                $ => $(t.derivate(t.polynomial(5, 2, -1, 3)).values).Equal([15, 4, -1])
+            )
+            eye.test("Integral", "node",
+                $ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([0.3333333333333333, -0.5, -1, 0]),
+                $ => $(t.integrate(t.polynomial(1, -1, -1)).f).Equal("0 * x**0 + -1 * x**1 + -0.5 * x**2 + 0.3333333333333333 * x**3 ")
+            )
+        })
     })
     eye.describe("Math Basic Functions", () => {
         eye.test("Factorial", "node",
@@ -126,12 +126,12 @@ eye.describe("Math", () => {
                 0: 2,
                 2: 4,
                 3: 5
-            }, 2).values).Equal([ -1.973729821555837e-15, 1.000000000000006, 1.9999999999999984 ]),
-			$ => $(t.regression({
-				0: 2,
-				1: 5,
-				3: 11
-			}, 1).values).Equal([3, 2])
+            }, 2).values).Equal([-1.973729821555837e-15, 1.000000000000006, 1.9999999999999984]),
+            $ => $(t.regression({
+                0: 2,
+                1: 5,
+                3: 11
+            }, 1).values).Equal([3, 2])
         )
     })
     eye.describe("Trigonometry", () => {
