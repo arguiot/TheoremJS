@@ -45,6 +45,10 @@ eye.describe("Math", () => {
             $ => $(t.y_intercept(t.f("x", "2*x+1"))).Equal(1)
         )
 		eye.describe("Calculus", () => {
+			eye.test("Derivative", "node",
+				$ => $(t.derivate(t.polynomial(1, -1, -1)).values).Equal([2, -1]),
+				$ => $(t.derivate(t.polynomial(5, 2, -1, 3)).values).Equal([15, 4, -1])
+			)
 			eye.test("Integral", "node",
 				$ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([0.3333333333333333,-0.5,-1,0]),
 				$ => $(t.integrate(t.polynomial(1, -1, -1)).f).Equal("0 * x**0 + -1 * x**1 + -0.5 * x**2 + 0.3333333333333333 * x**3 ")
