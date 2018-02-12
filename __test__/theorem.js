@@ -573,7 +573,10 @@ class TheoremJS {
   		values.push(poly.values[i] / (parseInt(i)+1))
   	}
   	values.reverse()
-  	return this.polynomial(...values, 0)
+  	values.push(0)
+  	const out = values.filter(a => !isNaN(a))
+  
+  	return this.polynomial(...out)
   }
   numeralSolve(f, end, from = -100, to = 100, step = 0.1) {
   	let p = this.graph(f, from, to, step)
@@ -592,7 +595,7 @@ class TheoremJS {
   polynomial() {
   	const args = [...arguments].reverse()
   	let buffer = "";
-  	for (let i in args) {
+  	for (let i = 0; i < args.length; i++) {
   		buffer += `${args[i]} * x**${i} ${i == args.length -1 ? '': '+ '}`
   	}
   	return {

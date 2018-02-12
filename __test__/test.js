@@ -46,7 +46,8 @@ eye.describe("Math", () => {
         )
 		eye.describe("Calculus", () => {
 			eye.test("Integral", "node",
-				$ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([NaN,NaN,0.3333333333333333,-0.5,-1,0]),
+				$ => $(t.integrate(t.polynomial(1, -1, -1)).values).Equal([0.3333333333333333,-0.5,-1,0]),
+				$ => $(t.integrate(t.polynomial(1, -1, -1)).f).Equal("0 * x**0 + -1 * x**1 + -0.5 * x**2 + 0.3333333333333333 * x**3 ")
 			)
 		})
     })

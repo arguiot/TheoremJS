@@ -1,7 +1,7 @@
 polynomial() {
 	const args = [...arguments].reverse()
 	let buffer = "";
-	for (let i in args) {
+	for (let i = 0; i < args.length; i++) {
 		buffer += `${args[i]} * x**${i} ${i == args.length -1 ? '': '+ '}`
 	}
 	return {

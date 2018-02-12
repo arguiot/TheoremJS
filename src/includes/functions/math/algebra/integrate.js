@@ -8,5 +8,8 @@ integrate(poly) {
 		values.push(poly.values[i] / (parseInt(i)+1))
 	}
 	values.reverse()
-	return this.polynomial(...values, 0)
+	values.push(0)
+	const out = values.filter(a => !isNaN(a))
+
+	return this.polynomial(...out)
 }
