@@ -572,6 +572,16 @@ class TheoremJS {
   
       return coefficients;
   }
+  gradient(p1, p2) {
+  	const x1 = Number(Object.keys(p1)[0])
+  	const y1 = Number(Object.values(p1)[0])
+  	const x2 = Number(Object.keys(p2)[0])
+  	const y2 = Number(Object.values(p2)[0])
+  
+  	const slope = (y2 - y1) / (x2 - x1)
+  	
+  	return slope
+  }
   graph(f, from=-100, to=100, step=0.1) {
   	let array = {}
   	for (var i = new BigNumber(from); i.lessThanOrEqualTo(new BigNumber(to)); i = i.plus(new BigNumber(step))) {

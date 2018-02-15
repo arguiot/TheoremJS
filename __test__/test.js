@@ -45,6 +45,13 @@ eye.describe("Math", () => {
             $ => $(t.y_intercept(t.f("x", "2*x+1"))).Equal(1)
         )
         eye.describe("Calculus", () => {
+			eye.test("Gradient", "node",
+				$ => $(t.gradient({
+					2: 3
+				}, {
+					6: 8
+				})).Equal(1.25)
+			)
             eye.test("Derivative", "node",
                 $ => $(t.derivate(t.polynomial(1, -1, -1)).values).Equal([2, -1]),
                 $ => $(t.derivate(t.polynomial(5, 2, -1, 3)).values).Equal([15, 4, -1])
