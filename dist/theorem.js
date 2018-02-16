@@ -324,6 +324,9 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
+  angle2Vec(rad) {
+  	return [this.cos(rad), this.sin(rad)];
+  }
   asin(n) {
       if (typeof n != 'object' || n.isBigNumber) {
   		n = n.isBigNumber == true ? n.toNumber() : n
@@ -402,6 +405,25 @@ class TheoremJS {
       	result.push(Math.cosh(n[i]))
       }
   	return result.length == 1 ? result[0] : result
+  }
+  deg2rad(x) {
+      return new BigNumber(x).times(this.pi()).div(180)
+  }
+  drawCircularPoints(n, r=1, start=[-r, 0]) {
+  	const angle = this.pi().times(2).div(n)
+  	let buffer = {}
+  	buffer[start[0]] = start[1]
+  	let angleState = this.atan2(...start.reverse()) + angle.toNumber()
+  	for (var i = 0; i < n - 1; i++) {
+  		const x = new BigNumber(r).times(`${this.cos(angleState)}`).toString()
+  		const y = new BigNumber(r).times(`${this.sin(angleState)}`).toNumber()
+  		buffer[x] = y
+  		angleState += angle.toNumber()
+  	}
+  	return buffer
+  }
+  rad2deg(x) {
+  	return new BigNumber(x).times(180).div(this.pi())
   }
   sin(n) {
       if (typeof n != 'object' || n.isBigNumber) {
@@ -775,25 +797,6 @@ class TheoremJS {
   }
   convertToBase(x, n) {
   	return new BigNumber(x).toString(n)
-  }
-  deg2rad(x) {
-      return new BigNumber(x).times(this.pi()).div(180)
-  }
-  drawCircularPoints(n, r=1, start=[-r, 0]) {
-  	const angle = this.pi().times(2).div(n)
-  	let buffer = {}
-  	buffer[start[0]] = start[1]
-  	let angleState = this.atan2(...start.reverse()) + angle.toNumber()
-  	for (var i = 0; i < n - 1; i++) {
-  		const x = new BigNumber(r).times(`${this.cos(angleState)}`).toString()
-  		const y = new BigNumber(r).times(`${this.sin(angleState)}`).toNumber()
-  		buffer[x] = y
-  		angleState += angle.toNumber()
-  	}
-  	return buffer
-  }
-  rad2deg(x) {
-  	return new BigNumber(x).times(180).div(this.pi())
   }
   flatten(array) {
   	return array.reduce((a, b) => a.concat(b), []);
