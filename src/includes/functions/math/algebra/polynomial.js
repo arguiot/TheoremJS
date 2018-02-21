@@ -11,7 +11,7 @@ polynomial() {
 		values: [...arguments],
 		core: x => {
 			let regex = new RegExp("x")
-			let newStr = buffer.replace(regex, x)
+			let newStr = buffer.replace(regex, `(${x})`)
 			return eval(newStr)
 		}
 	}
