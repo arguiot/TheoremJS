@@ -30,6 +30,11 @@ eye.describe("Math", () => {
         eye.test("Function", "node",
             $ => $(t.run(t.f("x", "2*x+1"), 2)).Equal(5)
         )
+		eye.test("Fractions", "node",
+			$ => $(t.toFraction(0.75)).Equal(["3", "4"]),
+			$ => $(t.toFraction(3.1415926535, 10)).Equal(["22", "7"]),
+			$ => $(t.toDec("3", "4").toNumber()).Equal(0.75)
+		)
         eye.test("Find Roots & Polynomial", "node",
             $ => $(t.findRoots(t.polynomial(1, -1, -1))).Equal(['(1 + Math.sqrt(5)) / 2', '(1 - Math.sqrt(5)) / 2']),
             $ => {

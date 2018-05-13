@@ -653,7 +653,7 @@ class TheoremJS {
   		values: [...arguments],
   		core: x => {
   			let regex = new RegExp("x")
-  			let newStr = buffer.replace(regex, x)
+  			let newStr = buffer.replace(regex, `(${x})`)
   			return eval(newStr)
   		}
   	}
@@ -670,6 +670,16 @@ class TheoremJS {
   }
   y_intercept(f) {
   	return f.core(0)
+  }
+  toDec() {
+  	const args = [...arguments]
+  	if (args.length != 2) {
+  		throw "Require 2 numbers"
+  	}
+  	return new BigNumber(args[0]).div(args[1])
+  }
+  toFraction(x, p) {
+  	return new BigNumber(x).toFraction(p)
   }
   * collatz(n) {
   	while (n != 1) {
