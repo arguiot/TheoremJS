@@ -4,15 +4,12 @@
 */
 
 const BigNumber = require('bignumber.js');
-BigNumber.config(20)
 class TheoremJS {
-  constructor() {
+  constructor(precision=20) {
+  	BigNumber.config({ DECIMAL_PLACES: precision })
   	// code
   }
   
-  abs(n) {
-  	return new BigNumber(n).abs()
-  }
   factorial(n) {
       if (new BigNumber(n).equals(0)) {
           return new BigNumber(1);
@@ -733,6 +730,9 @@ class TheoremJS {
   
       return output;
   }
+  abs(n) {
+  	return new BigNumber(n).abs()
+  }
   c(name, n = 15) {
   	const numbers = {
   		"pi": '3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909',
@@ -743,6 +743,9 @@ class TheoremJS {
   		"UltimateAnswer": '42'
   	}
   	return new BigNumber(new BigNumber(numbers[name]).toPrecision(n))
+  }
+  floor(n) {
+  	return new BigNumber(n).integerValue(BigNumber.ROUND_CEIL)
   }
   e(n = 15) {
       let zero = new BigNumber(0);
@@ -756,6 +759,9 @@ class TheoremJS {
       }
       rval = zero.toPrecision(n)
       return new BigNumber(rval);
+  }
+  floor(n) {
+  	return new BigNumber(n).integerValue(BigNumber.ROUND_FLOOR)
   }
   goldenRatio(n = 15) {
   	return new BigNumber(new BigNumber(1).plus(this.sqrt(5)).div(2).toPrecision(n))
@@ -804,9 +810,9 @@ class TheoremJS {
       // the final pi has the requested number of decimals
       return new BigNumber(new Decimal(4).times(pi4th).toPrecision(digits))
   }
-  round(n, precision = 2) {
-  	n = Number(n)
-  	return Math.round(n * 10 ** precision) / 10 ** precision
+  round(n, precision = 0) {
+  	const tenPow = this.pow(10, precision)
+  	return new BigNumber(n).times(tenPow).integerValue(BigNumber.ROUND_HALF_CEIL).div(tenPow)
   }
   convertToBase(x, n) {
   	return new BigNumber(x).toString(n)
