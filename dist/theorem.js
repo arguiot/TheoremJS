@@ -3,7 +3,9 @@
 **         TheoremJS
 */
 
-const BigNumber = require('bignumber.js');
+if (!BigNumber) {
+	var BigNumber = require('bignumber.js');
+}
 class TheoremJS {
   constructor(precision=20) {
   	BigNumber.config({ DECIMAL_PLACES: precision })

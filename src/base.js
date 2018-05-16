@@ -3,7 +3,9 @@
 **         TheoremJS
 */
 
-const BigNumber = require('bignumber.js');
+if (!BigNumber) {
+	var BigNumber = require('bignumber.js');
+}
 class TheoremJS {
   //= includes/functions
 }
