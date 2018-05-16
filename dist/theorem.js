@@ -10,6 +10,9 @@ class TheoremJS {
   	// code
   }
   
+  abs(n) {
+  	return new BigNumber(n).abs()
+  }
   factorial(n) {
       if (new BigNumber(n).equals(0)) {
           return new BigNumber(1);
