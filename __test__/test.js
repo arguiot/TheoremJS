@@ -89,14 +89,14 @@ eye.describe("Math", () => {
             $ => $(t.pi().toNumber()).Equal(3.141592653589793)
         )
         eye.test("e", "node",
-            $ => $(t.e().toNumber()).Equal(2.718281828459045)
+            $ => $(t.e().toNumber()).Equal(2.718281828459046)
         )
         eye.test("Golden Ratio", "node",
             $ => $(t.goldenRatio().toNumber()).Equal(1.618033988749895)
         )
         eye.test("Constants", "node",
-            $ => $(t.c("pi")).isCloseTo(t.pi(), 15),
-            $ => $(t.c("e")).isCloseTo(t.e(), 15),
+            $ => $(t.c("pi")).isCloseTo(t.pi(), 14),
+            $ => $(t.c("e")).isCloseTo(t.e(), 14),
             $ => $(t.c("goldenRatio")).isCloseTo(t.goldenRatio(), 14)
         )
         eye.describe("Primes", () => {
