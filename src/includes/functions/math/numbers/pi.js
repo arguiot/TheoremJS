@@ -27,5 +27,5 @@ pi(digits = 15) {
         .minus(arctan(new DecimalPlus(1).div(239)));
 
     // the final pi has the requested number of decimals
-    return new BigNumber(new Decimal(4).times(pi4th).toPrecision(digits))
+    return new Decimal(4).times(new Decimal(pi4th))
 }
