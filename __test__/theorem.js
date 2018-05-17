@@ -708,29 +708,12 @@ class TheoremJS {
       }
   }
   * sieve() {
-  	// Eratosthenes algorithm to find all primes under n
-      var array = [], upperLimit = Math.sqrt(n), output = [2];
+      let n = 2;
   
-      // Make an array from 2 to (n - 1)
-      for (var i = 0; i < n; i++)
-          array.push(1);
-  
-      // Remove multiples of primes starting from 2, 3, 5,...
-      for (var i = 3; i <= upperLimit; i += 2) {
-          if (array[i]) {
-              for (var j = i * i; j < n; j += i*2)
-                  array[j] = 0;
-          }
+      while (true) {
+          if (this.isPrime(n)) yield n;
+          n++;
       }
-  
-      // All array[i] set to 1 (true) are primes
-      for (var i = 3; i < n; i += 2) {
-          if(array[i]) {
-              output.push(i);
-          }
-      }
-  
-      return output;
   }
   abs(n) {
   	return new BigNumber(n).abs()
@@ -744,15 +727,16 @@ class TheoremJS {
   		"EulerGamma": '0.5772156649015328606065120900824024310421593359399235988057672348848677267776646709369470632917467495146314472498070824809605040144865428362241739976449235362535003337429373377376739427925952582470949160087352039481656708532331517766115286211995015080',
   		"UltimateAnswer": '42'
   	}
-  	const BN = BigNumber.clone({ DECIMAL_PLACES: n })
-  	return new BN(number[name].slice(0, n + 2))
+  	const BN = BigNumber.another({ DECIMAL_PLACES: n })
+  	return new BN(numbers[name].slice(0, n + 2))
   }
   floor(n) {
   	return new BigNumber(n).integerValue(BigNumber.ROUND_CEIL)
   }
   e(n = 15) {
-      let zero = new BigNumber(0);
-      let one = new BigNumber(1);
+  	const BN = BigNumber.another({ DECIMAL_PLACES: n })
+      let zero = new BN(0);
+      let one = new BN(1);
       let rval;
   
       for (let i = 0; i <= n * 10; i++) {
@@ -760,24 +744,47 @@ class TheoremJS {
           let invert = one.div(fval)
           zero = zero.plus(invert)
       }
-      rval = zero.toPrecision(n)
-      return new BigNumber(rval);
+      return new BN(zero);
   }
   floor(n) {
   	return new BigNumber(n).integerValue(BigNumber.ROUND_FLOOR)
   }
   goldenRatio(n = 15) {
-  	return new BigNumber(new BigNumber(1).plus(this.sqrt(5)).div(2).toPrecision(n))
+  	const BN = BigNumber.another({ DECIMAL_PLACES: n + 1 })
+  	return new BN(BN(1).plus(this.sqrt(5)).div(2).toPrecision(n + 1))
   }
   isPrime(n) {
-  	n = Number(n)
-      if (n < 2) return false
-  	if (n == 2) return true
-  	if (n % 2 == 0) return false
-  	for (var i = 3; i < this.sqrt(n).toNumber(); i += 2) {
-  		if (n % i == 0) return false
+  	n = new BigNumber(n).abs()
+  	const leastFactor = this.leastFactor(n)
+  	if (n.eq(leastFactor)) {
+  		return true
   	}
-  	return true
+  	return false
+  }
+  leastFactor(n) {
+  	n = new BigNumber(n).abs().toNumber()
+  	if (Number.MAX_SAFE_INTEGER < n) throw `${n} is superior to ${Number.MAX_SAFE_INTEGER}`
+  	let out = false
+      if (isNaN(n) || !isFinite(n)) out = out !== false ? out : NaN;
+      if (n == 0) out = out !== false ? out : 0;
+      if (n % 1 || n * n < 2) out = out !== false ? out : 1;
+      if (n % 2 == 0) out = out !== false ? out : 2;
+      if (n % 3 == 0) out = out !== false ? out : 3;
+      if (n % 5 == 0) out = out !== false ? out : 5;
+      const m = Math.sqrt(n);
+      for (let i = 7; i <= m; i += 30) {
+          if (n % i == 0) out = out !== false ? out : i;
+          if (n % (i + 4) == 0) out = out !== false ? out : i + 4;
+          if (n % (i + 6) == 0) out = out !== false ? out : i + 6;
+          if (n % (i + 10) == 0) out = out !== false ? out : i + 10;
+          if (n % (i + 12) == 0) out = out !== false ? out : i + 12;
+          if (n % (i + 16) == 0) out = out !== false ? out : i + 16;
+          if (n % (i + 22) == 0) out = out !== false ? out : i + 22;
+          if (n % (i + 24) == 0) out = out !== false ? out : i + 24;
+      }
+      out = out !== false ? out : n
+  
+  	return new BigNumber(out)
   }
   n(n) {
   	return new BigNumber(n)
@@ -811,7 +818,7 @@ class TheoremJS {
           .minus(arctan(new DecimalPlus(1).div(239)));
   
       // the final pi has the requested number of decimals
-      return new BigNumber(new Decimal(4).times(pi4th).toPrecision(digits))
+      return new Decimal(4).times(new Decimal(pi4th))
   }
   round(n, precision = 0) {
   	const tenPow = this.pow(10, precision)

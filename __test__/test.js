@@ -86,18 +86,18 @@ eye.describe("Math", () => {
     })
     eye.describe("Numbers", () => {
         eye.test("Pi", "node",
-            $ => $(t.pi().toNumber()).Equal(3.14159265358979)
+            $ => $(t.pi().toNumber()).Equal(3.141592653589793)
         )
         eye.test("e", "node",
-            $ => $(t.e().toNumber()).Equal(2.71828182845905)
+            $ => $(t.e().toNumber()).Equal(2.718281828459045)
         )
         eye.test("Golden Ratio", "node",
-            $ => $(t.goldenRatio().toNumber()).Equal(1.61803398874989)
+            $ => $(t.goldenRatio().toNumber()).Equal(1.618033988749895)
         )
         eye.test("Constants", "node",
-            $ => $(t.c("pi")).Equal(t.pi()),
-            $ => $(t.c("e")).Equal(t.e()),
-            $ => $(t.c("goldenRatio")).Equal(t.goldenRatio())
+            $ => $(t.c("pi")).isCloseTo(t.pi(), 15),
+            $ => $(t.c("e")).isCloseTo(t.e(), 15),
+            $ => $(t.c("goldenRatio")).isCloseTo(t.goldenRatio(), 14)
         )
         eye.describe("Primes", () => {
             eye.test("isPrime", "node",
