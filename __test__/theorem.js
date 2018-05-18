@@ -125,12 +125,13 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
-  zeta(x, n = 15) {
-  	let buffer = 0
-  	for (var i = 1; i < n * 10; i++) {
-  		buffer = new BigNumber(buffer).plus(new BigNumber(x).pow(-i))
+  zeta(x) {
+  	x = new BigNumber(x)
+  	let buffer = new BigNumber(0)
+  	for (let i = 0; i < x.abs().times(150).toNumber(); i++) {
+  		buffer = buffer.plus(this.pow(i, x.times(-1)))
   	}
-  	return new BigNumber(buffer.toPrecision(n))
+  	return buffer
   }
   apply(n, f) {
       if (typeof n != 'object') {
