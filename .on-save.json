@@ -1,8 +1,0 @@
-[
-  {
-    "srcDir": "src",
-    "destDir": "dist",
-    "files": "**/*.js",
-    "command": "npm run gulp"
-  }
-]
