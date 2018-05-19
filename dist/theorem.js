@@ -125,14 +125,6 @@ class TheoremJS {
       }
   	return result.length == 1 ? result[0] : result
   }
-  zeta(x) {
-  	x = new BigNumber(x)
-  	let buffer = new BigNumber(0)
-  	for (let i = 0; i < x.abs().times(150).toNumber(); i++) {
-  		buffer = buffer.plus(this.pow(i, x.times(-1)))
-  	}
-  	return buffer
-  }
   apply(n, f) {
       if (typeof n != 'object') {
           n = [n]
@@ -205,17 +197,17 @@ class TheoremJS {
   		down2 += Math.pow(array2[i] - average2, 2)
       }
   	const result = up / Math.sqrt(down1 * down2)
-  	return result
+  	return new BigNumber(result)
   }
   median() {
   	let array = [...arguments]
   	array.sort( (a, b) => new BigNumber(a).sub(b) );
   	const half = Math.floor(new BigNumber(array.length).div(2).toNumber());
   	if(array.length % 2) {
-  		return array[half]
+  		return new BigNumber(array[half])
   	}
   	else {
-  		return new BigNumber(array[half-1]).add(array[half]).div(2).toNumber()
+  		return new BigNumber(array[half-1]).add(array[half]).div(2)
   	}
   }
   regression(data, deg) {
@@ -418,8 +410,8 @@ class TheoremJS {
   	buffer[start[0]] = start[1]
   	let angleState = this.atan2(...start.reverse()) + angle.toNumber()
   	for (var i = 0; i < n - 1; i++) {
-  		const x = new BigNumber(r).times(`${this.cos(angleState)}`).toString()
-  		const y = new BigNumber(r).times(`${this.sin(angleState)}`).toNumber()
+  		const x = new BigNumber(r).times(this.cos(angleState)).toString()
+  		const y = new BigNumber(r).times(this.sin(angleState)).toNumber()
   		buffer[x] = y
   		angleState += angle.toNumber()
   	}

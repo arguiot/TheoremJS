@@ -128,10 +128,10 @@ eye.describe("Math", () => {
             $ => $(t.average(10, 20, 15).toNumber()).Equal(15)
         )
         eye.test("Median", "node",
-            $ => $(t.median(10, 20, 15)).Equal(15)
+            $ => $(t.median(10, 20, 15).toNumber()).Equal(15)
         )
         eye.test("Correlation", "node",
-            $ => $(t.correlation([3, 2, 4, 5, 6], [9, 7, 12, 15, 17])).isCloseTo(0.997054486, 5)
+            $ => $(t.correlation([3, 2, 4, 5, 6], [9, 7, 12, 15, 17]).toNumber()).isCloseTo(0.997054486, 5)
         )
         eye.test("Regression", "node",
             $ => $(t.regression({
