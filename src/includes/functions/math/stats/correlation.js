@@ -13,5 +13,5 @@ correlation(array1, array2) {
 		down2 += Math.pow(array2[i] - average2, 2)
     }
 	const result = up / Math.sqrt(down1 * down2)
-	return new BigNumber(result)
+	return new BigNumber(Math.round(result * 10 ** 10) / 10 ** 10)
 }
