@@ -8,7 +8,7 @@ if (!BigNumber) {
 }
 class TheoremJS {
   constructor(precision=20) {
-  	BigNumber.config({ DECIMAL_PLACES: precision })
+  	BigNumber.set({ DECIMAL_PLACES: precision })
   	// code
   }
   
@@ -197,7 +197,7 @@ class TheoremJS {
   		down2 += Math.pow(array2[i] - average2, 2)
       }
   	const result = up / Math.sqrt(down1 * down2)
-  	return new BigNumber(result)
+  	return new BigNumber(Math.round(result * 10 ** 10) / 10 ** 10)
   }
   median() {
   	let array = [...arguments]
@@ -304,7 +304,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.acos(n[i]))
+      	result.push(Math.acos(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -315,7 +315,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.acosh(n[i]))
+      	result.push(Math.acosh(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -329,7 +329,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.asin(n[i]))
+      	result.push(Math.asin(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -340,7 +340,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.asinh(n[i]))
+      	result.push(Math.asinh(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -351,7 +351,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.atan(n[i]))
+      	result.push(Math.atan(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -375,7 +375,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.atanh(n[i]))
+      	result.push(Math.atanh(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -386,7 +386,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.cos(n[i]))
+      	result.push(Math.cos(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -397,7 +397,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.cosh(n[i]))
+      	result.push(Math.cosh(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -427,7 +427,7 @@ class TheoremJS {
       }
       let result = []
       for (var i = 0; i < n.length; i++) {
-          result.push(Math.sin(n[i]))
+          result.push(Math.sin(n[i]).toPrecision(15))
       }
       return result.length == 1 ? result[0] : result
   }
@@ -438,7 +438,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.sinh(n[i]))
+      	result.push(Math.sinh(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -449,7 +449,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.tan(n[i]))
+      	result.push(Math.tan(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -460,7 +460,7 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.tanh(n[i]))
+      	result.push(Math.tanh(n[i]).toPrecision(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -873,6 +873,9 @@ class TheoremJS {
   round(n, precision = 0) {
   	const tenPow = this.pow(10, precision)
   	return new BigNumber(n).times(tenPow).integerValue(BigNumber.ROUND_HALF_CEIL).div(tenPow)
+  }
+  config(obj) {
+  	BigNumber.set(obj)
   }
   convertToBase(x, n) {
   	return new BigNumber(x).toString(n)

@@ -150,65 +150,65 @@ eye.describe("Math", () => {
     eye.describe("Trigonometry", () => {
         eye.describe("Basic", () => {
             eye.test("Sin", "node",
-                $ => $(t.sin(0)).Equal(0),
+                $ => $(t.sin(0)).isCloseTo(0),
                 $ => $(t.sin(t.pi())).isCloseTo(0),
-                $ => $(t.sin(60)).Equal(Math.sin(60))
+                $ => $(t.sin(60)).isCloseTo(Math.sin(60))
             )
             eye.test("Cos", "node",
-                $ => $(t.cos(0)).Equal(1),
+                $ => $(t.cos(0)).isCloseTo(1),
                 $ => $(t.cos(t.pi())).isCloseTo(-1),
-                $ => $(t.cos(60)).Equal(Math.cos(60))
+                $ => $(t.cos(60)).isCloseTo(Math.cos(60))
             )
             eye.test("Tan", "node",
-                $ => $(t.tan(0)).Equal(0),
+                $ => $(t.tan(0)).isCloseTo(0),
                 $ => $(t.tan(t.pi())).isCloseTo(0),
-                $ => $(t.tan(60)).Equal(Math.tan(60))
+                $ => $(t.tan(60)).isCloseTo(Math.tan(60))
             )
         })
         eye.describe("Hyperbolic", () => {
             eye.test("Sinh", "node",
-                $ => $(t.sinh(0)).Equal(0),
+                $ => $(t.sinh(0)).isCloseTo(0),
                 $ => $(t.sinh(t.pi())).isCloseTo(Math.sinh(Math.PI))
             )
             eye.test("Cosh", "node",
-                $ => $(t.cosh(0)).Equal(1),
+                $ => $(t.cosh(0)).isCloseTo(1),
                 $ => $(t.cosh(t.pi())).isCloseTo(Math.cosh(Math.PI))
             )
             eye.test("Tanh", "node",
-                $ => $(t.tanh(0)).Equal(0),
+                $ => $(t.tanh(0)).isCloseTo(0),
                 $ => $(t.tanh(t.pi())).isCloseTo(Math.tanh(Math.PI))
             )
         })
         eye.describe("Arc", () => {
             eye.test("Asin", "node",
-                $ => $(t.asin(0)).Equal(0),
+                $ => $(t.asin(0)).isCloseTo(0),
                 $ => $(t.asin(1)).isCloseTo(t.pi().div(2))
             )
             eye.test("Acos", "node",
-                $ => $(t.acos(0)).Equal(Math.acos(0)),
+                $ => $(t.acos(0)).isCloseTo(Math.acos(0)),
                 $ => $(t.acos(1)).isCloseTo(0)
             )
             eye.test("Atan", "node",
-                $ => $(t.atan(0)).Equal(0),
+                $ => $(t.atan(0)).isCloseTo(0),
                 $ => $(t.atan(t.pi())).isCloseTo(Math.atan(Math.PI))
             )
         })
         eye.describe("Arc Hyperbolic", () => {
             eye.test("Asinh", "node",
-                $ => $(t.asinh(0)).Equal(0),
+                $ => $(t.asinh(0)).isCloseTo(0),
                 $ => $(t.asinh(1)).isCloseTo(Math.asinh(1))
             )
             eye.test("Acosh", "node",
-                $ => $(t.acosh(10)).Equal(Math.acosh(10)),
-                $ => $(t.acosh(1)).Equal(0)
+                $ => $(t.acosh(10)).isCloseTo(Math.acosh(10)),
+                $ => $(t.acosh(1)).isCloseTo(0)
             )
             eye.test("Atanh", "node",
-                $ => $(t.atanh(0)).Equal(0),
+                $ => $(t.atanh(0)).isCloseTo(0),
                 $ => $(t.atanh(0.5)).isCloseTo(Math.atanh(0.5))
             )
         })
         eye.test("Atan2", "node",
-            $ => $(t.atan2(90, 15)).Equal(Math.atan2(90, 15))
+            $ => $(t.atan2(90, 15)).isCloseTo(Math.atan2(90, 15))
         )
 
 		eye.describe("Other", () => {
