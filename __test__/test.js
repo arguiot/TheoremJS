@@ -44,7 +44,8 @@ eye.describe("Math", () => {
             $ => $(t.polynomial(1, -1, -1).core(0)).Equal(-1)
         )
         eye.test("Numeral Solve & Graph", "node",
-            $ => $(t.numeralSolve(t.f("x", "2*x+1"), 0)).Equal(['-0.5', 0]) // Returns -0.5 with 0 error rate
+            $ => $(t.numeralSolve(t.f("x", "2*x+1"), 0)).Equal(-0.5),
+			$ => $(t.numeralSolve(t.f("x", "x ** 0.5"), 5)).Equal(25)
         )
         eye.test("Y-Intercept", "node",
             $ => $(t.y_intercept(t.f("x", "2*x+1"))).Equal(1)

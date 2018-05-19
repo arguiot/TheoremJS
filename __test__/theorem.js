@@ -622,18 +622,26 @@ class TheoremJS {
   	return this.polynomial(...out)
   }
   numeralSolve(f, end, from = -100, to = 100, step = 0.1) {
-  	let p = this.graph(f, from, to, step)
-  	let g = Object.values(p)
-  	let y = []
-  	for (let i in g) {
-  		y.push(new BigNumber(g[i]).sub(end).abs().toNumber())
+  	let buffer = []
+  	let index = []
+  	for (let i = new BigNumber(from); i.lt(to); i = i.plus(step)) {
+  		buffer.push(this.run(f, i.toNumber()))
+  		index.push(i.toNumber())
   	}
-  	Object.prototype.getKey = function(value) {
-  		var object = this;
-  		return Object.keys(object).find(key => object[key] === value);
-  	};
-  	const min = this.min(...y)
-  	return [p.getKey(min.toPrecision(15)), min]
+  	function closest(num, arr) {
+  		let curr = arr[0];
+  		let diff = Math.abs(num - curr);
+  		for (let val = 0; val < arr.length; val++) {
+  			const newdiff = Math.abs(num - arr[val]);
+  			if (newdiff < diff) {
+  				diff = newdiff;
+  				curr = arr[val];
+  			}
+  		}
+  		return curr;
+  	}
+  	const close = closest(end, buffer.filter(x => !isNaN(x)))
+  	return index[buffer.indexOf(close)]
   }
   polynomial() {
   	const args = [...arguments].reverse()
@@ -654,7 +662,14 @@ class TheoremJS {
   	}
   }
   run(f, x) {
-  	return f.core(x)
+  	x = new BigNumber(x).toNumber()
+  	let out = 0
+  	try {
+  		out = f.core(x)
+  	} catch(e) {
+  		console.log(`[TheoremJS]: ${e}`)
+  	}
+  	return out
   }
   slope(f, x=0, i=0.01) {
   	const f1 = f.core(x)
