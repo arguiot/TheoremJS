@@ -836,8 +836,8 @@ class TheoremJS {
   
   	return new BigNumber(out)
   }
-  n(n) {
-  	return new BigNumber(n)
+  n(n, base=10) {
+  	return new BigNumber(n, base)
   }
   pi(digits = 15) {
   	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
@@ -879,6 +879,9 @@ class TheoremJS {
   }
   convertToBase(x, n) {
   	return new BigNumber(x).toString(n)
+  }
+  toBase10(n, base) {
+  	return new BigNumber(n, base);
   }
   flatten(array) {
   	return array.reduce((a, b) => a.concat(b), []);

@@ -1,3 +1,3 @@
-n(n) {
-	return new BigNumber(n)
+n(n, base=10) {
+	return new BigNumber(n, base)
 }
