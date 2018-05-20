@@ -657,7 +657,7 @@ class TheoremJS {
   		core: x => {
   			let regex = new RegExp("x")
   			let newStr = buffer.replace(regex, `(${x})`)
-  			return eval(newStr)
+  			return eval(newStr).toPrecision(14)
   		}
   	}
   }
@@ -671,7 +671,7 @@ class TheoremJS {
   	}
   	return out
   }
-  slope(f, x=0, i=0.01) {
+  slope(f, x=0, i=1E-10) {
   	const f1 = f.core(x)
   	const x1 = x
   	const f2 = f.core(x + i)

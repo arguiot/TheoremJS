@@ -657,7 +657,7 @@ class TheoremJS {
   		core: x => {
   			let regex = new RegExp("x")
   			let newStr = buffer.replace(regex, `(${x})`)
-  			return eval(newStr)
+  			return eval(newStr).toPrecision(14)
   		}
   	}
   }
@@ -671,7 +671,7 @@ class TheoremJS {
   	}
   	return out
   }
-  slope(f, x=0, i=0.01) {
+  slope(f, x=0, i=1E-10) {
   	const f1 = f.core(x)
   	const x1 = x
   	const f2 = f.core(x + i)
@@ -909,19 +909,14 @@ class TheoremJS {
   	const tenPow = this.pow(10, precision)
   	return new BigNumber(n).times(tenPow).integerValue(BigNumber.ROUND_HALF_CEIL).div(tenPow)
   }
-  // Browserify / Node.js
-  if (typeof define === "function" && define.amd) {
-    define(() => new TheoremJS());
-    // CommonJS and Node.js module support.
-  } else if (typeof exports !== "undefined") {
-    // Support Node.js specific `module.exports` (which can be a function)
-    if (typeof module !== "undefined" && module.exports) {
-      exports = module.exports = new TheoremJS();
-    }
-    // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
-    exports.TheoremJS = new TheoremJS();
-  } else if (typeof global !== "undefined") {
-    global.TheoremJS = new TheoremJS();
+  config(obj) {
+  	BigNumber.set(obj)
+  }
+  convertToBase(x, n) {
+  	return new BigNumber(x).toString(n)
+  }
+  toBase10(n, base) {
+  	return new BigNumber(n, base);
   }
   flatten(array) {
   	return array.reduce((a, b) => a.concat(b), []);
