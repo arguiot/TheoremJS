@@ -1,4 +1,4 @@
-slope(f, x=0, i=0.01) {
+slope(f, x=0, i=1E-10) {
 	const f1 = f.core(x)
 	const x1 = x
 	const f2 = f.core(x + i)

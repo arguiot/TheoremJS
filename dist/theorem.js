@@ -494,7 +494,7 @@ class TheoremJS {
   		core: x => {
   			let regex = new RegExp(v)
   			let newStr = func.replace(regex, `(${x})`)
-  			return eval(newStr)
+  			return eval(newStr).toPrecision(14)
   		}
   	}
   }
@@ -869,6 +869,41 @@ class TheoremJS {
   
       // the final pi has the requested number of decimals
       return new Decimal(4).times(new Decimal(pi4th))
+  }
+  primeFactors(n) {
+  	n = new BigNumber(n).toNumber()
+  	if (n < 2) {
+  		throw "[TheoremJS] Number should be greater or equal to 2"
+  	}
+  	if (n > Number.MAX_SAFE_INTEGER) {
+  		throw `[TheoremJS] Input was larger than ${Number.MAX_SAFE_INTEGER}`
+  	}
+  	let list = []
+  	for (var i = 2; i <= n; i++) {
+  		if (n % i == 0) {
+  			if (this.isPrime(i)) {
+  				n /= i
+  				list.push(new BigNumber(i))
+  				i = i - 1 // check for number twice (example 100 = 2*2*5*5)
+  			}
+  		}
+  	}
+  	return list
+  }
+  primePi(n) {
+  	n = new BigNumber(n).toNumber()
+  	if (n < 2) {
+  		throw "[TheoremJS] Number should be greater or equal to 2"
+  	}
+  	if (n > Number.MAX_SAFE_INTEGER) {
+  		throw `[TheoremJS] Input was larger than ${Number.MAX_SAFE_INTEGER}`
+  	}
+  	const gen = this.sieve()
+  	let out = 0
+  	for (var i = 0; i < n; i = gen.next().value) {
+  		out += 1
+  	}
+  	return new BigNumber(out - 1)
   }
   round(n, precision = 0) {
   	const tenPow = this.pow(10, precision)
