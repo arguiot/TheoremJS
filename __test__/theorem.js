@@ -689,7 +689,8 @@ class TheoremJS {
   	return new BigNumber(args[0]).div(args[1])
   }
   toFraction(x, p) {
-  	return new BigNumber(x).toFraction(p)
+  	const BN = BigNumber.another({ DECIMAL_PLACES: 20 })
+  	return new BN(x.toPrecision(15)).toFraction(p)
   }
   * collatz(n) {
   	while (n != 1) {
