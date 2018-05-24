@@ -64,7 +64,6 @@ triangle.constRand = -0.3
 let moveBy = 0
 const render = () => {
     renderer.setSize(window.innerWidth, window.innerHeight)
-    requestAnimationFrame(render);
     for (let i of [sphere, triangle]) {
         i.rotation.y += .01 * i.constRand;
         i.rotation.x += .01 * i.constRand;
@@ -79,7 +78,7 @@ const render = () => {
     renderer.render(scene, camera);
 };
 
-render();
+setInterval(render, 1000 / 30) // 30 fps
 
 $.scroll(() => {
     if ($.scrollTop() < window.innerHeight) {
