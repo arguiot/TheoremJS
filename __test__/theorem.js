@@ -925,6 +925,14 @@ class TheoremJS {
   	const tenPow = this.pow(10, precision)
   	return new BigNumber(n).times(tenPow).integerValue(BigNumber.ROUND_HALF_CEIL).div(tenPow)
   }
+  rand(n = 1, crypto = false) {
+  	const BN = BigNumber.another({ CRYPTO: crypto })
+  	let out = []
+  	for (var i = 0; i < n; i++) {
+  		out.push(BN.random())
+  	}
+  	return out.length == 1 ? out[0] : out
+  }
   config(obj) {
   	BigNumber.set(obj)
   }

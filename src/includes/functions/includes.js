@@ -7,5 +7,6 @@
 //= math/fractions
 //= math/generators
 //= math/numbers
+//= math/random
 //= other
 //= array
