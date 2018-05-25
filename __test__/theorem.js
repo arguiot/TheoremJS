@@ -688,7 +688,7 @@ class TheoremJS {
   	}
   	return new BigNumber(args[0]).div(args[1])
   }
-  toFraction(x, p) {
+  toFraction(x, p=15) {
   	const BN = BigNumber.another({ DECIMAL_PLACES: 20 })
   	return new BN(x.toPrecision(15)).toFraction(p)
   }
@@ -839,6 +839,21 @@ class TheoremJS {
   }
   n(n, base=10) {
   	return new BigNumber(n, base)
+  }
+  nPrime(n) {
+  	n = new BigNumber(n).toNumber()
+  	if (n < 1) {
+  		throw "[TheoremJS]: n is less than 1"
+  	}
+  	if (n > Number.MAX_SAFE_INTEGER) {
+  		throw `[TheoremJS] Input was larger than ${Number.MAX_SAFE_INTEGER}`
+  	}
+  	const gen = this.sieve()
+  	let out = 0
+  	for (var i = 0; i < n; i++) {
+  		out = gen.next().value
+  	}
+  	return new BigNumber(out)
   }
   pi(digits = 15) {
   	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
