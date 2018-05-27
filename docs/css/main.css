@@ -250,7 +250,40 @@ section {
     width: 60vw;
     max-width: 800px;
 }
-
+.vid {
+	text-align: center;
+	cursor: pointer;
+}
+.video {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	z-index: 10;
+}
+.flex {
+	display: flex;
+}
+.exit {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	color: black;
+	cursor: pointer;
+	font-size: 40px;
+	color: white;
+}
+iframe {
+	width: 80vw;
+	height: 80vh;
+}
+.vid:hover {
+	color: #0366d6;
+}
 h3 {
     text-align: center;
 }
@@ -266,7 +299,6 @@ h3 {
 }
 
 hr {
-    border: 0 none;
     color: #cccccc;
     height: 4px;
     padding: 0;
