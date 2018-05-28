@@ -43,7 +43,7 @@ c(name, n = 15) {
         "UltimateAnswer": "42",
         "zeroKelvin": "-273.15"
     }
-    const BN = BigNumber.another({
+    const BN = BigNumber.clone({
         DECIMAL_PLACES: n
     })
     const num = numbers[name].split("e")

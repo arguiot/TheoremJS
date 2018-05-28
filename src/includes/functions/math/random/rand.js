@@ -1,5 +1,5 @@
 rand(n = 1, crypto = false) {
-	const BN = BigNumber.another({ CRYPTO: crypto })
+	const BN = BigNumber.clone({ CRYPTO: crypto })
 	let out = []
 	for (var i = 0; i < n; i++) {
 		out.push(BN.random())

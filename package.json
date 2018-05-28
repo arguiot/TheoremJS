@@ -33,6 +33,6 @@
     "gulp-rigger": "^0.5.8"
   },
   "dependencies": {
-    "bignumber.js": "^5.0.0"
+    "bignumber.js": "^7.2.1"
   }
 }

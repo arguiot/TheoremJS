@@ -1,5 +1,5 @@
 pi(digits = 15) {
-	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
+	const Decimal = BigNumber.clone({ DECIMAL_PLACES: digits })
     function arctan(x) {
         var y = x;
         var yPrev = NaN;
@@ -7,7 +7,7 @@ pi(digits = 15) {
         var num = x;
         var sign = -1;
 
-        for (var k = 3; !y.equals(yPrev); k += 2) {
+        for (var k = 3; !y.eq(yPrev); k += 2) {
             num = num.times(x2);
 
             yPrev = y;
@@ -22,7 +22,7 @@ pi(digits = 15) {
     // http://milan.milanovic.org/math/english/pi/machin.html
 
     // we calculate pi with a few decimal places extra to prevent round off issues
-    var DecimalPlus = BigNumber.another({ DECIMAL_PLACES: digits + 4 })
+    var DecimalPlus = BigNumber.clone({ DECIMAL_PLACES: digits + 4 })
     var pi4th = new DecimalPlus(4).times(arctan(new DecimalPlus(1).div(5)))
         .minus(arctan(new DecimalPlus(1).div(239)));
 

@@ -1,5 +1,5 @@
 e(n = 15) {
-	const BN = BigNumber.another({ DECIMAL_PLACES: n })
+	const BN = BigNumber.clone({ DECIMAL_PLACES: n })
     let zero = new BN(0);
     let one = new BN(1);
     let rval;
