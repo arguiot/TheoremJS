@@ -205,26 +205,37 @@ class TheoremJS {
   	if (typeof array[0] == 'object') {
   		array = array[0]
   	}
-  	array.sort( (a, b) => new BigNumber(a).minus(b) );
+  	array.sort( (a, b) => new BigNumber(a).minus(b).toNumber());
   	if (array.length == 0) return 0
   
-  	const half = this.floor(array.length / 2).toNumber()
+  	const half = Math.floor(array.length / 2)
   
-  	if (array.length % 2 == 0) {
+  	if (array.length % 2) {
   		return new BigNumber(array[half])
   	} else {
-  		return new BigNumber(array[half - 1]).plus(array[half]).div(2)
+  		return new BigNumber((array[half - 1] + array[half]) / 2)
   	}
   }
-  q1() {
+  quantile() {
   	let array = [...arguments]
-  	array.sort( (a, b) => new BigNumber(a).sub(b) );
-  	const half = Math.floor(new BigNumber(array.length).div(4).toNumber());
-  	if(array.length % 2 == 0) {
-  		return new BigNumber(array[half])
+  	let n = array[0]
+  	array.shift()
+  	if (typeof array[0] == 'object') {
+  		array = array[0]
   	}
-  	else {
-  		return new BigNumber(array[half]).add(array[half + 1]).div(2)
+  	if (n > 1 || n < 0) {
+  		throw "[TheoremJS] n should be a Float between 0 and 1"
+  	}
+  
+  	array.sort( (a, b) => new BigNumber(a).minus(b).toNumber());
+  	if (array.length == 0) return 0
+  
+  	const half = new BigNumber(array.length).times(n).toNumber() - 1
+  
+  	if (half === Math.floor( half )) {
+  		return new BigNumber((array[half] + array[half + 1]) / 2)
+  	} else {
+  		return new BigNumber(array[Math.ceil(half)])
   	}
   }
   regression(data, deg) {

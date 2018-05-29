@@ -136,6 +136,10 @@ eye.describe("Math", () => {
         eye.test("Median", "node",
             $ => $(t.median(10, 20, 15).toNumber()).Equal(15)
         )
+		eye.test("Quantile", "node",
+			$ => $(t.quantile(1 / 2, 10, 20, 15).toNumber()).Equal(15),
+			$ => $(t.quantile(1 / 4, 4, 3, 5, 1, 2).toNumber()).Equal(2)
+		)
         eye.test("Correlation", "node",
             $ => $(t.correlation([3, 2, 4, 5, 6], [9, 7, 12, 15, 17]).toNumber()).isCloseTo(0.997054486, 5)
         )
