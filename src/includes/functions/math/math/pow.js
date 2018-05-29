@@ -1,5 +1,5 @@
 pow(n, base) {
-    if (typeof n != 'object' || n.isBigNumber) {
+    if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
         n = [n]
     }
     let result = []

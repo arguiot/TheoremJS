@@ -13,7 +13,7 @@ class TheoremJS {
   }
   
   factorial(n) {
-      if (new BigNumber(n).equals(0)) {
+      if (new BigNumber(n).eq(0)) {
           return new BigNumber(1);
       }
       return new BigNumber(n).times(this.factorial(new BigNumber(n).minus(1)))
@@ -90,33 +90,33 @@ class TheoremJS {
       return new BigNumber(Number(.5*Math.log(2*Math.PI)+(z+.5)*Math.log(t)-t+Math.log(x)-Math.log(z)).toFixed(10));
   }
   log(x, base, n = 15) {
-  	return new BigNumber(this.ln(x, n).div(this.ln(base, n)).toPrecision(n - 1))
+  	return new BigNumber(this.ln(x, n).div(this.ln(base, n)).toFixed(n - 1))
   }
   pow(n, base) {
-      if (typeof n != 'object' || n.isBigNumber) {
+      if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
           n = [n]
       }
       let result = []
       for (var i = 0; i < n.length; i++) {
           result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(base).toNumber()).toFixed(10)))
       }
-      return result.length == 1 ? result[0] : result
+      return result.length == 1 ? result[0] : new BigNumber(result)
   }
   root(n, base) {
-  	if (typeof n != 'object' || n.isBigNumber) {
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(1).div(base).toNumber()).toPrecision(15)))
+      	result.push(new BigNumber(Math.pow(new BigNumber(n[i]).toNumber(), new BigNumber(1).div(base).toNumber()).toFixed(15)))
       }
   	return result.length == 1 ? result[0] : result
   }
   sigmoid(x, n = 15) {
-  	return new BigNumber(new BigNumber(1).div(this.e(n).pow(x).add(1)).toPrecision(n))
+  	return new BigNumber(new BigNumber(1).div(this.pow(this.c("e", n), x).plus(1)).toFixed(n))
   }
   sqrt(n) {
-  	if (typeof n != 'object' || n.isBigNumber) {
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
           n = [n]
       }
   	let result = []
@@ -148,6 +148,7 @@ class TheoremJS {
   }
   sort() {
   	// https://gist.github.com/jasondscott/7073857
+  	const t = this;
       Array.prototype.quickSort = function() {
   
           var r = this;
@@ -157,10 +158,10 @@ class TheoremJS {
           var less = [],
               greater = [];
   
-          var pivot = r.splice(new BigNumber(r.length).div(2).floor(), 1);
+          var pivot = r.splice(t.floor(new BigNumber(r.length).div(2)), 1);
   
           for (var i = r.length - 1; i >= 0; i--) {
-              if (new BigNumber(r[i]).lessThanOrEqualTo(new BigNumber(pivot))) {
+              if (new BigNumber(r[i]).lte(new BigNumber(pivot))) {
                   less.push(r[i]);
               } else {
                   greater.push(r[i]);
@@ -201,13 +202,29 @@ class TheoremJS {
   }
   median() {
   	let array = [...arguments]
+  	if (typeof array[0] == 'object') {
+  		array = array[0]
+  	}
+  	array.sort( (a, b) => new BigNumber(a).minus(b) );
+  	if (array.length == 0) return 0
+  
+  	const half = this.floor(array.length / 2).toNumber()
+  
+  	if (array.length % 2 == 0) {
+  		return new BigNumber(array[half])
+  	} else {
+  		return new BigNumber(array[half - 1]).plus(array[half]).div(2)
+  	}
+  }
+  q1() {
+  	let array = [...arguments]
   	array.sort( (a, b) => new BigNumber(a).sub(b) );
-  	const half = Math.floor(new BigNumber(array.length).div(2).toNumber());
-  	if(array.length % 2) {
+  	const half = Math.floor(new BigNumber(array.length).div(4).toNumber());
+  	if(array.length % 2 == 0) {
   		return new BigNumber(array[half])
   	}
   	else {
-  		return new BigNumber(array[half-1]).add(array[half]).div(2)
+  		return new BigNumber(array[half]).add(array[half + 1]).div(2)
   	}
   }
   regression(data, deg) {
@@ -298,24 +315,24 @@ class TheoremJS {
       return this.polynomial(...equation.reverse())
   }
   acos(n) {
-      if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+      if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.acos(n[i]).toPrecision(15))
+      	result.push(Math.acos(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   acosh(n) {
-  	if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.acosh(n[i]).toPrecision(15))
+      	result.push(Math.acosh(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -323,40 +340,40 @@ class TheoremJS {
   	return [this.cos(rad), this.sin(rad)];
   }
   asin(n) {
-      if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+      if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.asin(n[i]).toPrecision(15))
+      	result.push(Math.asin(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   asinh(n) {
-  	if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.asinh(n[i]).toPrecision(15))
+      	result.push(Math.asinh(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   atan(n) {
-      if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+      if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.atan(n[i]).toPrecision(15))
+      	result.push(Math.atan(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   atan2(x, y) {
-  	if (typeof n != 'object' || n.isBigNumber) {
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
   		x = x.isBigNumber == true ? x.toNumber() : x
           x = [x]
   		y = y.isBigNumber == true ? y.toNumber() : y
@@ -370,34 +387,34 @@ class TheoremJS {
   }
   atanh(n) {
   	if (typeof n != 'object') {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.atanh(n[i]).toPrecision(15))
+      	result.push(Math.atanh(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   cos(n) {
-      if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+      if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.cos(n[i]).toPrecision(15))
+      	result.push(Math.cos(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   cosh(n) {
-  	if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.cosh(n[i]).toPrecision(15))
+      	result.push(Math.cosh(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -421,46 +438,46 @@ class TheoremJS {
   	return new BigNumber(x).times(180).div(this.pi())
   }
   sin(n) {
-      if (typeof n != 'object' || n.isBigNumber) {
-          n = n.isBigNumber == true ? n.toNumber() : n
+      if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+          n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
       let result = []
       for (var i = 0; i < n.length; i++) {
-          result.push(Math.sin(n[i]).toPrecision(15))
+          result.push(Math.sin(n[i]).toFixed(15))
       }
       return result.length == 1 ? result[0] : result
   }
   sinh(n) {
-  	if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.sinh(n[i]).toPrecision(15))
+      	result.push(Math.sinh(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   tan(n) {
-      if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+      if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.tan(n[i]).toPrecision(15))
+      	result.push(Math.tan(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
   tanh(n) {
-  	if (typeof n != 'object' || n.isBigNumber) {
-  		n = n.isBigNumber == true ? n.toNumber() : n
+  	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
+  		n = BigNumber.isBigNumber(n) == true ? n.toNumber() : n
           n = [n]
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(Math.tanh(n[i]).toPrecision(15))
+      	result.push(Math.tanh(n[i]).toFixed(15))
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -494,7 +511,7 @@ class TheoremJS {
   		core: x => {
   			let regex = new RegExp(v)
   			let newStr = func.replace(regex, `(${x})`)
-  			return eval(newStr).toPrecision(14)
+  			return eval(newStr).toFixed(14)
   		}
   	}
   }
@@ -602,7 +619,7 @@ class TheoremJS {
   graph(f, from=-100, to=100, step=0.1) {
   	let array = {}
   	for (var i = new BigNumber(from); i.lessThanOrEqualTo(new BigNumber(to)); i = i.plus(new BigNumber(step))) {
-  		array[i.toString()] = f.core(i).toPrecision(15)
+  		array[i.toString()] = f.core(i).toFixed(15)
   	}
   	return array
   }
@@ -657,7 +674,7 @@ class TheoremJS {
   		core: x => {
   			let regex = new RegExp("x")
   			let newStr = buffer.replace(regex, `(${x})`)
-  			return eval(newStr).toPrecision(14)
+  			return eval(newStr).toFixed(14)
   		}
   	}
   }
@@ -689,8 +706,8 @@ class TheoremJS {
   	return new BigNumber(args[0]).div(args[1])
   }
   toFraction(x, p=15) {
-  	const BN = BigNumber.another({ DECIMAL_PLACES: 20 })
-  	return new BN(x.toPrecision(15)).toFraction(p)
+  	const BN = BigNumber.clone({ DECIMAL_PLACES: 20 })
+  	return new BN(x.toFixed(15)).toFraction(p)
   }
   * collatz(n) {
   	while (n != 1) {
@@ -772,7 +789,7 @@ class TheoremJS {
           "UltimateAnswer": "42",
           "zeroKelvin": "-273.15"
       }
-      const BN = BigNumber.another({
+      const BN = BigNumber.clone({
           DECIMAL_PLACES: n
       })
       const num = numbers[name].split("e")
@@ -781,11 +798,11 @@ class TheoremJS {
       }
       return new BN(num[0].slice(0, n + 2))
   }
-  floor(n) {
+  ceil(n) {
   	return new BigNumber(n).integerValue(BigNumber.ROUND_CEIL)
   }
   e(n = 15) {
-  	const BN = BigNumber.another({ DECIMAL_PLACES: n })
+  	const BN = BigNumber.clone({ DECIMAL_PLACES: n })
       let zero = new BN(0);
       let one = new BN(1);
       let rval;
@@ -801,8 +818,8 @@ class TheoremJS {
   	return new BigNumber(n).integerValue(BigNumber.ROUND_FLOOR)
   }
   goldenRatio(n = 15) {
-  	const BN = BigNumber.another({ DECIMAL_PLACES: n + 1 })
-  	return new BN(BN(1).plus(this.sqrt(5)).div(2).toPrecision(n + 1))
+  	const BN = BigNumber.clone({ DECIMAL_PLACES: n + 1 })
+  	return new BN(BN(1).plus(this.sqrt(5)).div(2).toFixed(n + 1))
   }
   isPrime(n) {
   	n = new BigNumber(n).abs()
@@ -856,7 +873,7 @@ class TheoremJS {
   	return new BigNumber(out)
   }
   pi(digits = 15) {
-  	const Decimal = BigNumber.another({ DECIMAL_PLACES: digits })
+  	const Decimal = BigNumber.clone({ DECIMAL_PLACES: digits })
       function arctan(x) {
           var y = x;
           var yPrev = NaN;
@@ -864,7 +881,7 @@ class TheoremJS {
           var num = x;
           var sign = -1;
   
-          for (var k = 3; !y.equals(yPrev); k += 2) {
+          for (var k = 3; !y.eq(yPrev); k += 2) {
               num = num.times(x2);
   
               yPrev = y;
@@ -879,7 +896,7 @@ class TheoremJS {
       // http://milan.milanovic.org/math/english/pi/machin.html
   
       // we calculate pi with a few decimal places extra to prevent round off issues
-      var DecimalPlus = BigNumber.another({ DECIMAL_PLACES: digits + 4 })
+      var DecimalPlus = BigNumber.clone({ DECIMAL_PLACES: digits + 4 })
       var pi4th = new DecimalPlus(4).times(arctan(new DecimalPlus(1).div(5)))
           .minus(arctan(new DecimalPlus(1).div(239)));
   
@@ -926,7 +943,7 @@ class TheoremJS {
   	return new BigNumber(n).times(tenPow).integerValue(BigNumber.ROUND_HALF_CEIL).div(tenPow)
   }
   rand(n = 1, crypto = false) {
-  	const BN = BigNumber.another({ CRYPTO: crypto })
+  	const BN = BigNumber.clone({ CRYPTO: crypto })
   	let out = []
   	for (var i = 0; i < n; i++) {
   		out.push(BN.random())
@@ -937,7 +954,8 @@ class TheoremJS {
   	BigNumber.set(obj)
   }
   convertToBase(x, n) {
-  	return new BigNumber(x).toString(n)
+  	const BN = BigNumber.clone({ ALPHABET: "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/" })
+  	return new BN(x).toString(n)
   }
   toBase10(n, base) {
   	return new BigNumber(n, base);

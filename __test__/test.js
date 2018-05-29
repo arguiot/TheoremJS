@@ -28,7 +28,7 @@ eye.describe("Array", () => {
 eye.describe("Math", () => {
     eye.describe("Algebra", () => {
         eye.test("Function", "node",
-            $ => $(t.run(t.f("x", "2*x+1"), 2)).Equal(5)
+            $ => $(t.run(t.f("x", "2*x+1"), 2)).isCloseTo(5)
         )
 		eye.test("Fractions", "node",
 			$ => $(t.toFraction(0.75)).Equal(["3", "4"]),
@@ -41,14 +41,14 @@ eye.describe("Math", () => {
                 const roots = t.findRoots(t.polynomial(-3, 0, 2, 0))
                 return $(roots[1]).isCloseTo(Math.sqrt(2 / 3))
             },
-            $ => $(t.polynomial(1, -1, -1).core(0)).Equal(-1)
+            $ => $(t.polynomial(1, -1, -1).core(0)).isCloseTo(-1)
         )
         eye.test("Numeral Solve & Graph", "node",
             $ => $(t.numeralSolve(t.f("x", "2*x+1"), 0)).Equal(-0.5),
 			$ => $(t.numeralSolve(t.f("x", "x ** 0.5"), 5)).Equal(25)
         )
         eye.test("Y-Intercept", "node",
-            $ => $(t.y_intercept(t.f("x", "2*x+1"))).Equal(1)
+            $ => $(t.y_intercept(t.f("x", "2*x+1"))).isCloseTo(1)
         )
         eye.describe("Calculus", () => {
 			eye.test("Gradient", "node",
@@ -107,6 +107,11 @@ eye.describe("Math", () => {
                 $ => $(t.isPrime(2)).Equal(true)
             )
         })
+		eye.test("Round, Ceil & Floor", "node",
+			$ => $(t.round(5.5).toNumber()).Equal(6),
+			$ => $(t.ceil(1.1).toNumber()).Equal(2),
+			$ => $(t.floor(1.7).toNumber()).Equal(1)
+		)
     })
     eye.describe("Other", () => {
         eye.test("Apply", "node",

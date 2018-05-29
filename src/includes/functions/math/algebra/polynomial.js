@@ -12,7 +12,7 @@ polynomial() {
 		core: x => {
 			let regex = new RegExp("x")
 			let newStr = buffer.replace(regex, `(${x})`)
-			return eval(newStr).toPrecision(14)
+			return eval(newStr).toFixed(14)
 		}
 	}
 }

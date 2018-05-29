@@ -1,5 +1,5 @@
 atan2(x, y) {
-	if (typeof n != 'object' || n.isBigNumber) {
+	if (typeof n != 'object' || BigNumber.isBigNumber(n)) {
 		x = x.isBigNumber == true ? x.toNumber() : x
         x = [x]
 		y = y.isBigNumber == true ? y.toNumber() : y
