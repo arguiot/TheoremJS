@@ -227,15 +227,17 @@ class TheoremJS {
   		throw "[TheoremJS] n should be a Float between 0 and 1"
   	}
   
-  	array.sort( (a, b) => new BigNumber(a).minus(b).toNumber());
+  	array.sort( (a, b) => a - b);
   	if (array.length == 0) return 0
   
-  	const half = new BigNumber(array.length).times(n).toNumber() - 1
-  
-  	if (half === Math.floor( half )) {
-  		return new BigNumber((array[half] + array[half + 1]) / 2)
+  	const index = (array.length - 1) * n
+  	const floor = Math.floor(index)
+  	const diff = index - floor;
+  	if (array[index + 1] !== undefined) {
+  		const out = array[floor] + diff * (array[floor + 1] - array[floor])
+  		return new BigNumber(out)
   	} else {
-  		return new BigNumber(array[Math.ceil(half)])
+  		return array[floor]
   	}
   }
   regression(data, deg) {
