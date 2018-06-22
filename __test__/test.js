@@ -24,7 +24,12 @@ eye.describe("Array", () => {
         ])
     )
 })
-
+eye.describe("Cryptography", () => {
+	eye.test("SHA256", "node",
+		$ => $(t.sha256("TheoremJS")).Equal("506a3473100061c0f1237f17949e1b65b47eb8ed2ce22d1685dc3354acb700a9"),
+		$ => $(t.sha256(0)).Equal("5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9")
+	)
+})
 eye.describe("Math", () => {
     eye.describe("Algebra", () => {
         eye.test("Function", "node",
