@@ -999,6 +999,11 @@ class TheoremJS {
   	}
   	return tmp;
   }
+  bin2str(txt) {
+  	return txt.replace(/\s*[01]{8}\s*/g, function(bin) {
+          return String.fromCharCode(parseInt(bin, 2))
+      })
+  }
   md5(s) {
   	if (BigNumber.isBigNumber(s) || (!isNaN(parseFloat(s)) && isFinite(s))) {
   		s = s.toString()
@@ -1428,6 +1433,15 @@ class TheoremJS {
   	s = Utf8Encode(s);
   
   	return binb2hex(core_sha256(str2binb(s), s.length * chrsz));
+  }
+  str2bin(txt, spaceSeparatedOctets) {
+  	function zeroPad(num) {
+  		return "00000000".slice(String(num).length) + num
+  	}
+  	return txt.replace(/[\s\S]/g, function(str) {
+  		str = zeroPad(str.charCodeAt().toString(2));
+  		return !1 == spaceSeparatedOctets ? str : str + " "
+  	})
   }
 }
 // Browserify / Node.js

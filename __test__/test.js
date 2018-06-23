@@ -32,6 +32,12 @@ eye.describe("Cryptography", () => {
 	eye.test("MD5", "node",
 		$ => $(t.md5("TheoremJS")).Equal("80139a691767b8ba6c43873c40fc9fe1")
 	)
+	eye.test("str2bin", "node",
+		$ => $(t.str2bin("TheoremJS")).Equal("01010100 01101000 01100101 01101111 01110010 01100101 01101101 01001010 01010011 ")
+	)
+	eye.test("bin2str", "node",
+		$ => $(t.bin2str("01010100 01101000 01100101 01101111 01110010 01100101 01101101 01001010 01010011")).Equal("TheoremJS")
+	)
 })
 eye.describe("Math", () => {
     eye.describe("Algebra", () => {
