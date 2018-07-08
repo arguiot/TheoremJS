@@ -55,7 +55,8 @@ eye.describe("Math", () => {
                 const roots = t.findRoots(t.polynomial(-3, 0, 2, 0))
                 return $(roots[1]).isCloseTo(Math.sqrt(2 / 3))
             },
-            $ => $(t.polynomial(1, -1, -1).core(0)).isCloseTo(-1)
+            $ => $(t.polynomial(1, -1, -1).core(0)).isCloseTo(-1),
+			$ => $(t.findRoots(t.polynomial(-1, 0, -1))).Equal([])
         )
         eye.test("Numeral Solve & Graph", "node",
             $ => $(t.numeralSolve(t.f("x", "2*x+1"), 0)).Equal(-0.5),
