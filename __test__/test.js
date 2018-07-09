@@ -38,6 +38,10 @@ eye.describe("Cryptography", () => {
 	eye.test("bin2str", "node",
 		$ => $(t.bin2str("01010100 01101000 01100101 01101111 01110010 01100101 01101101 01001010 01010011")).Equal("TheoremJS")
 	)
+	eye.test("Huffman", "node",
+		$ => $(t.huffmanEncode("bibbity bobbity").string).Equal("01110011110010111000110100111100101"),
+		$ => $(t.huffmanDecode("01110011110010111000110100111100101", t.huffmanEncode("bibbity bobbity").tree)).Equal("bibbity bobbity")
+	)
 })
 eye.describe("Math", () => {
     eye.describe("Algebra", () => {
