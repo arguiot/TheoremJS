@@ -17,6 +17,8 @@ const t = require("theorem.js");
 /* Start coding here */
 ```
 
+# Documentation
+The documentation can be found [here](https://github.com/arguiot/TheoremJS/wiki)
 # Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/arguiot/TheoremJS/tags).
@@ -31,4 +33,4 @@ Also look at the list of [contributors](https://github.com/arguiot/TheoremJS/con
 
 This project is licensed under the MIT License - see the <LICENSE> file for details
 
-Copyright © 2017 Arthur Guiot All Rights Reserved.
+Copyright © 2017 - 2018 Arthur Guiot All Rights Reserved.
