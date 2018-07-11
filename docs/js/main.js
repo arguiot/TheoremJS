@@ -1,15 +1,5 @@
 const $ = new DisplayJS(window);
 
-$.on($.s(".vid"), "click", e => {
-	$.addClass($.s(".video"), "flex")
-})
-$.on($.s(".video"), "click", e => {
-	$.removeClass($.s(".video"), "flex")
-})
-$.on($.s(".exit"), "click", e => {
-	$.removeClass($.s(".video"), "flex")
-})
-
 
 
 const scene = new THREE.Scene();
