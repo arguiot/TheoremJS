@@ -286,7 +286,10 @@ iframe {
 	color: #0366d6;
 }
 h3 {
-    text-align: center;
+	text-align: center;
+}
+p {
+	text-align: justify;
 }
 
 .sep {
@@ -298,7 +301,9 @@ h3 {
 .gist-meta {
     display: none;
 }
-
+a {
+	color: inherit;
+}
 hr {
     color: #cccccc;
     height: 4px;
