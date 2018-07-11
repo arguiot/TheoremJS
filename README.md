@@ -1,5 +1,11 @@
 <div align="center"><img src="docs/img/TheoremJS.svg" alt="Logo" height="200"><h1>TheoremJS</h1>
 A Math framework for computation in JavaScript
+<br>
+[![GitHub release](https://img.shields.io/github/release/arguiot/TheoremJS.svg)](https://github.com/arguiot/TheoremJS/releases)
+[![Build Status](https://travis-ci.org/arguiot/TheoremJS.svg?branch=master)](https://travis-ci.org/arguiot/TheoremJS)
+[![Github All Releases](https://img.shields.io/github/downloads/arguiot/TheoremJS/total.svg)](https://github.com/arguiot/TheoremJS/)
+[![npm](https://img.shields.io/npm/dt/theorem.js.svg)](https://www.npmjs.com/package/theorem.js)
+[![License](https://img.shields.io/github/license/arguiot/TheoremJS.svg)](LICENSE)
 </div>
 
 # Getting Started
@@ -19,6 +25,10 @@ const t = require("theorem.js");
 
 # Documentation
 The documentation can be found [here](https://github.com/arguiot/TheoremJS/wiki)
+
+# Project using TheoremJS
+- [Descartes](https://github.com/arguiot/Descartes)
+
 # Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/arguiot/TheoremJS/tags).
