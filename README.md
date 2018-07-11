@@ -1,6 +1,6 @@
 <div align="center"><img src="docs/img/TheoremJS.svg" alt="Logo" height="200"><h1>TheoremJS</h1>
 A Math framework for computation in JavaScript
-<br>
+
 [![GitHub release](https://img.shields.io/github/release/arguiot/TheoremJS.svg)](https://github.com/arguiot/TheoremJS/releases)
 [![Build Status](https://travis-ci.org/arguiot/TheoremJS.svg?branch=master)](https://travis-ci.org/arguiot/TheoremJS)
 [![Github All Releases](https://img.shields.io/github/downloads/arguiot/TheoremJS/total.svg)](https://github.com/arguiot/TheoremJS/)
