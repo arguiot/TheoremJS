@@ -1,6 +1,6 @@
 /*
-**   © Arthur Guiot 2017
-**         TheoremJS
+**   © Arthur Guiot 2017 - 2018
+**           TheoremJS
 */
 
 if (!BigNumber) {
