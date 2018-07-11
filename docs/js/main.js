@@ -78,9 +78,8 @@ const render = () => {
 	point.position.y = moveBy / 1.22 + 1
 	point.position.x = (-moveBy / -2.25) + 2
     renderer.render(scene, camera);
+	requestAnimationFrame(render)
 };
-
-setInterval(render, 1000 / 30) // 30 fps
 
 $.scroll(() => {
     if ($.scrollTop() < window.innerHeight) {
@@ -90,3 +89,5 @@ $.scroll(() => {
 
 var year = new Date().getFullYear()
 $.var()
+
+render()
