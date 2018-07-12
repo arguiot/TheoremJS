@@ -148,7 +148,7 @@ eye.describe("Math", () => {
             $ => $(t.sum(1, 3, 3).toNumber()).Equal(7)
         )
     })
-    eye.describe("Statisqtiques", () => {
+    eye.describe("Statistiques", () => {
         eye.test("Average", "node",
             $ => $(t.average(10, 20, 15).toNumber()).Equal(15)
         )
