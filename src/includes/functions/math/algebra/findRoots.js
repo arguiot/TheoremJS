@@ -31,13 +31,15 @@ findRoots(f) {
                     roots = [0].concat(p < 0 ? [Math.sqrt(-p), -Math.sqrt(-p)] : []);
                 } else {
                     var D = q * q / 4 + p * p * p / 27;
+
+					var u; // no-redeclare
                     if (Math.abs(D) < 1e-8) { // D = 0 -> two roots
                         roots = [-1.5 * q / p, 3 * q / p];
                     } else if (D > 0) { // Only one real root
-                        var u = Math.cbrt(-q / 2 - Math.sqrt(D));
+                        u = Math.cbrt(-q / 2 - Math.sqrt(D));
                         roots = [u - p / (3 * u)];
                     } else { // D < 0, three roots, but needs to use complex numbers/trigonometric solution
-                        var u = 2 * Math.sqrt(-p / 3);
+                        u = 2 * Math.sqrt(-p / 3);
                         var t = Math.acos(3 * q / p / u) / 3; // D < 0 implies p < 0 and acos argument in [-1..1]
                         var k = 2 * Math.PI / 3;
                         roots = [u * Math.cos(t), u * Math.cos(t - k), u * Math.cos(t - 2 * k)];
@@ -51,11 +53,11 @@ findRoots(f) {
                 break;
 			}
             default: {
-                exp = [numeralSolve(f, 0)[0]]
+                exp = [this.numeralSolve(f, 0)[0]]
 			}
         }
     } else {
-        exp = [numeralSolve(f, 0)[0]]
+        exp = [this.numeralSolve(f, 0)[0]]
     }
     return exp
 }
