@@ -1,10 +1,6 @@
 atan2(x, y) {
-	if (BigNumber.isBigNumber(x)) {
-		x = [x.toNumber()]
-    }
-	if (BigNumber.isBigNumber(y)) {
-		y = [y.toNumber()]
-    }
+	x = [BigNumber(x).toNumber()]
+	y = [BigNumber(y).toNumber()]
 	let result = []
     for (var i = 0; i < x.length; i++) {
     	result.push(Math.atan2(x[i], y[i]))
