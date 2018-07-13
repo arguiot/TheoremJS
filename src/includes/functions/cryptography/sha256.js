@@ -60,7 +60,7 @@ sha256(input) {
 		let T2;
 		m[l >> 5] |= 0x80 << (24 - l % 32);
 		m[((l + 64 >> 9) << 4) + 15] = l;
-		for (var i = 0; i < m.length; i += 16) {
+		for (i = 0; i < m.length; i += 16) {
 			a = HASH[0];
 
 			b = HASH[1];
@@ -76,7 +76,7 @@ sha256(input) {
 			g = HASH[6];
 
 			h = HASH[7];
-			for (var j = 0; j < 64; j++) {
+			for (j = 0; j < 64; j++) {
 				if (j < 16) W[j] = m[j + i];
 				else W[j] = safe_add(safe_add(safe_add(Gamma1256(W[j - 2]), W[j - 7]), Gamma0256(W[j - 15])), W[j - 16]);
 
