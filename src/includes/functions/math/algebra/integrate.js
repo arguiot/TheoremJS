@@ -1,7 +1,6 @@
 integrate(poly) {
 	if (poly.type != 'polynomial') {
 		throw "TheoremJS: Integrate: Not a polynomial"
-		return 0;
 	}
 	let values = []
 	for (let i in poly.values.reverse()) {
