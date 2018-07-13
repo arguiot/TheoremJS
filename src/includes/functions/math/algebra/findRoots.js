@@ -2,17 +2,19 @@ findRoots(f) {
     let exp = [];
     if (f.type == "polynomial") {
         switch (f.values.length - 1) {
-            case 1:
+            case 1: {
                 exp.push(`${new BigNumber(f.values[1]).isNegative() ? '' : '-'}${f.values[1]} / ${f.values[0]}`)
                 break;
-            case 2:
+			}
+            case 2: {
 				const delta = new BigNumber(f.values[1]).pow(2).minus(new BigNumber(4).times(f.values[0]).times(f.values[2])).toNumber()
 				if (delta > 0) {
 					exp.push(`(${new BigNumber(f.values[1]).isNegative() ? '' : '-'}${new BigNumber(f.values[1]).abs()} + Math.sqrt(${delta})) / ${new BigNumber(f.values[0]).times(2)}`)
 	                exp.push(`(${new BigNumber(f.values[1]).isNegative() ? '' : '-'}${new BigNumber(f.values[1]).abs()} - Math.sqrt(${delta})) / ${new BigNumber(f.values[0]).times(2)}`)
 				}
                 break;
-            case 3:
+			}
+            case 3: {
                 let a = new BigNumber(f.values[0]).toNumber()
                 let b = new BigNumber(f.values[1]).toNumber()
                 let c = new BigNumber(f.values[2]).toNumber()
@@ -47,8 +49,10 @@ findRoots(f) {
                     roots[i] -= b / (3 * a);
                 exp = roots;
                 break;
-            default:
+			}
+            default: {
                 exp = [numeralSolve(f, 0)[0]]
+			}
         }
     } else {
         exp = [numeralSolve(f, 0)[0]]
