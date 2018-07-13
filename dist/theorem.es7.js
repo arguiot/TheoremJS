@@ -416,12 +416,8 @@ class TheoremJS {
     return result.length == 1 ? result[0] : result;
   }
   atan2(x, y) {
-    if (typeof n != "object" || BigNumber.isBigNumber(n)) {
-      x = x.toNumber() : x;
-      x = [x];
-      y = y.isBigNumber == true ? y.toNumber() : y;
-      y = [y];
-    }
+    x = [BigNumber(x).toNumber()];
+    y = [BigNumber(y).toNumber()];
     let result = [];
     for (var i = 0; i < x.length; i++) {
       result.push(Math.atan2(x[i], y[i]));
@@ -529,7 +525,6 @@ class TheoremJS {
   derivate(poly) {
     if (poly.type != "polynomial") {
       throw "TheoremJS: Derivative: Not a polynomial";
-      return 0;
     }
     let values = [];
     const arr = poly.values.reverse();
@@ -564,14 +559,15 @@ class TheoremJS {
     let exp = [];
     if (f.type == "polynomial") {
       switch (f.values.length - 1) {
-        case 1:
+        case 1: {
           exp.push(
             `${new BigNumber(f.values[1]).isNegative() ? "" : "-"}${
               f.values[1]
             } / ${f.values[0]}`
           );
           break;
-        case 2:
+        }
+        case 2: {
           const delta = new BigNumber(f.values[1])
             .pow(2)
             .minus(new BigNumber(4).times(f.values[0]).times(f.values[2]))
@@ -597,7 +593,8 @@ class TheoremJS {
             );
           }
           break;
-        case 3:
+        }
+        case 3: {
           let a = new BigNumber(f.values[0]).toNumber();
           let b = new BigNumber(f.values[1]).toNumber();
           let c = new BigNumber(f.values[2]).toNumber();
@@ -617,16 +614,18 @@ class TheoremJS {
             roots = [0].concat(p < 0 ? [Math.sqrt(-p), -Math.sqrt(-p)] : []);
           } else {
             var D = q * q / 4 + p * p * p / 27;
+
+            var u; // no-redeclare
             if (Math.abs(D) < 1e-8) {
               // D = 0 -> two roots
               roots = [-1.5 * q / p, 3 * q / p];
             } else if (D > 0) {
               // Only one real root
-              var u = Math.cbrt(-q / 2 - Math.sqrt(D));
+              u = Math.cbrt(-q / 2 - Math.sqrt(D));
               roots = [u - p / (3 * u)];
             } else {
               // D < 0, three roots, but needs to use complex numbers/trigonometric solution
-              var u = 2 * Math.sqrt(-p / 3);
+              u = 2 * Math.sqrt(-p / 3);
               var t = Math.acos(3 * q / p / u) / 3; // D < 0 implies p < 0 and acos argument in [-1..1]
               var k = 2 * Math.PI / 3;
               roots = [
@@ -641,11 +640,13 @@ class TheoremJS {
           for (var i = 0; i < roots.length; i++) roots[i] -= b / (3 * a);
           exp = roots;
           break;
-        default:
-          exp = [numeralSolve(f, 0)[0]];
+        }
+        default: {
+          exp = [this.numeralSolve(f, 0)[0]];
+        }
       }
     } else {
-      exp = [numeralSolve(f, 0)[0]];
+      exp = [this.numeralSolve(f, 0)[0]];
     }
     return exp;
   }
@@ -710,7 +711,6 @@ class TheoremJS {
   integrate(poly) {
     if (poly.type != "polynomial") {
       throw "TheoremJS: Integrate: Not a polynomial";
-      return 0;
     }
     let values = [];
     for (let i in poly.values.reverse()) {
@@ -768,7 +768,7 @@ class TheoremJS {
     try {
       out = f.core(x);
     } catch (e) {
-      console.log(`[TheoremJS]: ${e}`);
+      throw `[TheoremJS]: ${e}`;
     }
     return out;
   }
@@ -1577,7 +1577,7 @@ class TheoremJS {
       let T2;
       m[l >> 5] |= 0x80 << (24 - l % 32);
       m[(((l + 64) >> 9) << 4) + 15] = l;
-      for (var i = 0; i < m.length; i += 16) {
+      for (i = 0; i < m.length; i += 16) {
         a = HASH[0];
 
         b = HASH[1];
@@ -1593,7 +1593,7 @@ class TheoremJS {
         g = HASH[6];
 
         h = HASH[7];
-        for (var j = 0; j < 64; j++) {
+        for (j = 0; j < 64; j++) {
           if (j < 16) W[j] = m[j + i];
           else
             W[j] = safe_add(

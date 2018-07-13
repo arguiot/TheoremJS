@@ -665,15 +665,8 @@ var TheoremJS = (function() {
     {
       key: "atan2",
       value: function atan2(x, y) {
-        if (
-          (typeof n === "undefined" ? "undefined" : _typeof(n)) != "object" ||
-          BigNumber.isBigNumber(n)
-        ) {
-          x = x.isBigNumber == true ? x.toNumber() : x;
-          x = [x];
-          y = y.isBigNumber == true ? y.toNumber() : y;
-          y = [y];
-        }
+        x = [BigNumber(x).toNumber()];
+        y = [BigNumber(y).toNumber()];
         var result = [];
         for (var i = 0; i < x.length; i++) {
           result.push(Math.atan2(x[i], y[i]));
@@ -841,7 +834,6 @@ var TheoremJS = (function() {
       value: function derivate(poly) {
         if (poly.type != "polynomial") {
           throw "TheoremJS: Derivative: Not a polynomial";
-          return 0;
         }
         var values = [];
         var arr = poly.values.reverse();
@@ -884,7 +876,7 @@ var TheoremJS = (function() {
         var exp = [];
         if (f.type == "polynomial") {
           switch (f.values.length - 1) {
-            case 1:
+            case 1: {
               exp.push(
                 "" +
                   (new BigNumber(f.values[1]).isNegative() ? "" : "-") +
@@ -893,7 +885,8 @@ var TheoremJS = (function() {
                   f.values[0]
               );
               break;
-            case 2:
+            }
+            case 2: {
               var delta = new BigNumber(f.values[1])
                 .pow(2)
                 .minus(new BigNumber(4).times(f.values[0]).times(f.values[2]))
@@ -919,7 +912,8 @@ var TheoremJS = (function() {
                 );
               }
               break;
-            case 3:
+            }
+            case 3: {
               var a = new BigNumber(f.values[0]).toNumber();
               var b = new BigNumber(f.values[1]).toNumber();
               var c = new BigNumber(f.values[2]).toNumber();
@@ -942,16 +936,18 @@ var TheoremJS = (function() {
                 );
               } else {
                 var D = q * q / 4 + p * p * p / 27;
+
+                var u; // no-redeclare
                 if (Math.abs(D) < 1e-8) {
                   // D = 0 -> two roots
                   roots = [-1.5 * q / p, 3 * q / p];
                 } else if (D > 0) {
                   // Only one real root
-                  var u = Math.cbrt(-q / 2 - Math.sqrt(D));
+                  u = Math.cbrt(-q / 2 - Math.sqrt(D));
                   roots = [u - p / (3 * u)];
                 } else {
                   // D < 0, three roots, but needs to use complex numbers/trigonometric solution
-                  var u = 2 * Math.sqrt(-p / 3);
+                  u = 2 * Math.sqrt(-p / 3);
                   var t = Math.acos(3 * q / p / u) / 3; // D < 0 implies p < 0 and acos argument in [-1..1]
                   var k = 2 * Math.PI / 3;
                   roots = [
@@ -968,11 +964,13 @@ var TheoremJS = (function() {
               }
               exp = roots;
               break;
-            default:
-              exp = [numeralSolve(f, 0)[0]];
+            }
+            default: {
+              exp = [this.numeralSolve(f, 0)[0]];
+            }
           }
         } else {
-          exp = [numeralSolve(f, 0)[0]];
+          exp = [this.numeralSolve(f, 0)[0]];
         }
         return exp;
       }
@@ -1062,7 +1060,6 @@ var TheoremJS = (function() {
       value: function integrate(poly) {
         if (poly.type != "polynomial") {
           throw "TheoremJS: Integrate: Not a polynomial";
-          return 0;
         }
         var values = [];
         for (var i in poly.values.reverse()) {
@@ -1150,7 +1147,7 @@ var TheoremJS = (function() {
         try {
           out = f.core(x);
         } catch (e) {
-          console.log("[TheoremJS]: " + e);
+          throw "[TheoremJS]: " + e;
         }
         return out;
       }
@@ -1494,24 +1491,14 @@ var TheoremJS = (function() {
     },
     {
       key: "n",
-      value: (function(_n) {
-        function n(_x) {
-          return _n.apply(this, arguments);
-        }
-
-        n.toString = function() {
-          return _n.toString();
-        };
-
-        return n;
-      })(function(n) {
+      value: function n(_n) {
         var base =
           arguments.length > 1 && arguments[1] !== undefined
             ? arguments[1]
             : 10;
 
-        return new BigNumber(n, base);
-      })
+        return new BigNumber(_n, base);
+      }
     },
     {
       key: "nPrime",
@@ -1955,8 +1942,8 @@ var TheoremJS = (function() {
           string = string.replace(/\r\n/g, "\n");
           var utftext = "";
 
-          for (var _n3 = 0; _n3 < string.length; _n3++) {
-            var _c = string.charCodeAt(_n3);
+          for (var n = 0; n < string.length; n++) {
+            var _c = string.charCodeAt(n);
 
             if (_c < 128) {
               utftext += String.fromCharCode(_c);
@@ -2227,7 +2214,7 @@ var TheoremJS = (function() {
           var T2 = void 0;
           m[l >> 5] |= 0x80 << (24 - l % 32);
           m[(((l + 64) >> 9) << 4) + 15] = l;
-          for (var i = 0; i < m.length; i += 16) {
+          for (i = 0; i < m.length; i += 16) {
             a = HASH[0];
 
             b = HASH[1];
@@ -2243,7 +2230,7 @@ var TheoremJS = (function() {
             g = HASH[6];
 
             h = HASH[7];
-            for (var j = 0; j < 64; j++) {
+            for (j = 0; j < 64; j++) {
               if (j < 16) W[j] = m[j + i];
               else
                 W[j] = safe_add(
@@ -2306,8 +2293,8 @@ var TheoremJS = (function() {
           string = string.replace(/\r\n/g, "\n");
 
           var utftext = "";
-          for (var _n4 = 0; _n4 < string.length; _n4++) {
-            var c = string.charCodeAt(_n4);
+          for (var n = 0; n < string.length; n++) {
+            var c = string.charCodeAt(n);
             if (c < 128) {
               utftext += String.fromCharCode(c);
             } else if (c > 127 && c < 2048) {
