@@ -4,7 +4,7 @@ run(f, x) {
 	try {
 		out = f.core(x)
 	} catch(e) {
-		console.log(`[TheoremJS]: ${e}`)
+		throw `[TheoremJS]: ${e}`
 	}
 	return out
 }
