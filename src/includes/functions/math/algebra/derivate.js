@@ -1,7 +1,6 @@
 derivate(poly) {
 	if (poly.type != 'polynomial') {
 		throw "TheoremJS: Derivative: Not a polynomial"
-		return 0;
 	}
 	let values = []
 	const arr = poly.values.reverse()
