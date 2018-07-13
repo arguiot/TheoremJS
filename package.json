@@ -2,7 +2,7 @@
     "name": "theorem.js",
     "version": "1.0.0",
     "description": "A Math library for computation in JavaScript",
-    "main": "dist/theorem.js",
+    "main": "dist/theorem.es7.js",
     "scripts": {
         "run": "npm test",
         "build": "npm test",
