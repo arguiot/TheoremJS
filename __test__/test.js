@@ -239,6 +239,12 @@ eye.describe("Math", () => {
             $ => $(t.atan2(90, 15)).isCloseTo(Math.atan2(90, 15))
         )
 
+		 eye.describe("Units", () => {
+			eye.test("Speed", "node",
+				$ => $(t.convert(1, "speed", "ms", "kh").toNumber()).Equal(3.6)
+			)
+		})
+
 		eye.describe("Other", () => {
 			eye.test("Deg & Rad convertions", "node",
 	            $ => $(t.deg2rad(180)).Equal(t.pi()),
