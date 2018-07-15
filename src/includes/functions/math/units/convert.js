@@ -3,5 +3,5 @@ convert(value, type, a, b) {
 		//= units
 	}
 	const u = Units()
-	return u[type](a, b)
+	return u[type](value, a, b)
 }
