@@ -10,4 +10,5 @@ speed(v, a, b) {
 	const ms = new BigNumber(v).times(factor[ia])
 
 	const out = ms.div(factor[ib])
+	return out
 }
