@@ -6,6 +6,7 @@
 //= math/algebra
 //= math/fractions
 //= math/generators
+//= math/units
 //= math/numbers
 //= math/random
 //= other
