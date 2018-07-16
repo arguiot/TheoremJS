@@ -244,6 +244,9 @@ eye.describe("Math", () => {
 				$ => $(t.convert(1, "speed", "m/s", "km/h").toNumber()).Equal(3.6),
 				$ => $(t.convert(20, "speed", "m/h", "km/h").toNumber()).isCloseTo(32.19)
 			)
+			eye.test("Length / Distance", "node",
+				$ => $(t.convert(1, "distance", "mi", "km").toNumber()).Equal(1.609344)
+			)
 		})
 
 		eye.describe("Other", () => {
