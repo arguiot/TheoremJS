@@ -241,8 +241,8 @@ eye.describe("Math", () => {
 
 		 eye.describe("Units", () => {
 			eye.test("Speed", "node",
-				$ => $(t.convert(1, "speed", "ms", "kh").toNumber()).Equal(3.6),
-				$ => $(t.convert(20, "speed", "mph", "kh").toNumber()).isCloseTo(32.19)
+				$ => $(t.convert(1, "speed", "m/s", "km/h").toNumber()).Equal(3.6),
+				$ => $(t.convert(20, "speed", "m/h", "km/h").toNumber()).isCloseTo(32.19)
 			)
 		})
 

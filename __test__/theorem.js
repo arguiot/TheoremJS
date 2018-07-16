@@ -767,7 +767,7 @@ class TheoremJS {
   convert(value, type, a, b) {
   	class Units {
   		speed(v, a, b) {
-  			const authorized = ["ms", "kh", "mph", "knot", "fts"]
+  			const authorized = ["m/s", "km/h", "m/h", "knot", "ft/s"]
   			if (!authorized.includes(a) || !authorized.includes(b)) {
   				throw "[TheoremJS] Speed: wrong units"
   			}
