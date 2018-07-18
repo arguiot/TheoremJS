@@ -247,6 +247,9 @@ eye.describe("Math", () => {
 			eye.test("Length / Distance", "node",
 				$ => $(t.convert(1, "distance", "mi", "km").toNumber()).Equal(1.609344)
 			)
+			eye.test("Time", "node",
+				$ => $(t.convert(12, "time", "mo", "y").toNumber()).isCloseTo(1, 1)
+			)
 		})
 
 		eye.describe("Other", () => {
