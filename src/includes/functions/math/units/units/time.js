@@ -1,6 +1,6 @@
 time(v, a, b) {
 	const authorized = [
-		"ms"
+		"ms",
 		"s",
 		"m",
 		"h",
@@ -27,6 +27,6 @@ time(v, a, b) {
 	]
 	const g = new BigNumber(v).times(factor[ia])
 
-	const out = g.times(factor[ib])
+	const out = g.div(factor[ib])
 	return out
 }
