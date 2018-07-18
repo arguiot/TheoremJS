@@ -7,7 +7,9 @@ mass(v, a, b) {
 		"dag",
 		"hg",
 		"kg",
-		"t"
+		"t",
+		"oz",
+		"lb"
 	]
 	if (!authorized.includes(a) || !authorized.includes(b)) {
 		throw "[TheoremJS] Speed: wrong units"
@@ -23,7 +25,9 @@ mass(v, a, b) {
 		new BigNumber(1).div(10),
 		new BigNumber(1).div(100),
 		new BigNumber(1).div(1000),
-		new BigNumber(1).div(1000000)
+		new BigNumber(1).div(1000000),
+		"28.349523125",
+		"453.59237"
 	]
 	const g = new BigNumber(v).times(factor[ia])
 
