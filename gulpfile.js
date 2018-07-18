@@ -4,11 +4,9 @@ const uglify = require("gulp-uglify");
 const babel = require("gulp-babel");
 const babili = require("gulp-babili");
 const rigger = require("gulp-rigger");
-const injectVersion = require("gulp-inject-version")
 gulp.task("modern", () => {
 	gulp.src("src/base.js")
 		.pipe(rigger())
-		.pipe(injectVersion())
 		.pipe(rename({
 			basename: "theorem"
 		}))
@@ -17,7 +15,6 @@ gulp.task("modern", () => {
 gulp.task("minify", () => {
 	gulp.src("src/base.js")
 		.pipe(rigger())
-		.pipe(injectVersion())
 		.pipe(babili({
 			mangle: {
 				keepClassName: true
@@ -32,7 +29,6 @@ gulp.task("minify", () => {
 gulp.task("tests", () => {
 	gulp.src("src/base.js")
 		.pipe(rigger())
-		.pipe(injectVersion())
 		.pipe(rename({
 			basename: "theorem"
 		}))
