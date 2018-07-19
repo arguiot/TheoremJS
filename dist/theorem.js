@@ -936,6 +936,21 @@ class TheoremJS {
         const out = ms.div(factor[ib]);
         return out;
       }
+      temperature(v, a, b) {
+        const authorized = ["c", "f", "k"];
+        if (!authorized.includes(a) || !authorized.includes(b)) {
+          throw "[TheoremJS] Speed: wrong units";
+        }
+        const ia = authorized.indexOf(a);
+        const ib = authorized.indexOf(b);
+        // to celsius
+        const add = [0, -32, -273.15];
+        const factor = [1, new BigNumber(5).div(9), 1];
+        const g = new BigNumber(v).plus(add[ia]).times(factor[ia]);
+
+        const out = g.div(factor[ib]).minus(add[ib]);
+        return out;
+      }
       time(v, a, b) {
         const authorized = ["ms", "s", "m", "h", "d", "w", "mo", "y"];
         if (!authorized.includes(a) || !authorized.includes(b)) {

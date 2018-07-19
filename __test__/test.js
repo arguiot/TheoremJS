@@ -250,6 +250,9 @@ eye.describe("Math", () => {
 			eye.test("Time", "node",
 				$ => $(t.convert(12, "time", "mo", "y").toNumber()).isCloseTo(1, 1)
 			)
+			eye.test("Temperature", "node",
+				$ => $(t.convert(0, "temperature", "c", "k").toNumber()).Equal(273.15),
+			)
 		})
 
 		eye.describe("Other", () => {
