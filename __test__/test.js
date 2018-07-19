@@ -252,6 +252,7 @@ eye.describe("Math", () => {
 			)
 			eye.test("Temperature", "node",
 				$ => $(t.convert(0, "temperature", "c", "k").toNumber()).Equal(273.15),
+				$ => $(t.convert(12, "temperature", "f", "k").toNumber()).isCloseTo(262)
 			)
 		})
 
