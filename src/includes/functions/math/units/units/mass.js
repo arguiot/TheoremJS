@@ -29,7 +29,7 @@ mass(v, a, b) {
 		"28.349523125",
 		"453.59237"
 	]
-	const g = new BigNumber(v).times(factor[ia])
+	const g = new BigNumber(v).div(factor[ia])
 
 	const out = g.times(factor[ib])
 	return out
