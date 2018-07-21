@@ -26,11 +26,11 @@ mass(v, a, b) {
 		new BigNumber(1).div(100),
 		new BigNumber(1).div(1000),
 		new BigNumber(1).div(1000000),
-		"28.349523125",
-		"453.59237"
+		new BigNumber(1).div("28.349523125"),
+		new BigNumber(1).div("453.59237")
 	]
 	const g = new BigNumber(v).div(factor[ia])
 
-	const out = g.times(factor[ib])
+	const out = new BigNumber(g).times(factor[ib])
 	return out
 }
