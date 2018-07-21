@@ -251,7 +251,8 @@ eye.describe("Math", () => {
 				$ => $(t.convert(12, "time", "mo", "y").toNumber()).isCloseTo(1, 1)
 			)
 			eye.test("Mass", "node",
-				$ => $(t.convert(1024, "mass", "kg", "t").toNumber()).Equal(1.024)
+				$ => $(t.convert(1024, "mass", "kg", "t").toNumber()).Equal(1.024),
+				$ => $(t.convert(24, "mass", "t", "oz").toNumber()).isCloseTo(846575, 0)
 			)
 			eye.test("Temperature", "node",
 				$ => $(t.convert(0, "temperature", "c", "k").toNumber()).Equal(273.15),
