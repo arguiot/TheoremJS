@@ -258,6 +258,10 @@ eye.describe("Math", () => {
 				$ => $(t.convert(0, "temperature", "c", "k").toNumber()).Equal(273.15),
 				$ => $(t.convert(12, "temperature", "f", "k").toNumber()).isCloseTo(262, 1)
 			)
+			eye.test("Area", "node",
+				$ => $(t.units(3, "area", "km2", "cm2").toNumber()).Equal(3e+10),
+				$ => $(t.convert(5, "area", "mi2", "km2").toNumber()).isCloseTo(12.95)
+			)
 		})
 
 		eye.describe("Other", () => {
