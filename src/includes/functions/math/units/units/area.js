@@ -8,7 +8,10 @@ area(v, a, b) {
 		"hm2",
 		"ha",
 		"km2",
-		
+		"in2",
+		"ft2",
+		"yd2",
+		"mi2"
 	]
 	if (!authorized.includes(a) || !authorized.includes(b)) {
 		throw "[TheoremJS] Speed: wrong units"
@@ -24,7 +27,11 @@ area(v, a, b) {
 		100,
 		10000,
 		10000,
-		1000000
+		1000000,
+		"0.00064516",
+		"0.09290304",
+		"0.83612736",
+		"2589988.110336"
 	]
 	const factor = [
 		1,
