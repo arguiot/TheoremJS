@@ -19,7 +19,7 @@ area(v, a, b) {
 	const ia = authorized.indexOf(a)
 	const ib = authorized.indexOf(b)
 	// to square meters
-	const add = [
+	const factor = [
 		new BigNumber(1).div(1000000),
 		new BigNumber(1).div(10000),
 		new BigNumber(1).div(100),
@@ -32,11 +32,6 @@ area(v, a, b) {
 		"0.09290304",
 		"0.83612736",
 		"2589988.110336"
-	]
-	const factor = [
-		1,
-		new BigNumber(5).div(9),
-		1
 	]
 	const g = new BigNumber(v).times(factor[ia])
 
