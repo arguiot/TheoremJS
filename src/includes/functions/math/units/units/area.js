@@ -14,7 +14,7 @@ area(v, a, b) {
 		"mi2"
 	]
 	if (!authorized.includes(a) || !authorized.includes(b)) {
-		throw "[TheoremJS] Speed: wrong units"
+		throw "[TheoremJS] Area: wrong units"
 	}
 	const ia = authorized.indexOf(a)
 	const ib = authorized.indexOf(b)

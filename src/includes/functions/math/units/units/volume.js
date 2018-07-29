@@ -1,4 +1,4 @@
-area(v, a, b) {
+volume(v, a, b) {
 	const authorized = [
 		"mm3",
 		"ml",
@@ -16,7 +16,7 @@ area(v, a, b) {
 		"floz"
 	]
 	if (!authorized.includes(a) || !authorized.includes(b)) {
-		throw "[TheoremJS] Speed: wrong units"
+		throw "[TheoremJS] Volume: wrong units"
 	}
 	const ia = authorized.indexOf(a)
 	const ib = authorized.indexOf(b)

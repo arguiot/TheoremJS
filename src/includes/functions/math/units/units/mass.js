@@ -12,7 +12,7 @@ mass(v, a, b) {
 		"lb"
 	]
 	if (!authorized.includes(a) || !authorized.includes(b)) {
-		throw "[TheoremJS] Speed: wrong units"
+		throw "[TheoremJS] Mass: wrong units"
 	}
 	const ia = authorized.indexOf(a)
 	const ib = authorized.indexOf(b)

@@ -1,7 +1,7 @@
 length(v, a, b) {
 	const authorized = ["mm", "cm", "dm", "m", "dam", "hm", "km", "yd", "ft", "mi", "in", "li", "au", "ly"]
 	if (!authorized.includes(a) || !authorized.includes(b)) {
-		throw "[TheoremJS] Speed: wrong units"
+		throw "[TheoremJS] Length: wrong units"
 	}
 	const ia = authorized.indexOf(a)
 	const ib = authorized.indexOf(b)
