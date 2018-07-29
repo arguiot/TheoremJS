@@ -34,7 +34,7 @@ volume(v, a, b) {
 		1000, // dam3
 		1000000, // hm3
 		1000000000, //km3
-		"0.0037854118", // gal,
+		"0.003785411784", // gal,
 		"2.95735295625e-5" // floz
 	]
 	const g = new BigNumber(v).times(factor[ia])
