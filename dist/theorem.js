@@ -10,7 +10,7 @@ class TheoremJS {
   constructor(precision = 20) {
     BigNumber.set({ DECIMAL_PLACES: precision });
     // code
-    this.version = "v1.0.0";
+    this.version = "v1.1.0";
   }
 
   factorial(n) {
@@ -56,7 +56,7 @@ class TheoremJS {
   }
   ln(x, n = 15) {
     let buffer = new BigNumber(0);
-    for (let i = 0; i < Math.ceil(n + 3 / 2 * x); i++) {
+    for (let i = 0; i < Math.ceil(n + (3 / 2) * x); i++) {
       const n = new BigNumber(1).div(new BigNumber(i).times(2).plus(1)).times(
         new BigNumber(x)
           .minus(1)
@@ -613,12 +613,12 @@ class TheoremJS {
             // q = 0 -> t^3 + pt = 0 -> t(t^2+p)=0
             roots = [0].concat(p < 0 ? [Math.sqrt(-p), -Math.sqrt(-p)] : []);
           } else {
-            var D = q * q / 4 + p * p * p / 27;
+            var D = (q * q) / 4 + (p * p * p) / 27;
 
             var u; // no-redeclare
             if (Math.abs(D) < 1e-8) {
               // D = 0 -> two roots
-              roots = [-1.5 * q / p, 3 * q / p];
+              roots = [(-1.5 * q) / p, (3 * q) / p];
             } else if (D > 0) {
               // Only one real root
               u = Math.cbrt(-q / 2 - Math.sqrt(D));
@@ -626,8 +626,8 @@ class TheoremJS {
             } else {
               // D < 0, three roots, but needs to use complex numbers/trigonometric solution
               u = 2 * Math.sqrt(-p / 3);
-              var t = Math.acos(3 * q / p / u) / 3; // D < 0 implies p < 0 and acos argument in [-1..1]
-              var k = 2 * Math.PI / 3;
+              var t = Math.acos((3 * q) / p / u) / 3; // D < 0 implies p < 0 and acos argument in [-1..1]
+              var k = (2 * Math.PI) / 3;
               roots = [
                 u * Math.cos(t),
                 u * Math.cos(t - k),
@@ -671,7 +671,7 @@ class TheoremJS {
 
       for (let j = i + 1; j < n; j++) {
         for (let k = n; k >= i; k--) {
-          matrix[k][j] -= matrix[k][i] * matrix[i][j] / matrix[i][i];
+          matrix[k][j] -= (matrix[k][i] * matrix[i][j]) / matrix[i][i];
         }
       }
     }
@@ -1502,20 +1502,20 @@ class TheoremJS {
       const lMessageLength = string.length;
       const lNumberOfWords_temp1 = lMessageLength + 8;
       const lNumberOfWords_temp2 =
-        (lNumberOfWords_temp1 - lNumberOfWords_temp1 % 64) / 64;
+        (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
       const lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
       const lWordArray = Array(lNumberOfWords - 1);
       let lBytePosition = 0;
       let lByteCount = 0;
       while (lByteCount < lMessageLength) {
-        lWordCount = (lByteCount - lByteCount % 4) / 4;
+        lWordCount = (lByteCount - (lByteCount % 4)) / 4;
         lBytePosition = (lByteCount % 4) * 8;
         lWordArray[lWordCount] =
           lWordArray[lWordCount] |
           (string.charCodeAt(lByteCount) << lBytePosition);
         lByteCount++;
       }
-      lWordCount = (lByteCount - lByteCount % 4) / 4;
+      lWordCount = (lByteCount - (lByteCount % 4)) / 4;
       lBytePosition = (lByteCount % 4) * 8;
       lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
       lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
@@ -1809,7 +1809,7 @@ class TheoremJS {
       var j;
       let T1;
       let T2;
-      m[l >> 5] |= 0x80 << (24 - l % 32);
+      m[l >> 5] |= 0x80 << (24 - (l % 32));
       m[(((l + 64) >> 9) << 4) + 15] = l;
       for (i = 0; i < m.length; i += 16) {
         a = HASH[0];
@@ -1877,7 +1877,7 @@ class TheoremJS {
       const mask = (1 << chrsz) - 1;
 
       for (let i = 0; i < str.length * chrsz; i += chrsz) {
-        bin[i >> 5] |= (str.charCodeAt(i / chrsz) & mask) << (24 - i % 32);
+        bin[i >> 5] |= (str.charCodeAt(i / chrsz) & mask) << (24 - (i % 32));
       }
 
       return bin;
@@ -1913,8 +1913,8 @@ class TheoremJS {
 
       for (let i = 0; i < binarray.length * 4; i++) {
         str +=
-          hex_tab.charAt((binarray[i >> 2] >> ((3 - i % 4) * 8 + 4)) & 0xf) +
-          hex_tab.charAt((binarray[i >> 2] >> ((3 - i % 4) * 8)) & 0xf);
+          hex_tab.charAt((binarray[i >> 2] >> ((3 - (i % 4)) * 8 + 4)) & 0xf) +
+          hex_tab.charAt((binarray[i >> 2] >> ((3 - (i % 4)) * 8)) & 0xf);
       }
 
       return str;
