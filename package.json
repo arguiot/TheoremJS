@@ -9,7 +9,7 @@
         "test": "npm run gulp && npm run prettier && npm run lint && npm run eye && exit 0",
         "gulp": "gulp",
         "prettier": "prettier \"dist/**/*.js\" --write",
-        "lint": "./node_modules/.bin/eslint dist/theorem.js dist/theorem.min.js --fix",
+        "lint": "./node_modules/.bin/eslint dist/theorem.js --fix",
         "eye": "./node_modules/.bin/eye"
     },
     "repository": {

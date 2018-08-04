@@ -678,7 +678,8 @@ class TheoremJS {
   	return index[buffer.indexOf(close)]
   }
   polynomial() {
-  	const args = [...arguments].reverse()
+  	const arg = [...arguments]
+  	const args = this.reverse(arg)
   	let buffer = "";
   	for (let i = 0; i < args.length; i++) {
   		buffer += `${args[i]} * x**${i} ${i == args.length -1 ? '': '+ '}`
@@ -687,7 +688,7 @@ class TheoremJS {
   		type: "polynomial",
   		v: "x",
   		f: buffer,
-  		values: [...arguments],
+  		values: arg,
   		core: x => {
   			let regex = new RegExp("x")
   			let newStr = buffer.replace(regex, `(${x})`)
@@ -1242,6 +1243,9 @@ class TheoremJS {
   		tmp.push(array.slice(i, i + part));
   	}
   	return tmp;
+  }
+  reverse(array) {
+  	return array.slice(0).reverse() // duplicate and reverse to duplicate the array
   }
   bin2str(txt) {
   	return txt.replace(/\s*[01]{8}\s*/g, function(bin) {

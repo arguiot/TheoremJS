@@ -1,4 +1,4 @@
-const t = require(__testDir + "theorem.js")
+const t = require(__testDir + "../dist/theorem.min.js")
 
 eye.describe("Array", () => {
     eye.test("Flatten", "node",
