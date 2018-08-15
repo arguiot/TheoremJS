@@ -245,7 +245,9 @@ eye.describe("Math", () => {
 				$ => $(t.convert(20, "speed", "m/h", "km/h").toNumber()).isCloseTo(32.19)
 			)
 			eye.test("Length / Distance", "node",
-				$ => $(t.convert(1, "distance", "mi", "km").toNumber()).Equal(1.609344)
+				$ => $(t.convert(1, "distance", "mi", "km").toNumber()).Equal(1.609344),
+				$ => $(t.convert(10, "length", "cm", "m").toNumber()).Equal(0.1),
+				$ => $(t.convert(1, "distance", "ly", "m")).Equal(t.n("9460730472580.8").times(1000))
 			)
 			eye.test("Time", "node",
 				$ => $(t.convert(12, "time", "mo", "y").toNumber()).isCloseTo(1, 1)
