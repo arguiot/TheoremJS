@@ -8,6 +8,9 @@ A Math framework for computation in JavaScript
 [![License](https://img.shields.io/github/license/arguiot/TheoremJS.svg)](LICENSE)
 </div>
 
+
+TheoremJS is a mathematical framework that is packed up with tons of useful mathematical functions. It is composed of functions in most mathematical fields such as algebra, number theory, statistics, etc... It was designed to fit your need, whatever you are trying to do.
+
 # Getting Started
 
 Type the following command in a terminal
