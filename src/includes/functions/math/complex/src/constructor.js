@@ -1,4 +1,4 @@
 constructor(a, b) {
-	this.a = a
-	this.b = b
+	this.a = new BigNumber(a)
+	this.b = new BigNumber(b)
 }
