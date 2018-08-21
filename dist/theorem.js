@@ -1941,6 +1941,29 @@ class TheoremJS {
       return !1 == spaceSeparatedOctets ? str : str + " ";
     });
   }
+  complex(a, b) {
+    class complex {
+      constructor(a, b) {
+        this.a = new BigNumber(a);
+        this.b = new BigNumber(b);
+      }
+      get isComplex() {
+        return true;
+      }
+      plus(complex) {
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        this.a = this.a.plus(complex.a);
+        this.b = this.b.plus(complex.b);
+        return this;
+      }
+      toString() {
+        return `${this.a} + ${this.b}i`;
+      }
+    }
+    return new complex(a, b);
+  }
 }
 // Browserify / Node.js
 if (typeof define === "function" && define.amd) {
