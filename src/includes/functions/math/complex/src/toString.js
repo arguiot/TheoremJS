@@ -1,3 +1,3 @@
 toString() {
-	return `${this.a} + ${this.b}i`
+	return `${this.a.toString()} + ${this.b.toString()}i`
 }
