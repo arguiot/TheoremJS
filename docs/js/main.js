@@ -15,6 +15,18 @@ renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
 camera.updateProjectionMatrix()
 document.body.appendChild(renderer.domElement);
 
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
+
+
 // Sphere
 const shape = new THREE.SphereGeometry(0.75, 16, 26, 0, Math.PI * 2, 0, Math.PI * 2);
 const geometry = new THREE.EdgesGeometry(shape);
