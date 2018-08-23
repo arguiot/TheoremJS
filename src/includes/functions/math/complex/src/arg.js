@@ -1,8 +1,6 @@
-negated() {
+arg(complex) {
 	if (!complex.isComplex) {
 		throw "[TheoremJS]: Complex operation require complex numbers"
 	}
-	this.a = this.a.negated()
-	this.b = this.b.negated()
-	return this
+	return new BigNumber(this.t.atan2(this.a, this.b))
 }
