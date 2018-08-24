@@ -4,7 +4,7 @@ sqrt(n) {
     }
 	let result = []
     for (var i = 0; i < n.length; i++) {
-		if (new BigNumber(n[i]).it(0)) {
+		if (new BigNumber(n[i]).lt(0)) {
 			result.push(this.complex(0, new BigNumber(n[i]).abs().sqrt()))
 		} else {
 			result.push(new BigNumber(new BigNumber(n[i]).sqrt()))
