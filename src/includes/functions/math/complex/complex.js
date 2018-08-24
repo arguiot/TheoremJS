@@ -1,6 +1,6 @@
 complex(a, b) {
 	class complex {
-		//= src
+		//= ./src
 	}
 	return new complex(a, b, this)
 }
