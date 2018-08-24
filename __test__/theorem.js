@@ -1785,15 +1785,9 @@ class TheoremJS {
   			return new BigNumber(this.a).times(this.a).plus(this.b.times(this.b)).sqrt() // sqrt(a^2 + b^2)
   		}
   		arg() {
-  			if (!complex.isComplex) {
-  				throw "[TheoremJS]: Complex operation require complex numbers"
-  			}
   			return new BigNumber(this.t.atan2(this.a, this.b))
   		}
   		conjugate() {
-  			if (!complex.isComplex) {
-  				throw "[TheoremJS]: Complex operation require complex numbers"
-  			}
   			this.b = this.b.negated()
   			return this
   		}
@@ -1809,8 +1803,23 @@ class TheoremJS {
   			if (!complex.isComplex) {
   				throw "[TheoremJS]: Complex operation require complex numbers"
   			}
-  			this.a = this.a.div(complex.a)
-  			this.b = this.b.div(complex.b)
+  			
+  			const a = this.a
+  			const b = this.b
+  			const c = complex.a
+  			const d = complex.b
+  		
+  			const c2d2 = c.times(c).plus(d.times(d)) // c^2 + d^2
+  		
+  			const acbd = a.times(c).plus(b.times(d)) // a*c + b*d
+  			const bcad = b.times(c).minus(a.times(d)) // b*c - a*d
+  		
+  			const re = acbd.div(c2d2)
+  			const im = bcad.div(c2d2)
+  		
+  			this.a = re
+  			this.b = im
+  		
   			return this
   		}
   		get isComplex() {
@@ -1898,7 +1907,7 @@ class TheoremJS {
   			return this
   		}
   		toString() {
-  			return `${this.a.toString()} + ${this.b.toString()}i`
+  			return `${this.a.toString()} ${this.b.lt(0) ? "-" : "+"} ${this.b.abs().toString()}i`
   		}
   	}
   	return new complex(a, b, this)

@@ -92,6 +92,16 @@ eye.describe("Math", () => {
 			$ => $(t.complex(1, 1).abs()).Equal(t.n(2).sqrt()),
 			$ => $(t.complex(32, 12).abs().toNumber()).isCloseTo(34.17601498127012)
 		)
+		eye.test("Arg", "node",
+			$ => $(t.complex(1, 1).arg().toNumber()).isCloseTo(t.c("pi").div(4).toNumber())
+		)
+		eye.test("Conjugate", "node",
+			$ => $(t.complex(1, 1).conjugate().toString()).Equal("1 - 1i")
+		)
+		eye.test("Division", "node",
+			$ => $(t.complex(1, 1).div(t.complex(1, 1)).toString()).Equal("1 + 0i"),
+			$ => $(t.complex(2, 3).div(t.complex(3, -5)).toString()).Equal("-0.26470588235294117647 + 0.55882352941176470588i")
+		)
 	})
     eye.describe("Math Basic Functions", () => {
         eye.test("Factorial", "node",
