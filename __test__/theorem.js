@@ -13,6 +13,9 @@ class TheoremJS {
   	this.version = "v1.1.0"
   }
   
+  exp(n) {
+  	return new BigNumber(Math.exp(new BigNumber(n).toNumber()))
+  }
   factorial(n) {
       if (new BigNumber(n).eq(0)) {
           return new BigNumber(1);
@@ -122,7 +125,11 @@ class TheoremJS {
       }
   	let result = []
       for (var i = 0; i < n.length; i++) {
-      	result.push(new BigNumber(new BigNumber(n[i]).sqrt()))
+  		if (new BigNumber(n[i]).lt(0)) {
+  			result.push(this.complex(0, new BigNumber(n[i]).abs().sqrt()))
+  		} else {
+  			result.push(new BigNumber(new BigNumber(n[i]).sqrt()))
+  		}
       }
   	return result.length == 1 ? result[0] : result
   }
@@ -767,267 +774,231 @@ class TheoremJS {
   }
   convert(value, type, a, b) {
   	class Units {
-  		convert(value, type, a, b) {
-  			class Units {
-  				convert(value, type, a, b) {
-  					class Units {
-  						convert(value, type, a, b) {
-  							class Units {
-  								convert(value, type, a, b) {
-  									class Units {
-  										area(v, a, b) {
-  											const authorized = [
-  												"mm2",
-  												"cm2",
-  												"dm2",
-  												"m2",
-  												"dam2",
-  												"hm2",
-  												"ha",
-  												"km2",
-  												"in2",
-  												"ft2",
-  												"yd2",
-  												"mi2"
-  											]
-  											if (!authorized.includes(a) || !authorized.includes(b)) {
-  												throw "[TheoremJS] Area: wrong units"
-  											}
-  											const ia = authorized.indexOf(a)
-  											const ib = authorized.indexOf(b)
-  											// to square meters
-  											const factor = [
-  												new BigNumber(1).div(1000000),
-  												new BigNumber(1).div(10000),
-  												new BigNumber(1).div(100),
-  												1,
-  												100,
-  												10000,
-  												10000,
-  												1000000,
-  												"0.00064516",
-  												"0.09290304",
-  												"0.83612736",
-  												"2589988.110336"
-  											]
-  											const g = new BigNumber(v).times(factor[ia])
-  										
-  											const out = g.div(factor[ib])
-  											return out
-  										}
-  										distance() {
-  											return this.length(...arguments)
-  										}
-  										length(v, a, b) {
-  											const authorized = ["mm", "cm", "dm", "m", "dam", "hm", "km", "yd", "ft", "mi", "in", "li", "au", "ly", "Nm"]
-  											if (!authorized.includes(a) || !authorized.includes(b)) {
-  												throw "[TheoremJS] Length: wrong units"
-  											}
-  											const ia = authorized.indexOf(a)
-  											const ib = authorized.indexOf(b)
-  											// to m
-  											const factor = [
-  												1 / 1000,
-  												1 / 100,
-  												1 / 10,
-  												1,
-  												10,
-  												100,
-  												1000,
-  												new BigNumber(0.9144),
-  												new BigNumber(0.3048),
-  												new BigNumber(1609.344),
-  												new BigNumber(25.4).div(1000),
-  												new BigNumber(6.35).times("0.0001"),
-  												new BigNumber("149597870700"),
-  												new BigNumber("9460730472580.8").times(1000),
-  												1852
-  											]
-  											const m = new BigNumber(v).times(factor[ia])
-  										
-  											const out = m.div(factor[ib])
-  											return out
-  										}
-  										mass(v, a, b) {
-  											const authorized = [
-  												"mg",
-  												"cg",
-  												"dg",
-  												"g",
-  												"dag",
-  												"hg",
-  												"kg",
-  												"t",
-  												"oz",
-  												"lb"
-  											]
-  											if (!authorized.includes(a) || !authorized.includes(b)) {
-  												throw "[TheoremJS] Mass: wrong units"
-  											}
-  											const ia = authorized.indexOf(a)
-  											const ib = authorized.indexOf(b)
-  											// to gram
-  											const factor = [
-  												1000,
-  												100,
-  												10,
-  												1,
-  												new BigNumber(1).div(10),
-  												new BigNumber(1).div(100),
-  												new BigNumber(1).div(1000),
-  												new BigNumber(1).div(1000000),
-  												new BigNumber(1).div("28.349523125"),
-  												new BigNumber(1).div("453.59237")
-  											]
-  											const g = new BigNumber(v).div(factor[ia])
-  										
-  											const out = new BigNumber(g).times(factor[ib])
-  											return out
-  										}
-  										speed(v, a, b) {
-  											const authorized = ["m/s", "km/h", "m/h", "knot", "ft/s"]
-  											if (!authorized.includes(a) || !authorized.includes(b)) {
-  												throw "[TheoremJS] Speed: wrong units"
-  											}
-  											const ia = authorized.indexOf(a)
-  											const ib = authorized.indexOf(b)
-  											// to ms
-  											const factor = [new BigNumber(1), new BigNumber(1).div(3.6), new BigNumber(0.44704), new BigNumber(0.514444), new BigNumber(0.3048)]
-  											const ms = new BigNumber(v).times(factor[ia])
-  										
-  											const out = ms.div(factor[ib])
-  											return out
-  										}
-  										temperature(v, a, b) {
-  											const authorized = [
-  												"c",
-  												"f",
-  												"k"
-  											]
-  											if (!authorized.includes(a) || !authorized.includes(b)) {
-  												throw "[TheoremJS] Temperature: wrong units"
-  											}
-  											const ia = authorized.indexOf(a)
-  											const ib = authorized.indexOf(b)
-  											// to celsius
-  											const add = [
-  												0,
-  												-32,
-  												-273.15
-  											]
-  											const factor = [
-  												1,
-  												new BigNumber(5).div(9),
-  												1
-  											]
-  											const g = new BigNumber(v).plus(add[ia]).times(factor[ia])
-  										
-  											const out = g.div(factor[ib]).minus(add[ib])
-  											return out
-  										}
-  										time(v, a, b) {
-  											const authorized = [
-  												"ms",
-  												"s",
-  												"m",
-  												"h",
-  												"d",
-  												"w",
-  												"mo",
-  												"y"
-  											]
-  											if (!authorized.includes(a) || !authorized.includes(b)) {
-  												throw "[TheoremJS] Time: wrong units"
-  											}
-  											const ia = authorized.indexOf(a)
-  											const ib = authorized.indexOf(b)
-  											// to gram
-  											const factor = [
-  												new BigNumber(1).div(1000),
-  												1,
-  												60,
-  												3600,
-  												86400,
-  												604800,
-  												"2592000",
-  												new BigNumber("365.2421891").times(24).times(3600)
-  											]
-  											const g = new BigNumber(v).times(factor[ia])
-  										
-  											const out = g.div(factor[ib])
-  											return out
-  										}
-  										volume(v, a, b) {
-  											const authorized = [
-  												"mm3",
-  												"ml",
-  												"cm3",
-  												"cl",
-  												"dl",
-  												"dm3",
-  												"l",
-  												"hl",
-  												"m3",
-  												"dam3",
-  												"hm3",
-  												"km3",
-  												"gal",
-  												"floz"
-  											]
-  											if (!authorized.includes(a) || !authorized.includes(b)) {
-  												throw "[TheoremJS] Volume: wrong units"
-  											}
-  											const ia = authorized.indexOf(a)
-  											const ib = authorized.indexOf(b)
-  											// to cubic meters
-  											const factor = [
-  												new BigNumber(1).div(1000000000), // mm3
-  												new BigNumber(1).div(1000000), // ml
-  												new BigNumber(1).div(1000000), // cm3
-  												new BigNumber(10).div(1000000), // cl
-  												"0.0001", // dl
-  												new BigNumber(1).div(1000), // dm3
-  												new BigNumber(1).div(1000), // l
-  												0.1, // hl
-  												1, // m3
-  												1000, // dam3
-  												1000000, // hm3
-  												1000000000, //km3
-  												"0.003785411784", // gal,
-  												"2.95735295625e-5" // floz
-  											]
-  											const g = new BigNumber(v).times(factor[ia])
-  										
-  											const out = g.div(factor[ib])
-  											return out
-  										}
-  									}
-  									const u = new Units()
-  									return u[type](value, a, b)
-  								}
-  								units() {
-  									return this.convert(...arguments)
-  								}
-  							}
-  							const u = new Units()
-  							return u[type](value, a, b)
-  						}
-  						units() {
-  							return this.convert(...arguments)
-  						}
-  					}
-  					const u = new Units()
-  					return u[type](value, a, b)
-  				}
-  				units() {
-  					return this.convert(...arguments)
-  				}
+  		area(v, a, b) {
+  			const authorized = [
+  				"mm2",
+  				"cm2",
+  				"dm2",
+  				"m2",
+  				"dam2",
+  				"hm2",
+  				"ha",
+  				"km2",
+  				"in2",
+  				"ft2",
+  				"yd2",
+  				"mi2"
+  			]
+  			if (!authorized.includes(a) || !authorized.includes(b)) {
+  				throw "[TheoremJS] Area: wrong units"
   			}
-  			const u = new Units()
-  			return u[type](value, a, b)
+  			const ia = authorized.indexOf(a)
+  			const ib = authorized.indexOf(b)
+  			// to square meters
+  			const factor = [
+  				new BigNumber(1).div(1000000),
+  				new BigNumber(1).div(10000),
+  				new BigNumber(1).div(100),
+  				1,
+  				100,
+  				10000,
+  				10000,
+  				1000000,
+  				"0.00064516",
+  				"0.09290304",
+  				"0.83612736",
+  				"2589988.110336"
+  			]
+  			const g = new BigNumber(v).times(factor[ia])
+  		
+  			const out = g.div(factor[ib])
+  			return out
   		}
-  		units() {
-  			return this.convert(...arguments)
+  		distance() {
+  			return this.length(...arguments)
+  		}
+  		length(v, a, b) {
+  			const authorized = ["mm", "cm", "dm", "m", "dam", "hm", "km", "yd", "ft", "mi", "in", "li", "au", "ly", "Nm"]
+  			if (!authorized.includes(a) || !authorized.includes(b)) {
+  				throw "[TheoremJS] Length: wrong units"
+  			}
+  			const ia = authorized.indexOf(a)
+  			const ib = authorized.indexOf(b)
+  			// to m
+  			const factor = [
+  				1 / 1000,
+  				1 / 100,
+  				1 / 10,
+  				1,
+  				10,
+  				100,
+  				1000,
+  				new BigNumber(0.9144),
+  				new BigNumber(0.3048),
+  				new BigNumber(1609.344),
+  				new BigNumber(25.4).div(1000),
+  				new BigNumber(6.35).times("0.0001"),
+  				new BigNumber("149597870700"),
+  				new BigNumber("9460730472580.8").times(1000),
+  				1852
+  			]
+  			const m = new BigNumber(v).times(factor[ia])
+  		
+  			const out = m.div(factor[ib])
+  			return out
+  		}
+  		mass(v, a, b) {
+  			const authorized = [
+  				"mg",
+  				"cg",
+  				"dg",
+  				"g",
+  				"dag",
+  				"hg",
+  				"kg",
+  				"t",
+  				"oz",
+  				"lb"
+  			]
+  			if (!authorized.includes(a) || !authorized.includes(b)) {
+  				throw "[TheoremJS] Mass: wrong units"
+  			}
+  			const ia = authorized.indexOf(a)
+  			const ib = authorized.indexOf(b)
+  			// to gram
+  			const factor = [
+  				1000,
+  				100,
+  				10,
+  				1,
+  				new BigNumber(1).div(10),
+  				new BigNumber(1).div(100),
+  				new BigNumber(1).div(1000),
+  				new BigNumber(1).div(1000000),
+  				new BigNumber(1).div("28.349523125"),
+  				new BigNumber(1).div("453.59237")
+  			]
+  			const g = new BigNumber(v).div(factor[ia])
+  		
+  			const out = new BigNumber(g).times(factor[ib])
+  			return out
+  		}
+  		speed(v, a, b) {
+  			const authorized = ["m/s", "km/h", "m/h", "knot", "ft/s"]
+  			if (!authorized.includes(a) || !authorized.includes(b)) {
+  				throw "[TheoremJS] Speed: wrong units"
+  			}
+  			const ia = authorized.indexOf(a)
+  			const ib = authorized.indexOf(b)
+  			// to ms
+  			const factor = [new BigNumber(1), new BigNumber(1).div(3.6), new BigNumber(0.44704), new BigNumber(0.514444), new BigNumber(0.3048)]
+  			const ms = new BigNumber(v).times(factor[ia])
+  		
+  			const out = ms.div(factor[ib])
+  			return out
+  		}
+  		temperature(v, a, b) {
+  			const authorized = [
+  				"c",
+  				"f",
+  				"k"
+  			]
+  			if (!authorized.includes(a) || !authorized.includes(b)) {
+  				throw "[TheoremJS] Temperature: wrong units"
+  			}
+  			const ia = authorized.indexOf(a)
+  			const ib = authorized.indexOf(b)
+  			// to celsius
+  			const add = [
+  				0,
+  				-32,
+  				-273.15
+  			]
+  			const factor = [
+  				1,
+  				new BigNumber(5).div(9),
+  				1
+  			]
+  			const g = new BigNumber(v).plus(add[ia]).times(factor[ia])
+  		
+  			const out = g.div(factor[ib]).minus(add[ib])
+  			return out
+  		}
+  		time(v, a, b) {
+  			const authorized = [
+  				"ms",
+  				"s",
+  				"m",
+  				"h",
+  				"d",
+  				"w",
+  				"mo",
+  				"y"
+  			]
+  			if (!authorized.includes(a) || !authorized.includes(b)) {
+  				throw "[TheoremJS] Time: wrong units"
+  			}
+  			const ia = authorized.indexOf(a)
+  			const ib = authorized.indexOf(b)
+  			// to gram
+  			const factor = [
+  				new BigNumber(1).div(1000),
+  				1,
+  				60,
+  				3600,
+  				86400,
+  				604800,
+  				"2592000",
+  				new BigNumber("365.2421891").times(24).times(3600)
+  			]
+  			const g = new BigNumber(v).times(factor[ia])
+  		
+  			const out = g.div(factor[ib])
+  			return out
+  		}
+  		volume(v, a, b) {
+  			const authorized = [
+  				"mm3",
+  				"ml",
+  				"cm3",
+  				"cl",
+  				"dl",
+  				"dm3",
+  				"l",
+  				"hl",
+  				"m3",
+  				"dam3",
+  				"hm3",
+  				"km3",
+  				"gal",
+  				"floz"
+  			]
+  			if (!authorized.includes(a) || !authorized.includes(b)) {
+  				throw "[TheoremJS] Volume: wrong units"
+  			}
+  			const ia = authorized.indexOf(a)
+  			const ib = authorized.indexOf(b)
+  			// to cubic meters
+  			const factor = [
+  				new BigNumber(1).div(1000000000), // mm3
+  				new BigNumber(1).div(1000000), // ml
+  				new BigNumber(1).div(1000000), // cm3
+  				new BigNumber(10).div(1000000), // cl
+  				"0.0001", // dl
+  				new BigNumber(1).div(1000), // dm3
+  				new BigNumber(1).div(1000), // l
+  				0.1, // hl
+  				1, // m3
+  				1000, // dam3
+  				1000000, // hm3
+  				1000000000, //km3
+  				"0.003785411784", // gal,
+  				"2.95735295625e-5" // floz
+  			]
+  			const g = new BigNumber(v).times(factor[ia])
+  		
+  			const out = g.div(factor[ib])
+  			return out
   		}
   	}
   	const u = new Units()
@@ -1810,12 +1781,56 @@ class TheoremJS {
   }
   complex(a, b) {
   	class complex {
-  		constructor(a, b) {
+  		abs() {
+  			return new BigNumber(this.a).times(this.a).plus(this.b.times(this.b)).sqrt() // sqrt(a^2 + b^2)
+  		}
+  		arg() {
+  			if (!complex.isComplex) {
+  				throw "[TheoremJS]: Complex operation require complex numbers"
+  			}
+  			return new BigNumber(this.t.atan2(this.a, this.b))
+  		}
+  		conjugate() {
+  			if (!complex.isComplex) {
+  				throw "[TheoremJS]: Complex operation require complex numbers"
+  			}
+  			this.b = this.b.negated()
+  			return this
+  		}
+  		constructor(a, b, theoremjs) {
   			this.a = new BigNumber(a)
   			this.b = new BigNumber(b)
+  			this.t = theoremjs
+  		}
+  		dividedBy() {
+  			return this.times(...arguments)
+  		}
+  		div(complex) {
+  			if (!complex.isComplex) {
+  				throw "[TheoremJS]: Complex operation require complex numbers"
+  			}
+  			this.a = this.a.div(complex.a)
+  			this.b = this.b.div(complex.b)
+  			return this
   		}
   		get isComplex() {
   			return true
+  		}
+  		minus(complex) {
+  			if (!complex.isComplex) {
+  				throw "[TheoremJS]: Complex operation require complex numbers"
+  			}
+  			this.a = this.a.minus(complex.a)
+  			this.b = this.b.minus(complex.b)
+  			return this
+  		}
+  		negated() {
+  			if (!complex.isComplex) {
+  				throw "[TheoremJS]: Complex operation require complex numbers"
+  			}
+  			this.a = this.a.negated()
+  			this.b = this.b.negated()
+  			return this
   		}
   		plus(complex) {
   			if (!complex.isComplex) {
@@ -1825,11 +1840,68 @@ class TheoremJS {
   			this.b = this.b.plus(complex.b)
   			return this
   		}
+  		pow(complex) {
+  			/* I couldn't find a good formula, so here is a derivation and optimization
+  			 *
+  			 * z_1^z_2 = (a + bi)^(c + di)
+  			 *         = exp((c + di) * log(a + bi)
+  			 *         = pow(a^2 + b^2, (c + di) / 2) * exp(i(c + di)atan2(b, a))
+  			 * =>...
+  			 * Re = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * cos(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+  			 * Im = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * sin(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+  			 *
+  			 * =>...
+  			 * Re = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * cos(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+  			 * Im = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * sin(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+  			 *
+  			 * =>
+  			 * Re = exp(c * logsq2 - d * arg(z_1)) * cos(d * logsq2 + c * arg(z_1))
+  			 * Im = exp(c * logsq2 - d * arg(z_1)) * sin(d * logsq2 + c * arg(z_1))
+  			 *
+  			 */
+  			if (!complex.isComplex) {
+  				throw "[TheoremJS]: Complex operation require complex numbers"
+  			}
+  			const arg = this.arg(this.a, this.b)
+  			const aS = new BigNumber(this.t.pow(this.a, 2))
+  			const bS = new BigNumber(this.t.pow(this.b, 2))
+  			const logsq2 = this.t.sqrt(aS.plus(bS))
+  		
+  			const exp = this.t.exp(
+  				logsq2
+  				.times(complex.a)
+  				.minus(
+  					arg.times(complex.b)
+  				))
+  			const trig = logsq2
+  			.times(complex.b)
+  			.plus(
+  				arg.times(complex.a)
+  			)
+  		
+  			const re = exp.times(this.t.cos(trig))
+  			const im = exp.times(this.t.sin(trig))
+  			
+  			this.a = re
+  			this.b = im
+  			return this
+  		}
+  		multipliedBy() {
+  			return this.times(...arguments)
+  		}
+  		times(complex) {
+  			if (!complex.isComplex) {
+  				throw "[TheoremJS]: Complex operation require complex numbers"
+  			}
+  			this.a = this.a.times(complex.a)
+  			this.b = this.b.times(complex.b)
+  			return this
+  		}
   		toString() {
-  			return `${this.a} + ${this.b}i`
+  			return `${this.a.toString()} + ${this.b.toString()}i`
   		}
   	}
-  	return new complex(a, b)
+  	return new complex(a, b, this)
   }
 }
 // Browserify / Node.js

@@ -13,6 +13,9 @@ class TheoremJS {
     this.version = "v1.1.0";
   }
 
+  exp(n) {
+    return new BigNumber(Math.exp(new BigNumber(n).toNumber()));
+  }
   factorial(n) {
     if (new BigNumber(n).eq(0)) {
       return new BigNumber(1);
@@ -152,7 +155,11 @@ class TheoremJS {
     }
     let result = [];
     for (var i = 0; i < n.length; i++) {
-      result.push(new BigNumber(new BigNumber(n[i]).sqrt()));
+      if (new BigNumber(n[i]).lt(0)) {
+        result.push(this.complex(0, new BigNumber(n[i]).abs().sqrt()));
+      } else {
+        result.push(new BigNumber(new BigNumber(n[i]).sqrt()));
+      }
     }
     return result.length == 1 ? result[0] : result;
   }
@@ -1943,12 +1950,59 @@ class TheoremJS {
   }
   complex(a, b) {
     class complex {
-      constructor(a, b) {
+      abs() {
+        return new BigNumber(this.a)
+          .times(this.a)
+          .plus(this.b.times(this.b))
+          .sqrt(); // sqrt(a^2 + b^2)
+      }
+      arg() {
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        return new BigNumber(this.t.atan2(this.a, this.b));
+      }
+      conjugate() {
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        this.b = this.b.negated();
+        return this;
+      }
+      constructor(a, b, theoremjs) {
         this.a = new BigNumber(a);
         this.b = new BigNumber(b);
+        this.t = theoremjs;
+      }
+      dividedBy() {
+        return this.times(...arguments);
+      }
+      div(complex) {
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        this.a = this.a.div(complex.a);
+        this.b = this.b.div(complex.b);
+        return this;
       }
       get isComplex() {
         return true;
+      }
+      minus(complex) {
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        this.a = this.a.minus(complex.a);
+        this.b = this.b.minus(complex.b);
+        return this;
+      }
+      negated() {
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        this.a = this.a.negated();
+        this.b = this.b.negated();
+        return this;
       }
       plus(complex) {
         if (!complex.isComplex) {
@@ -1958,11 +2012,61 @@ class TheoremJS {
         this.b = this.b.plus(complex.b);
         return this;
       }
+      pow(complex) {
+        /* I couldn't find a good formula, so here is a derivation and optimization
+  			 *
+  			 * z_1^z_2 = (a + bi)^(c + di)
+  			 *         = exp((c + di) * log(a + bi)
+  			 *         = pow(a^2 + b^2, (c + di) / 2) * exp(i(c + di)atan2(b, a))
+  			 * =>...
+  			 * Re = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * cos(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+  			 * Im = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * sin(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+  			 *
+  			 * =>...
+  			 * Re = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * cos(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+  			 * Im = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * sin(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+  			 *
+  			 * =>
+  			 * Re = exp(c * logsq2 - d * arg(z_1)) * cos(d * logsq2 + c * arg(z_1))
+  			 * Im = exp(c * logsq2 - d * arg(z_1)) * sin(d * logsq2 + c * arg(z_1))
+  			 *
+  			 */
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        const arg = this.arg(this.a, this.b);
+        const aS = new BigNumber(this.t.pow(this.a, 2));
+        const bS = new BigNumber(this.t.pow(this.b, 2));
+        const logsq2 = this.t.sqrt(aS.plus(bS));
+
+        const exp = this.t.exp(
+          logsq2.times(complex.a).minus(arg.times(complex.b))
+        );
+        const trig = logsq2.times(complex.b).plus(arg.times(complex.a));
+
+        const re = exp.times(this.t.cos(trig));
+        const im = exp.times(this.t.sin(trig));
+
+        this.a = re;
+        this.b = im;
+        return this;
+      }
+      multipliedBy() {
+        return this.times(...arguments);
+      }
+      times(complex) {
+        if (!complex.isComplex) {
+          throw "[TheoremJS]: Complex operation require complex numbers";
+        }
+        this.a = this.a.times(complex.a);
+        this.b = this.b.times(complex.b);
+        return this;
+      }
       toString() {
-        return `${this.a} + ${this.b}i`;
+        return `${this.a.toString()} + ${this.b.toString()}i`;
       }
     }
-    return new complex(a, b);
+    return new complex(a, b, this);
   }
 }
 // Browserify / Node.js

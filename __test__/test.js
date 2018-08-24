@@ -87,6 +87,12 @@ eye.describe("Math", () => {
             )
         })
     })
+	eye.describe("Complex", () => {
+		eye.test("Abs", "node",
+			$ => $(t.complex(1, 1).abs()).Equal(t.n(2).sqrt()),
+			$ => $(t.complex(32, 12).abs().toNumber()).isCloseTo(34.17601498127012)
+		)
+	})
     eye.describe("Math Basic Functions", () => {
         eye.test("Factorial", "node",
             $ => $(t.factorial(5).toNumber()).Equal(120)
