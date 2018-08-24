@@ -1,4 +1,4 @@
-plus(complex) {
+minus(complex) {
 	if (!complex.isComplex) {
 		throw "[TheoremJS]: Complex operation require complex numbers"
 	}
