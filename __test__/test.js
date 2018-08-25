@@ -102,6 +102,12 @@ eye.describe("Math", () => {
 			$ => $(t.complex(1, 1).div(t.complex(1, 1)).toString()).Equal("1 + 0i"),
 			$ => $(t.complex(2, 3).div(t.complex(3, -5)).toString()).Equal("-0.26470588235294117647 + 0.55882352941176470588i")
 		)
+		eye.test("Minus", "node",
+			$ => $(t.complex(3, -4).minus(t.complex(2, 4)).toString()).Equal("1 - 8i")
+		)
+		eye.test("Negated", "node",
+			$ => $(t.complex(2, 3).negated().toString()).Equal("-2 - 3i")
+		)
 	})
     eye.describe("Math Basic Functions", () => {
         eye.test("Factorial", "node",
