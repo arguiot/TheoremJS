@@ -467,7 +467,7 @@ class TheoremJS {
   deg2rad(x) {
     return new BigNumber(x).times(this.pi()).div(180);
   }
-  drawCircularPoints(n, r = 1, start = [-r, 0]) {
+  drawCircularPoints(n, r = 1, start = [-r, 0], complex = false) {
     const angle = this.pi()
       .times(2)
       .div(n);
@@ -477,8 +477,15 @@ class TheoremJS {
     for (var i = 0; i < n - 1; i++) {
       const x = new BigNumber(r).times(this.cos(angleState)).toString();
       const y = new BigNumber(r).times(this.sin(angleState)).toNumber();
-      buffer[x] = y;
+      if (complex === true) {
+        buffer[i] = this.complex(x, y);
+      } else {
+        buffer[x] = y;
+      }
       angleState += angle.toNumber();
+    }
+    if (complex === true) {
+      return Object.values(buffer);
     }
     return buffer;
   }
@@ -1957,7 +1964,7 @@ class TheoremJS {
           .sqrt(); // sqrt(a^2 + b^2)
       }
       arg() {
-        return new BigNumber(this.t.atan2(this.a, this.b));
+        return new BigNumber(this.t.atan2(this.b, this.a));
       }
       conjugate() {
         this.b = this.b.negated();
@@ -2040,21 +2047,66 @@ class TheoremJS {
         if (!complex.isComplex) {
           throw "[TheoremJS]: Complex operation require complex numbers";
         }
-        const arg = this.arg(this.a, this.b);
-        const aS = new BigNumber(this.t.pow(this.a, 2));
-        const bS = new BigNumber(this.t.pow(this.b, 2));
-        const logsq2 = this.t.sqrt(aS.plus(bS));
 
-        const exp = this.t.exp(
-          logsq2.times(complex.a).minus(arg.times(complex.b))
-        );
-        const trig = logsq2.times(complex.b).plus(arg.times(complex.a));
+        function logHypot(a, b) {
+          a = new BigNumber(a).toNumber();
+          b = new BigNumber(b).toNumber();
 
-        const re = exp.times(this.t.cos(trig));
-        const im = exp.times(this.t.sin(trig));
+          const _a = Math.abs(a);
+          const _b = Math.abs(b);
 
-        this.a = re;
-        this.b = im;
+          if (a === 0) {
+            return new BigNumber(Math.log(_b));
+          }
+
+          if (b === 0) {
+            return new BigNumber(Math.log(_a));
+          }
+
+          if (_a < 3000 && _b < 3000) {
+            return new BigNumber(Math.log(a * a + b * b) * 0.5);
+          }
+
+          /* I got 4 ideas to compute this property without overflow:
+  				 *
+  				 * Testing 1000000 times with random samples for a,b ∈ [1, 1000000000] against a big decimal library to get an error estimate
+  				 *
+  				 * 1. Only eliminate the square root: (OVERALL ERROR: 3.9122483030951116e-11)
+  				 Math.log(a * a + b * b) / 2
+  				 *
+  				 *
+  				 * 2. Try to use the non-overflowing pythagoras: (OVERALL ERROR: 8.889760039210159e-10)
+  				 var fn = function(a, b) {
+  				 a = Math.abs(a);
+  				 b = Math.abs(b);
+  				 var t = Math.min(a, b);
+  				 a = Math.max(a, b);
+  				 t = t / a;
+  				 return Math.log(a) + Math.log(1 + t * t) / 2;
+  				 };
+  				 * 3. Abuse the identity cos(atan(y/x) = x / sqrt(x^2+y^2): (OVERALL ERROR: 3.4780178737037204e-10)
+  				 Math.log(a / Math.cos(Math.atan2(b, a)))
+  				 * 4. Use 3. and apply log rules: (OVERALL ERROR: 1.2014087502620896e-9)
+  				 Math.log(a) - Math.log(Math.cos(Math.atan2(b, a)))
+  				 */
+
+          return new BigNumber(Math.log(a / Math.cos(Math.atan2(b, a))));
+        }
+
+        let a = this.a;
+        let b = this.b;
+        const c = complex.a;
+        const d = complex.b;
+
+        const arg = this.t.atan2(b, a);
+        const loh = logHypot(a, b);
+
+        a = this.t.exp(c.times(loh).minus(d.times(arg)));
+        b = d.times(loh).plus(c.times(arg));
+
+        this.a = a.times(this.t.cos(b));
+        this.b = a.times(this.t.sin(b));
+
         return this;
       }
       multipliedBy() {
