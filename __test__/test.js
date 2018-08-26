@@ -119,6 +119,9 @@ eye.describe("Math", () => {
 		)
 	})
     eye.describe("Math Basic Functions", () => {
+		eye.test("Exp", "node",
+			$ => $(t.ln(t.exp(3)).toNumber()).isCloseTo(3)
+		)
         eye.test("Factorial", "node",
             $ => $(t.factorial(5).toNumber()).Equal(120)
         )
@@ -129,7 +132,8 @@ eye.describe("Math", () => {
             $ => $(t.root(256, 8).toNumber()).Equal(2)
         )
         eye.test("Sqrt", "node",
-            $ => $(t.sqrt(4).toNumber()).Equal(2)
+            $ => $(t.sqrt(4).toNumber()).Equal(2),
+			$ => $(t.sqrt(-9).toString()).Equal("0 + 3i")
         )
         eye.test("Sigmoid", "node",
             $ => $(t.y_intercept(t.f(x => t.sigmoid(x).toNumber()))).Equal(0.5)
