@@ -1899,12 +1899,14 @@ class TheoremJS {
   			if (!complex.isComplex) {
   				throw "[TheoremJS]: Complex operation require complex numbers"
   			}
-  			this.a = this.a.times(complex.a).minus(this.b.times(complex.b))
-  			this.b = this.a
-  						.plus(this.b)
+  			const a = this.a
+  			const b = this.b
+  			this.a = a.times(complex.a).minus(b.times(complex.b))
+  			this.b = a
+  						.plus(b)
   						.times(complex.a.plus(complex.b))
-  						.minus(this.a.times(complex.a))
-  						.minus(this.b.times(complex.b)) // 	(a+b)(c+d)-ac-bd.
+  						.minus(a.times(complex.a))
+  						.minus(b.times(complex.b)) // 	(a+b)(c+d)-ac-bd.
   			return this
   		}
   		toString() {

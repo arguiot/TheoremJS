@@ -111,6 +111,12 @@ eye.describe("Math", () => {
 		eye.test("Addition", "node",
 			$ => $(t.complex(18, -12).plus(t.complex(-3, 2)).toString()).Equal("15 - 10i")
 		)
+		// eye.test("Exponentiation", "node",
+		// 	$ => $(t.complex(3, 2).pow(t.complex(4, -2)).toString()).Equal("535.4240192766963 - 115.76768825678575i")
+		// )
+		eye.test("Multiplication", "node",
+			$ => $(t.complex(2, 3).times(t.complex(4, 5)).toString()).Equal("-7 + 22i")
+		)
 	})
     eye.describe("Math Basic Functions", () => {
         eye.test("Factorial", "node",
