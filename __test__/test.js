@@ -229,7 +229,8 @@ eye.describe("Math", () => {
             eye.test("Tan", "node",
                 $ => $(t.tan(0)).isCloseTo(0),
                 $ => $(t.tan(t.pi())).isCloseTo(0),
-                $ => $(t.tan(60)).isCloseTo(Math.tan(60))
+                $ => $(t.tan(60)).isCloseTo(Math.tan(60)),
+				$ => $(t.tan(t.complex(3, 2)).toString()).Equal("-0.009884375038322494 + 0.965385879022133i")
             )
         })
         eye.describe("Hyperbolic", () => {
