@@ -217,7 +217,8 @@ eye.describe("Math", () => {
             eye.test("Sin", "node",
                 $ => $(t.sin(0)).isCloseTo(0),
                 $ => $(t.sin(t.pi())).isCloseTo(0),
-                $ => $(t.sin(60)).isCloseTo(Math.sin(60))
+                $ => $(t.sin(60)).isCloseTo(Math.sin(60)),
+				$ => $(t.sin(t.complex(3, 2)).toString()).Equal("0.5309210862485197 - 3.59056458998578i")
             )
             eye.test("Cos", "node",
                 $ => $(t.cos(0)).isCloseTo(1),
