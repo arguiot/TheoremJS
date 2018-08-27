@@ -222,7 +222,8 @@ eye.describe("Math", () => {
             eye.test("Cos", "node",
                 $ => $(t.cos(0)).isCloseTo(1),
                 $ => $(t.cos(t.pi())).isCloseTo(-1),
-                $ => $(t.cos(60)).isCloseTo(Math.cos(60))
+                $ => $(t.cos(60)).isCloseTo(Math.cos(60)),
+				$ => $(t.cos(t.complex(t.c("pi"), 1)).toString()).Equal("-1.5430806348152437 - 1.4392063801500302e-16i")
             )
             eye.test("Tan", "node",
                 $ => $(t.tan(0)).isCloseTo(0),
