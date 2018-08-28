@@ -236,7 +236,8 @@ eye.describe("Math", () => {
         eye.describe("Hyperbolic", () => {
             eye.test("Sinh", "node",
                 $ => $(t.sinh(0)).isCloseTo(0),
-                $ => $(t.sinh(t.pi())).isCloseTo(Math.sinh(Math.PI))
+                $ => $(t.sinh(t.pi())).isCloseTo(Math.sinh(Math.PI)),
+				$ => $(t.sinh(t.complex(2, 3)).toString()).Equal("-3.59056458998578 + 0.5309210862485197i")
             )
             eye.test("Cosh", "node",
                 $ => $(t.cosh(0)).isCloseTo(1),
