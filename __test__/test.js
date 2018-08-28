@@ -246,7 +246,8 @@ eye.describe("Math", () => {
             )
             eye.test("Tanh", "node",
                 $ => $(t.tanh(0)).isCloseTo(0),
-                $ => $(t.tanh(t.pi())).isCloseTo(Math.tanh(Math.PI))
+                $ => $(t.tanh(t.pi())).isCloseTo(Math.tanh(Math.PI)),
+				$ => $(t.tanh(t.complex(2, 3)).toString()).Equal("0.965385879022133 - 0.009884375038322494i")
             )
         })
         eye.describe("Arc", () => {
