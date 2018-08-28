@@ -240,7 +240,8 @@ eye.describe("Math", () => {
             )
             eye.test("Cosh", "node",
                 $ => $(t.cosh(0)).isCloseTo(1),
-                $ => $(t.cosh(t.pi())).isCloseTo(Math.cosh(Math.PI))
+                $ => $(t.cosh(t.pi())).isCloseTo(Math.cosh(Math.PI)),
+				$ => $(t.cosh(t.complex(2, 3)).toString()).Equal("-3.7245455049153224 + 0.5118225699873846i")
             )
             eye.test("Tanh", "node",
                 $ => $(t.tanh(0)).isCloseTo(0),
