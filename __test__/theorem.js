@@ -1294,6 +1294,9 @@ class TheoremJS {
   	const BN = BigNumber.clone({ ALPHABET: "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/" })
   	return new BN(x).toString(n)
   }
+  get fn() {
+  	return this.prototype
+  }
   toBase10(n, base) {
   	return new BigNumber(n, base);
   }
@@ -1887,6 +1890,22 @@ class TheoremJS {
   		
   			const re = acbd.div(c2d2)
   			const im = bcad.div(c2d2)
+  		
+  			this.a = re
+  			this.b = im
+  		
+  			return this
+  		}
+  		exp() {
+  			const a = this.a
+  			const b = this.b
+  		
+  			const ea = this.t.exp(a)
+  			const cos = this.t.cos(b)
+  			const sin = this.t.sin(b)
+  		
+  			const re = ea.times(cos)
+  			const im = ea.times(sin)
   		
   			this.a = re
   			this.b = im
