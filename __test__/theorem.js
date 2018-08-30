@@ -14,6 +14,9 @@ class TheoremJS {
   }
   
   exp(n) {
+  	if (n.isComplex) {
+  		return n.exp()
+  	}
   	return new BigNumber(Math.exp(new BigNumber(n).toNumber()))
   }
   factorial(n) {
@@ -1914,6 +1917,19 @@ class TheoremJS {
   		}
   		get isComplex() {
   			return true
+  		}
+  		ln() {
+  			const a = this.a
+  			const b = this.b
+  		
+  			const asbs = a.times(a).plus(b.times(b))
+  			const log = this.t.ln(asbs)
+  			const half = log.div(2)
+  		
+  			this.b = this.arg()
+  			this.a = half
+  		
+  			return this
   		}
   		minus(complex) {
   			if (!complex.isComplex) {
