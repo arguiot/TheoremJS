@@ -1,4 +1,4 @@
-const t = require(__testDir + "../dist/theorem.min.js")
+const t = require(__testDir + "../dist/theorem.js")
 
 eye.describe("Array", () => {
     eye.test("Flatten", "node",
@@ -95,6 +95,9 @@ eye.describe("Math", () => {
 		eye.test("Arg", "node",
 			$ => $(t.complex(1, 1).arg().toNumber()).isCloseTo(t.c("pi").div(4).toNumber())
 		)
+		eye.test("Clone", "node",
+			$ => $(t.complex(1, 1).clone().toString()).Equal("1 + 1i")
+		)
 		eye.test("Conjugate", "node",
 			$ => $(t.complex(1, 1).conjugate().toString()).Equal("1 - 1i")
 		)
@@ -106,7 +109,9 @@ eye.describe("Math", () => {
 			$ => $(t.complex(2, 3).exp().toString()).Equal("-7.31511009490109891372481413925 + 1.04274365623590274091988122355i")
 		)
 		eye.test("Logarithm", "node",
-			$ => $(t.complex(2, 3).ln().toString()).Equal("1.28247380404213 + 0.982793723247329i")
+			$ => $(t.complex(2, 3).ln().toString()).Equal("1.28247380404213 + 0.982793723247329i"),
+			$ => $(t.complex(100, 0).log(10).toString()).Equal("1.99992155781462 + 0i"),
+			$ => $(t.complex(4, 2).log(2).toString()).Equal("2.16095516072906501293 + 0.66890210622548354827i")
 		)
 		eye.test("Minus", "node",
 			$ => $(t.complex(3, -4).minus(t.complex(2, 4)).toString()).Equal("1 - 8i")

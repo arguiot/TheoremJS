@@ -58,6 +58,9 @@ class TheoremJS {
       }
   }
   ln(x, n = 15) {
+  	if (x.isComplex) {
+  		return x.ln()
+  	}
       let buffer = new BigNumber(0);
       for (let i = 0; i < Math.ceil(n + (3 / 2 * x)); i++) {
   		const n = new BigNumber(1)
@@ -1864,6 +1867,9 @@ class TheoremJS {
   		arg() {
   			return new BigNumber(this.t.atan2(this.b, this.a))
   		}
+  		clone() {
+  			return Object.assign( Object.create( Object.getPrototypeOf(this)), this)
+  		}
   		conjugate() {
   			this.b = this.b.negated()
   			return this
@@ -1928,6 +1934,39 @@ class TheoremJS {
   		
   			this.b = this.arg()
   			this.a = half
+  		
+  			return this
+  		}
+  		log(base) {
+  			if (!base) {
+  				throw "[TheoremJS] Log: wrong base"
+  			}
+  			let a = this.a
+  			let b = this.b
+  			if (b.eq(0)) {
+  				this.a = this.t.log(a, base)
+  		
+  				return this
+  			}
+  			const asbs = a.times(a).plus(b.times(b))
+  			const log = this.t.ln(asbs)
+  			const half = log.div(2)
+  		
+  			a = this.arg()
+  			b = half
+  			const c = this.t.ln(base)
+  			const d = new BigNumber(0)
+  		
+  			const c2d2 = c.times(c).plus(d.times(d)) // c^2 + d^2
+  		
+  			const acbd = a.times(c).plus(b.times(d)) // a*c + b*d
+  			const bcad = b.times(c).minus(a.times(d)) // b*c - a*d
+  		
+  			const re = acbd.div(c2d2)
+  			const im = bcad.div(c2d2)
+  		
+  			this.a = im
+  			this.b = re
   		
   			return this
   		}
