@@ -100,6 +100,9 @@ class TheoremJS {
       return new BigNumber(Number(.5*Math.log(2*Math.PI)+(z+.5)*Math.log(t)-t+Math.log(x)-Math.log(z)).toFixed(10));
   }
   log(x, base, n = 15) {
+  	if (x.isComplex) {
+  		return x.log(base)
+  	}
   	return new BigNumber(this.ln(x, n).div(this.ln(base, n)).toFixed(n - 1))
   }
   pow(n, base) {

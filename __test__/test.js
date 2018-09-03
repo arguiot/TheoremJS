@@ -111,7 +111,7 @@ eye.describe("Math", () => {
 		eye.test("Logarithm", "node",
 			$ => $(t.complex(2, 3).ln().toString()).Equal("1.28247380404213 + 0.982793723247329i"),
 			$ => $(t.complex(100, 0).log(10).toString()).Equal("1.99992155781462 + 0i"),
-			$ => $(t.complex(4, 2).log(2).toString()).Equal("2.16095516072906501293 + 0.66890210622548354827i")
+			$ => $(t.log(t.complex(4, 2), 2).toString()).Equal("2.16095516072906501293 + 0.66890210622548354827i")
 		)
 		eye.test("Minus", "node",
 			$ => $(t.complex(3, -4).minus(t.complex(2, 4)).toString()).Equal("1 - 8i")
