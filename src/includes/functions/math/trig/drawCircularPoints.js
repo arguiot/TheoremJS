@@ -1,5 +1,5 @@
 drawCircularPoints(n, r=1, start=[-r, 0], complex=false) {
-	const angle = this.pi().times(2).div(n)
+	const angle = this.pi.times(2).div(n)
 	let buffer = {}
 	buffer[start[0]] = start[1]
 	let angleState = this.atan2(...start.reverse()) + angle.toNumber()

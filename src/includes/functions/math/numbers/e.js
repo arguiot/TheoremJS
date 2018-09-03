@@ -1,4 +1,5 @@
-e(n = 15) {
+get e() {
+	const n = 15
 	const BN = BigNumber.clone({ DECIMAL_PLACES: n })
     let zero = new BN(0);
     let one = new BN(1);

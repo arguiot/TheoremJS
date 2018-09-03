@@ -460,10 +460,10 @@ class TheoremJS {
   	return result.length == 1 ? result[0] : result
   }
   deg2rad(x) {
-      return new BigNumber(x).times(this.pi()).div(180)
+      return new BigNumber(x).times(this.pi).div(180)
   }
   drawCircularPoints(n, r=1, start=[-r, 0], complex=false) {
-  	const angle = this.pi().times(2).div(n)
+  	const angle = this.pi.times(2).div(n)
   	let buffer = {}
   	buffer[start[0]] = start[1]
   	let angleState = this.atan2(...start.reverse()) + angle.toNumber()
@@ -483,7 +483,7 @@ class TheoremJS {
   	return buffer
   }
   rad2deg(x) {
-  	return new BigNumber(x).times(180).div(this.pi())
+  	return new BigNumber(x).times(180).div(this.pi)
   }
   sin(n) {
   	if (n.isComplex) {
@@ -1144,7 +1144,8 @@ class TheoremJS {
   ceil(n) {
   	return new BigNumber(n).integerValue(BigNumber.ROUND_CEIL)
   }
-  e(n = 15) {
+  get e() {
+  	const n = 15
   	const BN = BigNumber.clone({ DECIMAL_PLACES: n })
       let zero = new BN(0);
       let one = new BN(1);
@@ -1160,7 +1161,8 @@ class TheoremJS {
   floor(n) {
   	return new BigNumber(n).integerValue(BigNumber.ROUND_FLOOR)
   }
-  goldenRatio(n = 15) {
+  get goldenRatio() {
+  	const n = 15
   	const BN = BigNumber.clone({ DECIMAL_PLACES: n + 1 })
   	return new BN(BN(1).plus(this.sqrt(5)).div(2).toFixed(n + 1))
   }
@@ -1215,7 +1217,8 @@ class TheoremJS {
   	}
   	return new BigNumber(out)
   }
-  pi(digits = 15) {
+  get pi() {
+  	const digits = 15
   	const Decimal = BigNumber.clone({ DECIMAL_PLACES: digits })
       function arctan(x) {
           var y = x;
@@ -2100,6 +2103,9 @@ class TheoremJS {
   		}
   	}
   	return new complex(a, b, this)
+  }
+  get i () {
+  	return this.complex(0, 1)
   }
 }
 // Browserify / Node.js

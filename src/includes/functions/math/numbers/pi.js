@@ -1,4 +1,5 @@
-pi(digits = 15) {
+get pi() {
+	const digits = 15
 	const Decimal = BigNumber.clone({ DECIMAL_PLACES: digits })
     function arctan(x) {
         var y = x;
