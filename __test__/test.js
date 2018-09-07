@@ -105,6 +105,9 @@ eye.describe("Math", () => {
 			$ => $(t.complex(1, 1).div(t.complex(1, 1)).toString()).Equal("1 + 0i"),
 			$ => $(t.complex(2, 3).div(t.complex(3, -5)).toString()).Equal("-0.26470588235294117647 + 0.55882352941176470588i")
 		)
+		eye.test("Equality", "node",
+			$ => $(t.complex(2, 3).eq(t.complex(3, 3).minus(t.complex(1, 0)))).Equal(true)
+		)
 		eye.test("Exponential", "node",
 			$ => $(t.complex(2, 3).exp().toString()).Equal("-7.31511009490109891372481413925 + 1.04274365623590274091988122355i")
 		)
