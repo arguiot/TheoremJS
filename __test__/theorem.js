@@ -1865,7 +1865,7 @@ class TheoremJS {
   		return !1 == spaceSeparatedOctets ? str : str + " "
   	})
   }
-  complex(a, b) {
+  complex(a=0, b=0) {
   	class complex {
   		abs() {
   			return new BigNumber(this.a).times(this.a).plus(this.b.times(this.b)).sqrt() // sqrt(a^2 + b^2)
