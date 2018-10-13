@@ -2,6 +2,7 @@
 A Math framework for computation in JavaScript
 
 [![GitHub release](https://img.shields.io/github/release/arguiot/TheoremJS.svg)](https://github.com/arguiot/TheoremJS/releases)
+[![cdnjs release](https://img.shields.io/cdnjs/v/TheoremJS.svg)](https://cdnjs.com/libraries/TheoremJS/)
 [![Build Status](https://travis-ci.org/arguiot/TheoremJS.svg?branch=master)](https://travis-ci.org/arguiot/TheoremJS)
 [![Github All Releases](https://img.shields.io/github/downloads/arguiot/TheoremJS/total.svg)](https://github.com/arguiot/TheoremJS/)
 [![npm](https://img.shields.io/npm/dt/theorem.js.svg)](https://www.npmjs.com/package/theorem.js)
