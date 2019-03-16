@@ -31,7 +31,7 @@
     "homepage": "https://github.com/arguiot/TheoremJS#readme",
     "devDependencies": {
         "babel-core": "^6.26.3",
-        "babel-eslint": "^8.2.6",
+        "babel-eslint": "^10.0.1",
         "babel-helper-flip-expressions": "^0.4.3",
         "babel-loader": "^7.1.5",
         "babel-minify": "^0.5.0",
