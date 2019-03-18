@@ -73,7 +73,7 @@
         "gulp-rename": "^1.4.0",
         "gulp-rigger": "^0.5.8",
         "gulp-uglify": "^3.0.1",
-        "prettier": "1.14.0"
+        "prettier": "1.16.4"
     },
     "dependencies": {
         "bignumber.js": "^7.2.1"
