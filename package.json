@@ -67,7 +67,7 @@
         "eslint-plugin-import": "^2.13.0",
         "eye.js": "1.1.2",
         "gulp": "^3.9.1",
-        "gulp-babel": "^7.0.1",
+        "gulp-babel": "^8.0.0",
         "gulp-babili": "^0.1.4",
         "gulp-inject-version": "^1.0.1",
         "gulp-rename": "^1.4.0",
