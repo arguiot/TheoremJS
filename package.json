@@ -52,7 +52,7 @@
         "babel-plugin-transform-property-literals": "^6.9.4",
         "babel-plugin-transform-remove-console": "^6.9.4",
         "babel-plugin-transform-remove-debugger": "^6.9.4",
-        "babel-plugin-transform-remove-undefined": "^0.4.3",
+        "babel-plugin-transform-remove-undefined": "^0.5.0",
         "babel-plugin-transform-simplify-comparison-operators": "^6.9.4",
         "babel-plugin-transform-undefined-to-void": "^6.9.4",
         "babel-polyfill": "^6.26.0",
