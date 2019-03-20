@@ -76,6 +76,6 @@
         "prettier": "1.16.4"
     },
     "dependencies": {
-        "bignumber.js": "^7.2.1"
+        "bignumber.js": "^8.1.1"
     }
 }
