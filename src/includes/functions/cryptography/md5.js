@@ -129,7 +129,6 @@ md5(s) {
 		return utftext;
 	}
 
-	let x = Array();
 	let k;
 	let AA;
 	let BB;
@@ -158,7 +157,7 @@ md5(s) {
 
 	string = Utf8Encode(string);
 
-	x = ConvertToWordArray(string);
+	let x = ConvertToWordArray(string);
 
 	a = 0x67452301;
 	b = 0xEFCDAB89;

@@ -7,7 +7,7 @@
         "run": "npm test",
         "build": "npm test",
         "test": "npm run gulp && npm run prettier && npm run lint && npm run eye && exit 0",
-        "gulp": "gulp",
+        "gulp": "rig src/base.js > dist/rig.js && gulp && rm dist/rig.js",
         "prettier": "prettier \"dist/**/*.js\" --write",
         "lint": "./node_modules/.bin/eslint dist/theorem.js --fix",
         "eye": "./node_modules/.bin/eye"
@@ -62,18 +62,20 @@
         "babel-preset-stage-0": "^6.24.1",
         "babili": "^0.1.4",
         "buffer-shims": "^1.0.0",
-        "eslint": "^5.2.0",
-        "eslint-config-airbnb-base": "^13.0.0",
-        "eslint-plugin-import": "^2.13.0",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.17.3",
         "eye.js": "1.1.2",
-        "gulp": "^3.9.1",
+        "gulp": "^4.0.2",
         "gulp-babel": "^7.0.1",
         "gulp-babili": "^0.1.4",
+        "gulp-concat": "^2.6.1",
         "gulp-inject-version": "^1.0.1",
         "gulp-rename": "^1.4.0",
         "gulp-rigger": "^0.5.8",
-        "gulp-uglify": "^3.0.1",
-        "prettier": "1.16.4"
+        "gulp-uglify": "^3.0.2",
+        "prettier": "1.16.4",
+        "rigger": "^1.0.1"
     },
     "dependencies": {
         "bignumber.js": "^7.2.1"

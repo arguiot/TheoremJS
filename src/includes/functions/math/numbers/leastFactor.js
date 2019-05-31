@@ -2,7 +2,7 @@ leastFactor(n) {
 	n = new BigNumber(n).abs().toNumber()
 	if (Number.MAX_SAFE_INTEGER < n) throw `${n} is superior to ${Number.MAX_SAFE_INTEGER}`
 	let out = false
-    if (isNaN(n) || !isFinite(n)) out = out !== false ? out : NaN;
+    if (isNaN(n) || !isFinite(n)) out = NaN;
     if (n == 0) out = out !== false ? out : 0;
     if (n % 1 || n * n < 2) out = out !== false ? out : 1;
     if (n % 2 == 0) out = out !== false ? out : 2;

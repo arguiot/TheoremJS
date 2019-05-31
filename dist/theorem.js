@@ -1,7 +1,7 @@
 /*
-**   © Arthur Guiot 2017 - 2018
-**           TheoremJS
-*/
+ **   © Arthur Guiot 2017 - 2018
+ **           TheoremJS
+ */
 
 if (!BigNumber) {
   var BigNumber = require("bignumber.js");
@@ -1223,7 +1223,6 @@ class TheoremJS {
     const BN = BigNumber.clone({ DECIMAL_PLACES: n });
     let zero = new BN(0);
     let one = new BN(1);
-    let rval;
 
     for (let i = 0; i <= n * 10; i++) {
       let fval = this.factorial(i);
@@ -1247,18 +1246,26 @@ class TheoremJS {
   }
   isPrime(n) {
     n = new BigNumber(n).abs();
-    const leastFactor = this.leastFactor(n);
-    if (n.eq(leastFactor) && n.gte(2)) {
-      return true;
+    if (n.toNumber() * 0 !== 0) {
+      return false;
     }
-    return false;
+    if (n.lte(3)) return n.gt(1);
+    if (n.mod(2).eq(0) || n.mod(3).eq(0)) return false;
+
+    for (let i = 5; n.gte(i * i); i += 6) {
+      if (n.mod(i).eq(0) || n.mod(i + 2).eq(0)) {
+        return false;
+      }
+    }
+
+    return true;
   }
   leastFactor(n) {
     n = new BigNumber(n).abs().toNumber();
     if (Number.MAX_SAFE_INTEGER < n)
       throw `${n} is superior to ${Number.MAX_SAFE_INTEGER}`;
     let out = false;
-    if (isNaN(n) || !isFinite(n)) out = out !== false ? out : NaN;
+    if (isNaN(n) || !isFinite(n)) out = NaN;
     if (n == 0) out = out !== false ? out : 0;
     if (n % 1 || n * n < 2) out = out !== false ? out : 1;
     if (n % 2 == 0) out = out !== false ? out : 2;
@@ -1657,7 +1664,6 @@ class TheoremJS {
       return utftext;
     }
 
-    let x = Array();
     let k;
     let AA;
     let BB;
@@ -1686,7 +1692,7 @@ class TheoremJS {
 
     string = Utf8Encode(string);
 
-    x = ConvertToWordArray(string);
+    let x = ConvertToWordArray(string);
 
     a = 0x67452301;
     b = 0xefcdab89;
@@ -2178,23 +2184,23 @@ class TheoremJS {
       }
       pow(complex) {
         /* I couldn't find a good formula, so here is a derivation and optimization
-  			 *
-  			 * z_1^z_2 = (a + bi)^(c + di)
-  			 *         = exp((c + di) * log(a + bi)
-  			 *         = pow(a^2 + b^2, (c + di) / 2) * exp(i(c + di)atan2(b, a))
-  			 * =>...
-  			 * Re = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * cos(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
-  			 * Im = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * sin(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
-  			 *
-  			 * =>...
-  			 * Re = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * cos(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
-  			 * Im = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * sin(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
-  			 *
-  			 * =>
-  			 * Re = exp(c * logsq2 - d * arg(z_1)) * cos(d * logsq2 + c * arg(z_1))
-  			 * Im = exp(c * logsq2 - d * arg(z_1)) * sin(d * logsq2 + c * arg(z_1))
-  			 *
-  			 */
+         *
+         * z_1^z_2 = (a + bi)^(c + di)
+         *         = exp((c + di) * log(a + bi)
+         *         = pow(a^2 + b^2, (c + di) / 2) * exp(i(c + di)atan2(b, a))
+         * =>...
+         * Re = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * cos(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+         * Im = (pow(a^2 + b^2, c / 2) * exp(-d * atan2(b, a))) * sin(d * log(a^2 + b^2) / 2 + c * atan2(b, a))
+         *
+         * =>...
+         * Re = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * cos(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+         * Im = exp(c * log(sqrt(a^2 + b^2)) - d * atan2(b, a)) * sin(d * log(sqrt(a^2 + b^2)) + c * atan2(b, a))
+         *
+         * =>
+         * Re = exp(c * logsq2 - d * arg(z_1)) * cos(d * logsq2 + c * arg(z_1))
+         * Im = exp(c * logsq2 - d * arg(z_1)) * sin(d * logsq2 + c * arg(z_1))
+         *
+         */
         if (!complex.isComplex) {
           throw "[TheoremJS]: Complex operation require complex numbers";
         }
