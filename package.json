@@ -78,6 +78,6 @@
         "rigger": "^1.0.1"
     },
     "dependencies": {
-        "bignumber.js": "^7.2.1"
+        "bignumber.js": "^8.1.1"
     }
 }
