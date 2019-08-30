@@ -1,5 +1,5 @@
 {
-    "name": "@arguiot/theorem.js",
+    "name": "theorem.js",
     "version": "1.2.0",
     "description": "A Math library for computation in JavaScript",
     "main": "dist/theorem.min.js",
