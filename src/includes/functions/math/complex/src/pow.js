@@ -73,7 +73,7 @@ pow(complex) {
 		c = complex;
 		d = 0;
 	} else {
-		throw "[TheoremJS]: Complex operation require complex numbers"
+		throw "[TheoremJS]: Unsupported typeof power"
 	}
 
 	let a = this.a;
