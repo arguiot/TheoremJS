@@ -69,9 +69,9 @@ pow(complex) {
 	if (complex.isComplex) {
     	c = complex.a;
     	d = complex.b;
-	} else if (typeof complex === 'number') {
-		c = complex;
-		d = 0;
+	} else if (typeof complex === 'number' || complex.isBigNumber) {
+		c = new BigNumber(complex);
+		d = new BigNumber(0);
 	} else {
 		throw "[TheoremJS]: Unsupported typeof power"
 	}
