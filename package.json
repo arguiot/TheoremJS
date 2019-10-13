@@ -10,7 +10,7 @@
         "gulp": "rig src/base.js > dist/rig.js && gulp && rm dist/rig.js",
         "prettier": "prettier \"dist/**/*.js\" --write",
         "lint": "./node_modules/.bin/eslint dist/theorem.js --fix",
-        "eye": "./node_modules/.bin/eye"
+        "eye": "./node_modules/.bin/eye -ci"
     },
     "repository": {
         "type": "git",
@@ -65,7 +65,7 @@
         "eslint": "^5.16.0",
         "eslint-config-airbnb-base": "^13.1.0",
         "eslint-plugin-import": "^2.17.3",
-        "eye.js": "1.1.2",
+        "eye.js": "1.2.1",
         "gulp": "^4.0.2",
         "gulp-babel": "^7.0.1",
         "gulp-babili": "^0.1.4",
