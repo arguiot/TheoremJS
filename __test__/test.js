@@ -200,9 +200,12 @@ eye.describe("Math", () => {
             $ => $(t.sum(1, 3, 3).toNumber()).Equal(7)
         )
     })
-    eye.describe("Statistiques", () => {
+    eye.describe("Statistics", () => {
         eye.test("Average", "node",
             $ => $(t.average(10, 20, 15).toNumber()).Equal(15)
+        )
+		eye.test("Mean (average alias)", "node",
+            $ => $(t.mean(10, 20, 15).toNumber()).Equal(15)
         )
         eye.test("Median", "node",
             $ => $(t.median(10, 20, 15).toNumber()).Equal(15)
@@ -225,6 +228,12 @@ eye.describe("Math", () => {
                 1: 5,
                 3: 11
             }, 1).values).Equal([3, 2])
+        )
+		eye.test("Standard deviation (std)", "node",
+            $ => $(t.std(10, 20, 15).toNumber()).Equal(5)
+        )
+		eye.test("Variance", "node",
+            $ => $(t.variance(10, 20, 15).toNumber()).Equal(25)
         )
     })
     eye.describe("Trigonometry", () => {

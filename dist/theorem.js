@@ -246,6 +246,9 @@ class TheoremJS {
     const result = up / Math.sqrt(down1 * down2);
     return new BigNumber(Math.round(result * 10 ** 10) / 10 ** 10);
   }
+  mean() {
+    return this.average(...arguments);
+  }
   median() {
     let array = [...arguments];
     if (typeof array[0] == "object") {
@@ -372,6 +375,20 @@ class TheoremJS {
     equation = this.gaussElimination(rhs, k);
 
     return this.polynomial(...equation.reverse());
+  }
+  std() {
+    const mean = this.mean(...arguments);
+    const sum = this.sum(
+      ...[...arguments].map(e => {
+        return (e - mean) ** 2;
+      })
+    );
+    const N = [...arguments].length;
+
+    return new BigNumber(Math.sqrt(sum / (N - 1)));
+  }
+  variance() {
+    return new BigNumber(this.std(...arguments)).pow(2);
   }
   acos(n) {
     if (typeof n != "object" || BigNumber.isBigNumber(n)) {
