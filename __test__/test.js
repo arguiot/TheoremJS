@@ -128,7 +128,8 @@ eye.describe("Math", () => {
 		eye.test("Exponentiation", "node",
 			$ => $(t.complex(3, 2).pow(t.complex(4, -2)).toString()).Equal("535.424019276695978424428817368 - 115.76768825678578727266368994i"),
 			$ => $(t.complex(2, 0).pow(t.complex(2, 0)).toString()).Equal("4 + 0i"),
-			$ => $(t.complex(0, 1).pow(t.complex(2, 0)).toString()).Equal("-1 + 0i")
+			$ => $(t.complex(0, 1).pow(t.complex(2, 0)).toString()).Equal("-1 + 0i"),
+			$ => $(t.complex(2, 0).pow(2).toString()).Equal("4 + 0i")
 		)
 		eye.test("Multiplication", "node",
 			$ => $(t.complex(2, 3).times(t.complex(4, 5)).toString()).Equal("-7 + 22i")
