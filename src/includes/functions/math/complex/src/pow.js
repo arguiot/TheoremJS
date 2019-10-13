@@ -69,9 +69,11 @@ pow(complex) {
 	if (complex.isComplex) {
     	c = complex.a;
     	d = complex.b;
-	} else {
+	} else if (typeof complex === 'number') {
 		c = complex;
 		d = 0;
+	} else {
+		throw "[TheoremJS]: Complex operation require complex numbers"
 	}
 
 	let a = this.a;
