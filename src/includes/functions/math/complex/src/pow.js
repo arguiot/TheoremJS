@@ -17,9 +17,6 @@ pow(complex) {
 	 * Im = exp(c * logsq2 - d * arg(z_1)) * sin(d * logsq2 + c * arg(z_1))
 	 *
 	 */
-	if (!complex.isComplex) {
-		throw "[TheoremJS]: Complex operation require complex numbers"
-	}
 
 	function logHypot(a, b) {
 		a = new BigNumber(a).toNumber()
@@ -66,11 +63,21 @@ pow(complex) {
 		return new BigNumber(Math.log(a / Math.cos(Math.atan2(b, a))))
 	}
 
+	let c;
+	let d;
+
+	if (complex.isComplex) {
+    	c = complex.a;
+    	d = complex.b;
+	} else if (typeof complex === 'number' || complex.isBigNumber) {
+		c = new BigNumber(complex);
+		d = new BigNumber(0);
+	} else {
+		throw "[TheoremJS]: Unsupported typeof power"
+	}
 
 	let a = this.a;
 	let b = this.b;
-	const c = complex.a;
-	const d = complex.b;
 
 	const arg = this.t.atan2(b, a);
 	const loh = logHypot(a, b);
