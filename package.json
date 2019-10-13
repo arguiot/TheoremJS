@@ -10,7 +10,7 @@
         "gulp": "rig src/base.js > dist/rig.js && gulp && rm dist/rig.js",
         "prettier": "prettier \"dist/**/*.js\" --write",
         "lint": "./node_modules/.bin/eslint dist/theorem.js --fix",
-        "eye": "./node_modules/.bin/eye -ci"
+        "eye": "./node_modules/.bin/eye ./__test__/test.js -ci"
     },
     "repository": {
         "type": "git",
